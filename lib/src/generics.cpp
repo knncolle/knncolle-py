@@ -18,6 +18,10 @@ uint32_t generic_num_obs(const PrebuiltPointer& prebuilt) {
     return prebuilt->num_observations();
 }
 
+uint32_t generic_num_dims(const PrebuiltPointer& prebuilt) {
+    return prebuilt->num_dimensions();
+}
+
 /*********************************
  ********* KNN functions *********
  *********************************/
@@ -172,14 +176,30 @@ pybind11::object generic_find_knn(
 
     } else if (is_k_variable) {
         pybind11::tuple output(2);
-        output[0] = format_range_output(var_i);
-        output[1] = format_range_output(var_d);
+        if (report_index) {
+            output[0] = format_range_output(var_i);
+        } else {
+            output[0] = pybind11::none();
+        }
+        if (report_distance) {
+            output[1] = format_range_output(var_d);
+        } else {
+            output[1] = pybind11::none();
+        }
         return output;
 
     } else {
         pybind11::tuple output(2);
-        output[0] = const_i;
-        output[1] = const_d;
+        if (report_index) {
+            output[0] = const_i;
+        } else {
+            output[0] = pybind11::none();
+        }
+        if (report_distance) {
+            output[1] = const_d;
+        } else {
+            output[1] = pybind11::none();
+        }
         return output;
     }
 } 
@@ -298,14 +318,30 @@ pybind11::object generic_query_knn(
 
     } else if (is_k_variable) {
         pybind11::tuple output(2);
-        output[0] = format_range_output(var_i);
-        output[1] = format_range_output(var_d);
+        if (report_index) {
+            output[0] = format_range_output(var_i);
+        } else {
+            output[0] = pybind11::none();
+        }
+        if (report_distance) {
+            output[1] = format_range_output(var_d);
+        } else {
+            output[1] = pybind11::none();
+        }
         return output;
 
     } else {
         pybind11::tuple output(2);
-        output[0] = const_i;
-        output[1] = const_d;
+        if (report_index) {
+            output[0] = const_i;
+        } else {
+            output[0] = pybind11::none();
+        }
+        if (report_distance) {
+            output[1] = const_d;
+        } else {
+            output[1] = pybind11::none();
+        }
         return output;
     }
 }
@@ -386,8 +422,16 @@ pybind11::object generic_find_all(
         return counts;
     } else {
         pybind11::tuple output(2);
-        output[0] = format_range_output(out_i);
-        output[1] = format_range_output(out_d);
+        if (report_index) {
+            output[0] = format_range_output(out_i);
+        } else {
+            output[0] = pybind11::none();
+        }
+        if (report_distance) {
+            output[1] = format_range_output(out_d);
+        } else {
+            output[1] = pybind11::none();
+        }
         return output;
     }
 } 
@@ -458,8 +502,16 @@ pybind11::object generic_query_all(
         return counts;
     } else {
         pybind11::tuple output(2);
-        output[0] = format_range_output(out_i);
-        output[1] = format_range_output(out_d);
+        if (report_index) {
+            output[0] = format_range_output(out_i);
+        } else {
+            output[0] = pybind11::none();
+        }
+        if (report_distance) {
+            output[1] = format_range_output(out_d);
+        } else {
+            output[1] = pybind11::none();
+        }
         return output;
     }
 } 
@@ -471,6 +523,7 @@ pybind11::object generic_query_all(
 void init_generics(pybind11::module& m) {
     m.def("generic_build", &generic_build);
     m.def("generic_num_obs", &generic_num_obs);
+    m.def("generic_num_dims", &generic_num_dims);
     m.def("generic_find_knn", &generic_find_knn);
     m.def("generic_query_knn", &generic_query_knn);
     m.def("generic_find_all", &generic_find_all);
