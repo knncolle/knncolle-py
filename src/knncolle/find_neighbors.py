@@ -1,10 +1,11 @@
 from functools import singledispatch
 from typing import Sequence, Optional, Union
 from dataclasses import dataclass
+import numpy
 
 from .classes import Index, GenericIndex
 from . import lib_knncolle as lib
-from ._utils import process_num_neighbors, process_subset
+from ._utils import process_threshold, process_subset
 
 
 @dataclass
@@ -79,7 +80,7 @@ def find_neighbors(
     Return:
         Results of the neighbor search.
     """
-    raise NotImplementedError("no available method for '" + type(X) + "'")
+    raise NotImplementedError("no available method for '" + str(type(X)) + "'")
 
 
 @find_neighbors.register
@@ -92,12 +93,12 @@ def _find_neighbors_generic(
     get_distance = True,
     **kwargs
 ) -> FindNeighborsResults:
-    idx, dist = lib.generic_find_neighbors_all(
+    idx, dist = lib.generic_find_all(
         X.ptr, 
-        threshold = threshold,
-        chosen = process_subset(subset), 
-        num_threads = num_threads, 
-        report_index = get_index,
-        report_distance = get_distance
+        process_subset(subset), 
+        process_threshold(threshold),
+        num_threads, 
+        get_index,
+        get_distance
     )
     return FindNeighborsResults(index = idx, distance = dist)

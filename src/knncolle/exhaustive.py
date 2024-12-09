@@ -2,12 +2,15 @@ from .classes import Parameters, GenericIndex
 from typing import Literal, Tuple
 
 from . import lib_knncolle as lib
+from .classes import Parameters, GenericIndex
+from .define_builder import define_builder
 
 
 class ExhaustiveParameters(Parameters):
     """Parameters for an exhaustive search. """
 
     def __init__(
+        self,
         distance: Literal["Euclidean", "Manhattan", "Cosine"] = "Euclidean",
     ):
         """
@@ -33,9 +36,9 @@ class ExhaustiveParameters(Parameters):
             distance:
                 Distance metric, see :meth:`~__init__()`.
         """
-        if value not in ["Euclidean", "Manhattan", "Cosine"]:
+        if distance not in ["Euclidean", "Manhattan", "Cosine"]:
             raise ValueError("unsupported 'distance'")
-        self._distance = value
+        self._distance = distance
 
 
 class ExhaustiveIndex(GenericIndex):
@@ -44,7 +47,7 @@ class ExhaustiveIndex(GenericIndex):
     :py:class:`~knncolle.exhaustive.ExhaustiveParameters` instance.
     """
 
-    def __init__(ptr):
+    def __init__(self, ptr):
         """
         Args:
             ptr:
@@ -63,5 +66,5 @@ class ExhaustiveIndex(GenericIndex):
 
 
 @define_builder.register
-def _define_builder_exhaustive(x: AnnoyParameters) -> Tuple:
+def _define_builder_exhaustive(x: ExhaustiveParameters) -> Tuple:
     return (lib.create_exhaustive_builder(x.distance), ExhaustiveIndex)

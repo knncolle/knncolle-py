@@ -21,4 +21,4 @@ def define_builder(param: Parameters) -> Tuple:
         double>` instance, and the second element is a
         :py:class:`~knncolle.classes.GenericIndex` subclass.
     """
-    raise NotImplementedError("no available method for '" + type(x) + "'")
+    raise NotImplementedError("no available method for '" + str(type(x)) + "'")

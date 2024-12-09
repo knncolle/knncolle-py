@@ -2,12 +2,15 @@ from .classes import Parameters, GenericIndex
 from typing import Literal, Tuple
 
 from . import lib_knncolle as lib
+from .classes import Parameters, GenericIndex
+from .define_builder import define_builder
 
 
 class VptreeParameters(Parameters):
     """Parameters for the vantage point (VP) tree algorithm."""
 
     def __init__(
+        self,
         distance: Literal["Euclidean", "Manhattan", "Cosine"] = "Euclidean",
     ):
         """
@@ -33,9 +36,9 @@ class VptreeParameters(Parameters):
             distance:
                 Distance metric, see :meth:`~__init__()`.
         """
-        if value not in ["Euclidean", "Manhattan", "Cosine"]:
+        if distance not in ["Euclidean", "Manhattan", "Cosine"]:
             raise ValueError("unsupported 'distance'")
-        self._distance = value
+        self._distance = distance
 
 
 class VptreeIndex(GenericIndex):
@@ -44,7 +47,7 @@ class VptreeIndex(GenericIndex):
     :py:class:`~knncolle.vptree.VptreeParameters` instance.
     """
 
-    def __init__(ptr):
+    def __init__(self, ptr):
         """
         Args:
             ptr:
@@ -63,5 +66,5 @@ class VptreeIndex(GenericIndex):
 
 
 @define_builder.register
-def _define_builder_vptree(x: AnnoyParameters) -> Tuple:
+def _define_builder_vptree(x: VptreeParameters) -> Tuple:
     return (lib.create_vptree_builder(x.distance), VptreeIndex)

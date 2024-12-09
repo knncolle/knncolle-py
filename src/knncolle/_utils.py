@@ -16,3 +16,11 @@ def process_subset(subset: Optional[Sequence]) -> Optional[numpy.ndarray]:
     if not isinstance(subset, numpy.ndarray):
         subset = numpy.array(subset, dtype=numpy.uint32)
     return subset
+
+
+def process_threshold(threshold: Union[float, Sequence]) -> numpy.ndarray:
+    if isinstance(threshold, float):
+        return numpy.array([threshold], dtype=numpy.float64)
+    if not isinstance(threshold, numpy.ndarray):
+        threshold = numpy.array(threshold, dtype=numpy.float64)
+    return threshold

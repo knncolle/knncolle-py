@@ -2,12 +2,15 @@ from .classes import Parameters, GenericIndex
 from typing import Literal, Tuple
 
 from . import lib_knncolle as lib
+from .classes import Parameters, GenericIndex
+from .define_builder import define_builder
 
 
 class KmknnParameters(Parameters):
     """Parameters for the k-means k-nearest neighbors (KMKNN) algorithm."""
 
     def __init__(
+        self,
         distance: Literal["Euclidean", "Manhattan", "Cosine"] = "Euclidean",
     ):
         """
@@ -33,9 +36,9 @@ class KmknnParameters(Parameters):
             distance:
                 Distance metric, see :meth:`~__init__()`.
         """
-        if value not in ["Euclidean", "Manhattan", "Cosine"]:
+        if distance not in ["Euclidean", "Manhattan", "Cosine"]:
             raise ValueError("unsupported 'distance'")
-        self._distance = value
+        self._distance = distance 
 
 
 class KmknnIndex(GenericIndex):
@@ -44,7 +47,7 @@ class KmknnIndex(GenericIndex):
     :py:class:`~knncolle.kmknn.KmknnParameters` instance.
     """
 
-    def __init__(ptr):
+    def __init__(self, ptr):
         """
         Args:
             ptr:
@@ -63,5 +66,5 @@ class KmknnIndex(GenericIndex):
 
 
 @define_builder.register
-def _define_builder_kmknn(x: AnnoyParameters) -> Tuple:
+def _define_builder_kmknn(x: KmknnParameters) -> Tuple:
     return (lib.create_kmknn_builder(x.distance), KmknnIndex)

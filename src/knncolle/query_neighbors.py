@@ -1,10 +1,11 @@
 from functools import singledispatch
 from typing import Sequence, Optional, Union
 from dataclasses import dataclass
+import numpy
 
 from .classes import Index, GenericIndex
 from . import lib_knncolle as lib
-from ._utils import process_num_neighbors, process_subset
+from ._utils import process_threshold, process_subset
 
 
 @dataclass
@@ -72,26 +73,25 @@ def query_neighbors(
     Return:
         Results of the neighbor search.
     """
-    raise NotImplementedError("no available method for '" + type(X) + "'")
+    raise NotImplementedError("no available method for '" + str(type(X)) + "'")
 
 
 @query_neighbors.register
 def _query_neighbors_generic(
     X: GenericIndex,
     query: numpy.ndarray,
-    threshold: Union[int, Sequence],
+    threshold: Union[float, Sequence],
     num_threads: int = 1,
-    subset: Optional[Sequence] = None,
     get_index = True,
     get_distance = True,
     **kwargs
 ) -> QueryNeighborsResults:
-    idx, dist = lib.generic_query_neighbors_all(
+    idx, dist = lib.generic_query_all(
         X.ptr, 
         query,
-        threshold = threshold,
-        num_threads = num_threads, 
-        report_index = get_index,
-        report_distance = get_distance
+        process_threshold(threshold),
+        num_threads, 
+        get_index,
+        get_distance
     )
     return QueryNeighborsResults(index = idx, distance = dist)

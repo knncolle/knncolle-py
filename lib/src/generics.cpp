@@ -1,6 +1,7 @@
 #include "def.h"
 #include "pybind11/pybind11.h"
 #include "pybind11/numpy.h"
+#include "pybind11/stl.h"
 
 #include <algorithm>
 #include <cstdint>
@@ -72,7 +73,7 @@ pybind11::object generic_find_knn(
         num_output = subset.size();
         for (uint32_t i = 0; i < num_output; ++i) {
             auto s = subset.at(i);
-            if (s <= 0 || s > nobs) {
+            if (s < 0 || s >= nobs) {
                 throw std::runtime_error("'subset' contains out-of-range indices");
             } 
         }
@@ -369,7 +370,7 @@ pybind11::object generic_find_all(
         num_output = subset.size();
         for (uint32_t i = 0; i < num_output; ++i) {
             auto s = subset.at(i);
-            if (s <= 0 || s > nobs) {
+            if (s < 0 || s >= nobs) {
                 throw std::runtime_error("'subset' contains out-of-range indices");
             } 
         }

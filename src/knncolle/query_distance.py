@@ -1,5 +1,6 @@
 from functools import singledispatch
 from typing import Sequence, Optional, Union
+import numpy
 
 from .classes import Index, GenericIndex
 from . import lib_knncolle as lib
@@ -47,7 +48,7 @@ def query_distance(
         ``query`` containing the distance to the ``num_neighbor``-th point in
         ``X`` for each observation.
     """
-    raise NotImplementedError("no available method for '" + type(X) + "'")
+    raise NotImplementedError("no available method for '" + str(type(X)) + "'")
 
 
 @query_distance.register
@@ -59,13 +60,13 @@ def _query_distance_generic(
     **kwargs
 ) -> numpy.ndarray:
     num_neighbors, force_variable = process_num_neighbors(num_neighbors)
-    return lib.generic_find_knn(
+    return lib.generic_query_knn(
         X.ptr, 
-        query = query,
-        num_neighbors = num_neighbors,
-        force_variable_neighbors = force_variable,
-        num_threads = num_threads, 
-        last_distance_only = True,
-        report_index = False,
-        report_distance = False
+        query,
+        num_neighbors,
+        force_variable,
+        num_threads, 
+        True,
+        False,
+        False
     )

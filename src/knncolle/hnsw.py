@@ -2,6 +2,8 @@ from .classes import Parameters, GenericIndex
 from typing import Literal, Optional, Tuple
 
 from . import lib_knncolle as lib
+from .classes import Parameters, GenericIndex
+from .define_builder import define_builder
 
 
 class HnswParameters(Parameters):
@@ -10,6 +12,7 @@ class HnswParameters(Parameters):
     """
 
     def __init__(
+        self,
         num_links: int = 16, 
         ef_construction: int = 200,
         ef_search: int = 10,
@@ -34,8 +37,9 @@ class HnswParameters(Parameters):
                 Distance metric for index construction and search. This should
                 be one of ``Euclidean``, ``Manhattan`` or ``Cosine``.
         """
-        self.num_trees = num_trees
-        self.search_mult = search_mult
+        self.num_links = num_links
+        self.ef_construction = ef_construction
+        self.ef_search = ef_search
         self.distance = distance
 
     @property
@@ -50,9 +54,9 @@ class HnswParameters(Parameters):
             distance:
                 Distance metric, see :meth:`~__init__()`.
         """
-        if value not in ["Euclidean", "Manhattan", "Cosine"]:
+        if distance not in ["Euclidean", "Manhattan", "Cosine"]:
             raise ValueError("unsupported 'distance'")
-        self._distance = value
+        self._distance = distance 
 
     @property
     def num_links(self) -> int:
@@ -112,7 +116,7 @@ class HnswIndex(GenericIndex):
     with a :py:class:`~knncolle.hnsw.HnswParameters` object.
     """
 
-    def __init__(ptr):
+    def __init__(self, ptr):
         """
         Args:
             ptr:
@@ -132,4 +136,4 @@ class HnswIndex(GenericIndex):
 
 @define_builder.register
 def _define_builder_hnsw(x: HnswParameters) -> Tuple:
-    return (lib.create_hnsw_builder(x.num_trees, x.search_mult, x.distance), HnswIndex)
+    return (lib.create_hnsw_builder(x.num_links, x.ef_construction, x.ef_search, x.distance), HnswIndex)

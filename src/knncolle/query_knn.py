@@ -1,6 +1,7 @@
 from functools import singledispatch
 from typing import Sequence, Optional, Union
 from dataclasses import dataclass
+import numpy
 
 from .classes import Index, GenericIndex
 from . import lib_knncolle as lib
@@ -80,28 +81,28 @@ def query_knn(
     Return:
         Results of the nearest-neighbor search.
     """
-    raise NotImplementedError("no available method for '" + type(X) + "'")
+    raise NotImplementedError("no available method for '" + str(type(X)) + "'")
 
 
 @query_knn.register
 def _query_knn_generic(
     X: GenericIndex,
+    query: numpy.ndarray,
     num_neighbors: Union[int, Sequence],
     num_threads: int = 1,
-    subset: Optional[Sequence] = None,
     get_index = True,
     get_distance = True,
     **kwargs
-) -> Tuple:
+) -> QueryKnnResults:
     num_neighbors, force_variable = process_num_neighbors(num_neighbors)
     idx, dist = lib.generic_query_knn(
         X.ptr, 
-        num_neighbors = num_neighbors,
-        force_variable_neighbors = force_variable,
-        chosen = process_subset(subset), 
-        num_threads = num_threads, 
-        last_distance_only = False,
-        report_index = get_index,
-        report_distance = get_distance
+        query,
+        num_neighbors,
+        force_variable,
+        num_threads, 
+        False,
+        get_index,
+        get_distance
     )
     return QueryKnnResults(index = idx, distance = dist)

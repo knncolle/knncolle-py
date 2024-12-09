@@ -24,6 +24,7 @@ from .find_distance import find_distance
 from .find_knn import find_knn
 from .find_neighbors import find_neighbors
 from .hnsw import HnswParameters, HnswIndex
+from .kmknn import KmknnParameters, KmknnIndex
 from .query_distance import query_distance
 from .query_knn import query_knn
 from .query_neighbors import query_neighbors

@@ -2,6 +2,8 @@ from .classes import Parameters, GenericIndex
 from typing import Literal, Optional, Tuple
 
 from . import lib_knncolle as lib
+from .define_builder import define_builder
+from .classes import Index, GenericIndex, Parameters
 
 
 class AnnoyParameters(Parameters):
@@ -10,6 +12,7 @@ class AnnoyParameters(Parameters):
     """
 
     def __init__(
+        self,
         num_trees: int = 50, 
         search_mult: Optional[float] = None,
         distance: Literal["Euclidean", "Manhattan", "Cosine"] = "Euclidean",
@@ -51,9 +54,9 @@ class AnnoyParameters(Parameters):
             distance:
                 Distance metric, see :meth:`~__init__()`.
         """
-        if value not in ["Euclidean", "Manhattan", "Cosine"]:
+        if distance not in ["Euclidean", "Manhattan", "Cosine"]:
             raise ValueError("unsupported 'distance'")
-        self._distance = value
+        self._distance = distance
 
     @property
     def num_trees(self) -> int:
@@ -90,7 +93,7 @@ class AnnoyParameters(Parameters):
                 Search multiplier, see :meth:`~__init__()`.
         """
         if search_mult is None:
-            search_mult = self._num_trees
+            search_mult = float(self._num_trees)
         if search_mult <= 1:
             raise ValueError("'search_mult' should be greater than 1")
         self._search_mult = search_mult
@@ -102,7 +105,7 @@ class AnnoyIndex(GenericIndex):
     with a :py:class:`~knncolle.annoy.AnnoyParameters` object.
     """
 
-    def __init__(ptr):
+    def __init__(self, ptr):
         """
         Args:
             ptr:

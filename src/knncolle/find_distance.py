@@ -1,5 +1,6 @@
 from functools import singledispatch
 from typing import Sequence, Optional, Union
+import numpy
 
 from .classes import Index, GenericIndex
 from . import lib_knncolle as lib
@@ -49,7 +50,7 @@ def find_distance(
         ``X`` (or ``subset``, if provided) containing the distance to the
         ``num_neighbor``-th point for each observation.
     """
-    raise NotImplementedError("no available method for '" + type(X) + "'")
+    raise NotImplementedError("no available method for '" + str(type(X)) + "'")
 
 
 @find_distance.register
@@ -63,11 +64,11 @@ def _find_distance_generic(
     num_neighbors, force_variable = process_num_neighbors(num_neighbors)
     return lib.generic_find_knn(
         X.ptr, 
-        num_neighbors = num_neighbors,
-        force_variable_neighbors = force_variable,
-        chosen = process_subset(subset), 
-        num_threads = num_threads, 
-        last_distance_only = True,
-        report_index = False,
-        report_distance = False
+        num_neighbors,
+        force_variable,
+        process_subset(subset), 
+        num_threads, 
+        True,
+        False,
+        False
     )
