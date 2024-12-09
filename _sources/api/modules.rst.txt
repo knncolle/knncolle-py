@@ -1,0 +1,7 @@
+knncolle
+========
+
+.. toctree::
+   :maxdepth: 4
+
+   knncolle

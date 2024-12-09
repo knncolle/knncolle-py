@@ -1,0 +1,1256 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="knncolle" href="modules.html" />
+
+    <!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
+        <title>knncolle package - knncolle unknown documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #eeffcc;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">knncolle unknown documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  
+  
+  <span class="sidebar-brand-text">knncolle unknown documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributions &amp; Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">Module Reference</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Module Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">knncolle package</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/api/knncolle.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="module-knncolle">
+<span id="knncolle-package"></span><h1>knncolle package<a class="headerlink" href="#module-knncolle" title="Link to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+</section>
+<section id="module-knncolle.annoy">
+<span id="knncolle-annoy-module"></span><h2>knncolle.annoy module<a class="headerlink" href="#module-knncolle.annoy" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="knncolle.annoy.AnnoyIndex">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">knncolle.annoy.</span></span><span class="sig-name descname"><span class="pre">AnnoyIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ptr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/annoy.html#AnnoyIndex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.annoy.AnnoyIndex" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#knncolle.classes.GenericIndex" title="knncolle.classes.GenericIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenericIndex</span></code></a></p>
+<p>A prebuilt index for the Approximate Nearest Neighbors Oh Yeah (Annoy)
+algorithm, created by <a class="reference internal" href="#knncolle.define_builder.define_builder" title="knncolle.define_builder.define_builder"><code class="xref py py-func docutils literal notranslate"><span class="pre">define_builder()</span></code></a>
+with a <a class="reference internal" href="#knncolle.annoy.AnnoyParameters" title="knncolle.annoy.AnnoyParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">AnnoyParameters</span></code></a> object.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="knncolle.annoy.AnnoyIndex.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ptr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/annoy.html#AnnoyIndex.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.annoy.AnnoyIndex.__init__" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ptr</strong> – Shared pointer to a <code class="docutils literal notranslate"><span class="pre">knncolle::Prebuilt&lt;uint32_t,</span> <span class="pre">uint32_t,</span>
+<span class="pre">double&gt;</span></code>, created and wrapped by pybind11.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="knncolle.annoy.AnnoyIndex.ptr">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ptr</span></span><a class="headerlink" href="#knncolle.annoy.AnnoyIndex.ptr" title="Link to this definition">¶</a></dt>
+<dd><p>Pointer to the prebuilt index, <a class="reference internal" href="#knncolle.annoy.AnnoyIndex.__init__" title="knncolle.annoy.AnnoyIndex.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="knncolle.annoy.AnnoyParameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">knncolle.annoy.</span></span><span class="sig-name descname"><span class="pre">AnnoyParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_trees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_mult</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Euclidean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/annoy.html#AnnoyParameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.annoy.AnnoyParameters" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#knncolle.classes.Parameters" title="knncolle.classes.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a></p>
+<p>Parameters for the Approximate Nearest Neighbors Oh Yeah (Annoy)
+algorithm, see <a class="reference external" href="https://github.com/spotify/annoy">here</a> for details.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="knncolle.annoy.AnnoyParameters.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_trees</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">search_mult</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Euclidean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/annoy.html#AnnoyParameters.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.annoy.AnnoyParameters.__init__" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_trees</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of trees to use to generate the search index. More trees
+increase accuracy at the cost of more computational work, in terms
+of both the indexing time and search speed.</p></li>
+<li><p><strong>search_mult</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</span>) – Multiplier for the number of observations to search.
+Specifically, the product of <code class="docutils literal notranslate"><span class="pre">k</span></code> and <code class="docutils literal notranslate"><span class="pre">search_mult</span></code> is used
+to define the number of points to search exhaustively and
+dictates the balance between search speed and accuracy.
+If None, this defaults to the value of <code class="docutils literal notranslate"><span class="pre">num_trees</span></code>.</p></li>
+<li><p><strong>distance</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Literal" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code></a>[<code class="docutils literal notranslate"><span class="pre">'Euclidean'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Manhattan'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Cosine'</span></code>]</span>) – Distance metric for index construction and search. This should
+be one of <code class="docutils literal notranslate"><span class="pre">Euclidean</span></code>, <code class="docutils literal notranslate"><span class="pre">Manhattan</span></code> or <code class="docutils literal notranslate"><span class="pre">Cosine</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="knncolle.annoy.AnnoyParameters.distance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">distance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#knncolle.annoy.AnnoyParameters.distance" title="Link to this definition">¶</a></dt>
+<dd><p>Distance metric, see <a class="reference internal" href="#knncolle.annoy.AnnoyParameters.__init__" title="knncolle.annoy.AnnoyParameters.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="knncolle.annoy.AnnoyParameters.num_trees">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_trees</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#knncolle.annoy.AnnoyParameters.num_trees" title="Link to this definition">¶</a></dt>
+<dd><p>Number of trees, see <a class="reference internal" href="#knncolle.annoy.AnnoyParameters.__init__" title="knncolle.annoy.AnnoyParameters.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="knncolle.annoy.AnnoyParameters.search_mult">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">search_mult</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#knncolle.annoy.AnnoyParameters.search_mult" title="Link to this definition">¶</a></dt>
+<dd><p>Search multiplier, see <a class="reference internal" href="#knncolle.annoy.AnnoyParameters.__init__" title="knncolle.annoy.AnnoyParameters.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-knncolle.build_index">
+<span id="knncolle-build-index-module"></span><h2>knncolle.build_index module<a class="headerlink" href="#module-knncolle.build_index" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="knncolle.build_index.build_index">
+<span class="sig-prename descclassname"><span class="pre">knncolle.build_index.</span></span><span class="sig-name descname"><span class="pre">build_index</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/build_index.html#build_index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.build_index.build_index" title="Link to this definition">¶</a></dt>
+<dd><p>Build a search index for a given nearest neighbor search algorithm. The
+default method calls <a class="reference internal" href="#knncolle.define_builder.define_builder" title="knncolle.define_builder.define_builder"><code class="xref py py-func docutils literal notranslate"><span class="pre">define_builder()</span></code></a> to
+obtain an algorithm-specific factory that builds the index from <code class="docutils literal notranslate"><span class="pre">x</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>param</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#knncolle.classes.Parameters" title="knncolle.classes.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a></span>) – Parameters for a particular search algorithm.</p></li>
+<li><p><strong>x</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Matrix of coordinates for the observations to be searched. This
+should be a two-dimensional double-precision NumPy array in Fortran
+order where the rows are dimensions and columns are observations.</p></li>
+<li><p><strong>kwargs</strong> – Additional arguments to be passed to individual methods.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#knncolle.classes.Index" title="knncolle.classes.Index"><code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Instance of a <a class="reference internal" href="#knncolle.classes.Index" title="knncolle.classes.Index"><code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code></a> subclass.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-knncolle.classes">
+<span id="knncolle-classes-module"></span><h2>knncolle.classes module<a class="headerlink" href="#module-knncolle.classes" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="knncolle.classes.GenericIndex">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">knncolle.classes.</span></span><span class="sig-name descname"><span class="pre">GenericIndex</span></span><a class="reference internal" href="../_modules/knncolle/classes.html#GenericIndex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.classes.GenericIndex" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#knncolle.classes.Index" title="knncolle.classes.Index"><code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code></a></p>
+<p>Abstract base class for a prebuilt nearest neighbor-search index that is
+represented as a <code class="docutils literal notranslate"><span class="pre">std::shared_ptr&lt;knncolle::Prebuilt&lt;uint32_t,</span> <span class="pre">uint32_t,</span>
+<span class="pre">double&gt;</span> <span class="pre">&gt;</span></code>. Compatible algorithms should implement their own subclasses.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="knncolle.classes.GenericIndex.num_dimensions">
+<span class="sig-name descname"><span class="pre">num_dimensions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/classes.html#GenericIndex.num_dimensions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.classes.GenericIndex.num_dimensions" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Number of dimensions in this index.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="knncolle.classes.GenericIndex.num_observations">
+<span class="sig-name descname"><span class="pre">num_observations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/classes.html#GenericIndex.num_observations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.classes.GenericIndex.num_observations" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Number of observations in this index.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="knncolle.classes.Index">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">knncolle.classes.</span></span><span class="sig-name descname"><span class="pre">Index</span></span><a class="reference internal" href="../_modules/knncolle/classes.html#Index"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.classes.Index" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.12/library/abc.html#abc.ABC" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>Abstract base class for a prebuilt nearest neighbor-search index. Each
+search algorithm should implement their own subclasses, but are free
+to use any data structure to represent their search indices.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="knncolle.classes.Parameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">knncolle.classes.</span></span><span class="sig-name descname"><span class="pre">Parameters</span></span><a class="reference internal" href="../_modules/knncolle/classes.html#Parameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.classes.Parameters" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.12/library/abc.html#abc.ABC" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></a></p>
+<p>Abstract base class for the parameters of a nearest neighbor search. Each
+search algorithm should implement a subclass that contains the relevant
+parameters for controlling index construction or search.</p>
+</dd></dl>
+
+</section>
+<section id="module-knncolle.define_builder">
+<span id="knncolle-define-builder-module"></span><h2>knncolle.define_builder module<a class="headerlink" href="#module-knncolle.define_builder" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="knncolle.define_builder.define_builder">
+<span class="sig-prename descclassname"><span class="pre">knncolle.define_builder.</span></span><span class="sig-name descname"><span class="pre">define_builder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">param</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/define_builder.html#define_builder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.define_builder.define_builder" title="Link to this definition">¶</a></dt>
+<dd><p>Create a builder instance for a given nearest neighbor search algorithm.
+The builder can be used in <a class="reference internal" href="#knncolle.build_index.build_index" title="knncolle.build_index.build_index"><code class="xref py py-func docutils literal notranslate"><span class="pre">build_index()</span></code></a>
+to create a search index from a matrix of observations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>param</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#knncolle.classes.Parameters" title="knncolle.classes.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a></span>) – Parameters for a particular search algorithm.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Tuple" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Tuple where the first element is a shared pointer to a
+<code class="docutils literal notranslate"><span class="pre">knncolle::Builder&lt;knncolle::SimpleMatrix&lt;uint32_t,</span> <span class="pre">uint32_t,</span> <span class="pre">double&gt;,</span>
+<span class="pre">double&gt;</span></code> instance, and the second element is a
+<a class="reference internal" href="#knncolle.classes.GenericIndex" title="knncolle.classes.GenericIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenericIndex</span></code></a> subclass.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-knncolle.exhaustive">
+<span id="knncolle-exhaustive-module"></span><h2>knncolle.exhaustive module<a class="headerlink" href="#module-knncolle.exhaustive" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="knncolle.exhaustive.ExhaustiveIndex">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">knncolle.exhaustive.</span></span><span class="sig-name descname"><span class="pre">ExhaustiveIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ptr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/exhaustive.html#ExhaustiveIndex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.exhaustive.ExhaustiveIndex" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#knncolle.classes.GenericIndex" title="knncolle.classes.GenericIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenericIndex</span></code></a></p>
+<p>A prebuilt index for an exhaustive search, created by
+<a class="reference internal" href="#knncolle.define_builder.define_builder" title="knncolle.define_builder.define_builder"><code class="xref py py-func docutils literal notranslate"><span class="pre">define_builder()</span></code></a> with a
+<a class="reference internal" href="#knncolle.exhaustive.ExhaustiveParameters" title="knncolle.exhaustive.ExhaustiveParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">ExhaustiveParameters</span></code></a> instance.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="knncolle.exhaustive.ExhaustiveIndex.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ptr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/exhaustive.html#ExhaustiveIndex.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.exhaustive.ExhaustiveIndex.__init__" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ptr</strong> – Shared pointer to a <code class="docutils literal notranslate"><span class="pre">knncolle::Prebuilt&lt;uint32_t,</span> <span class="pre">uint32_t,</span>
+<span class="pre">double&gt;</span></code>, created and wrapped by pybind11.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="knncolle.exhaustive.ExhaustiveIndex.ptr">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ptr</span></span><a class="headerlink" href="#knncolle.exhaustive.ExhaustiveIndex.ptr" title="Link to this definition">¶</a></dt>
+<dd><p>Pointer to the prebuilt index, see <a class="reference internal" href="#knncolle.exhaustive.ExhaustiveIndex.__init__" title="knncolle.exhaustive.ExhaustiveIndex.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="knncolle.exhaustive.ExhaustiveParameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">knncolle.exhaustive.</span></span><span class="sig-name descname"><span class="pre">ExhaustiveParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Euclidean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/exhaustive.html#ExhaustiveParameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.exhaustive.ExhaustiveParameters" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#knncolle.classes.Parameters" title="knncolle.classes.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a></p>
+<p>Parameters for an exhaustive search.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="knncolle.exhaustive.ExhaustiveParameters.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Euclidean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/exhaustive.html#ExhaustiveParameters.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.exhaustive.ExhaustiveParameters.__init__" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>distance</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Literal" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code></a>[<code class="docutils literal notranslate"><span class="pre">'Euclidean'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Manhattan'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Cosine'</span></code>]</span>) – Distance metric for index construction and search. This should
+be one of <code class="docutils literal notranslate"><span class="pre">Euclidean</span></code>, <code class="docutils literal notranslate"><span class="pre">Manhattan</span></code> or <code class="docutils literal notranslate"><span class="pre">Cosine</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="knncolle.exhaustive.ExhaustiveParameters.distance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">distance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#knncolle.exhaustive.ExhaustiveParameters.distance" title="Link to this definition">¶</a></dt>
+<dd><p>Distance metric, see <a class="reference internal" href="#knncolle.exhaustive.ExhaustiveParameters.__init__" title="knncolle.exhaustive.ExhaustiveParameters.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-knncolle.find_distance">
+<span id="knncolle-find-distance-module"></span><h2>knncolle.find_distance module<a class="headerlink" href="#module-knncolle.find_distance" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="knncolle.find_distance.find_distance">
+<span class="sig-prename descclassname"><span class="pre">knncolle.find_distance.</span></span><span class="sig-name descname"><span class="pre">find_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_neighbors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/find_distance.html#find_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.find_distance.find_distance" title="Link to this definition">¶</a></dt>
+<dd><p>Find the distance to the k-th closest point for each observation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#knncolle.classes.Index" title="knncolle.classes.Index"><code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code></a></span>) – A prebuilt search index.</p></li>
+<li><p><strong>num_neighbors</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Union" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>]</span>) – <p>Number of nearest neighbors at which to compute the distance from
+each observation in <code class="docutils literal notranslate"><span class="pre">X</span></code>, i.e., k. This is automatically capped at
+the number of observations minus 1.</p>
+<p>Alternatively, this may be a sequence of non-negative integers of
+length equal to the number of observations in <code class="docutils literal notranslate"><span class="pre">X</span></code>, specifying the
+neighbor at which to compute the distance for each observation.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">subset</span></code> is supplied and <code class="docutils literal notranslate"><span class="pre">num_neighbors</span></code> is a sequence, it
+should have length equal to <code class="docutils literal notranslate"><span class="pre">subset</span></code> instead, and should specify
+the neighbor for each observation in the subset.</p>
+</p></li>
+<li><p><strong>num_threads</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of threads to use for the search.</p></li>
+<li><p><strong>subset</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>]</span>) – Sequence of integers containing the indices of the observations for
+which to compute the distances. All indices should be non-negative
+and less than the total number of observations.</p></li>
+<li><p><strong>kwargs</strong> – Additional arguments to pass to specific methods.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A NumPy array of length equal to the number of observations in
+<code class="docutils literal notranslate"><span class="pre">X</span></code> (or <code class="docutils literal notranslate"><span class="pre">subset</span></code>, if provided) containing the distance to the
+<code class="docutils literal notranslate"><span class="pre">num_neighbors</span></code>-th point for each observation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-knncolle.find_knn">
+<span id="knncolle-find-knn-module"></span><h2>knncolle.find_knn module<a class="headerlink" href="#module-knncolle.find_knn" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="knncolle.find_knn.FindKnnResults">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">knncolle.find_knn.</span></span><span class="sig-name descname"><span class="pre">FindKnnResults</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/find_knn.html#FindKnnResults"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.find_knn.FindKnnResults" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Results of <a class="reference internal" href="#knncolle.find_knn.find_knn" title="knncolle.find_knn.find_knn"><code class="xref py py-func docutils literal notranslate"><span class="pre">find_knn()</span></code></a>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">num_neighbors</span></code> is an integer, <code class="docutils literal notranslate"><span class="pre">index</span></code> and <code class="docutils literal notranslate"><span class="pre">distance</span></code> are both
+matrices. Each row corresponds to an observation in <code class="docutils literal notranslate"><span class="pre">X</span></code> and each column
+corresponds to one of its neighbors. <code class="docutils literal notranslate"><span class="pre">index</span></code> contains the indices of the
+nearest neighbors while <code class="docutils literal notranslate"><span class="pre">distance</span></code> contains the distance to those
+neighbors. In each row, neighbors are guaranteed to be sorted in order of
+increasing distance. Each row of <code class="docutils literal notranslate"><span class="pre">index</span></code> is guaranteed to not contain the
+index of the corresponding observation.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">num_neighbors</span></code> is a sequence, <code class="docutils literal notranslate"><span class="pre">index</span></code> and <code class="docutils literal notranslate"><span class="pre">distance</span></code> are lists
+instead. Each list element corresponds to an observation in <code class="docutils literal notranslate"><span class="pre">X</span></code> and is a
+NumPy array containing the indices (for <code class="docutils literal notranslate"><span class="pre">index</span></code>) or distances (for
+<code class="docutils literal notranslate"><span class="pre">distance</span></code>) to the requested number of neighbors for that observation.
+For each observation, the neighbors are guaranteed to be sorted in order of
+increasing distance. Each element of <code class="docutils literal notranslate"><span class="pre">index</span></code> is guaranteed to not contain
+the index of the corresponding observation.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">get_index</span> <span class="pre">=</span> <span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">index</span></code> is set to None.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">get_distance</span> <span class="pre">=</span> <span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">distance</span></code> is set to None.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">subset</span></code> is provided, the number of rows in <code class="docutils literal notranslate"><span class="pre">index</span></code> and <code class="docutils literal notranslate"><span class="pre">distance</span></code>
+(if <code class="docutils literal notranslate"><span class="pre">num_neighbors</span></code> is an integer) or their length (otherwise) is instead
+equal to the length of the subset. Each row or list entry corresponds to
+one of the observations in the subset.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="knncolle.find_knn.FindKnnResults.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#knncolle.find_knn.FindKnnResults.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="knncolle.find_knn.FindKnnResults.distance">
+<span class="sig-name descname"><span class="pre">distance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a><span class="pre">[</span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#knncolle.find_knn.FindKnnResults.distance" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="knncolle.find_knn.FindKnnResults.index">
+<span class="sig-name descname"><span class="pre">index</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a><span class="pre">[</span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#knncolle.find_knn.FindKnnResults.index" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="knncolle.find_knn.find_knn">
+<span class="sig-prename descclassname"><span class="pre">knncolle.find_knn.</span></span><span class="sig-name descname"><span class="pre">find_knn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_neighbors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/find_knn.html#find_knn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.find_knn.find_knn" title="Link to this definition">¶</a></dt>
+<dd><p>Find the k-nearest neighbors for each observation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#knncolle.classes.Index" title="knncolle.classes.Index"><code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code></a></span>) – A prebuilt search index.</p></li>
+<li><p><strong>num_neighbors</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Union" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>]</span>) – <p>Number of nearest neighbors to identify for each observation in
+<code class="docutils literal notranslate"><span class="pre">X</span></code>. This is automatically capped at the number of observations
+minus 1.</p>
+<p>Alternatively, this may be a sequence of non-negative integers of
+length equal to the number of observations in <code class="docutils literal notranslate"><span class="pre">X</span></code>, specifying the
+number of neighbors to find for each observation.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">subset</span></code> is supplied and <code class="docutils literal notranslate"><span class="pre">num_neighbors</span></code> is a sequence, it
+should have length equal to <code class="docutils literal notranslate"><span class="pre">subset</span></code> instead, and should specify
+the number of neighbors for each observation in the subset.</p>
+</p></li>
+<li><p><strong>num_threads</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of threads to use for the search.</p></li>
+<li><p><strong>subset</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>]</span>) – Sequence of integers containing the indices of the observations for
+which to identify neighbors. All indices should be non-negative
+and less than the total number of observations.</p></li>
+<li><p><strong>get_index</strong> – Whether to report the indices of each nearest neighbor.</p></li>
+<li><p><strong>get_distance</strong> – Whether to report the distances to each nearest neighbor.</p></li>
+<li><p><strong>kwargs</strong> – Additional arguments to pass to specific methods.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#knncolle.find_knn.FindKnnResults" title="knncolle.find_knn.FindKnnResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">FindKnnResults</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Results of the nearest-neighbor search.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-knncolle.find_neighbors">
+<span id="knncolle-find-neighbors-module"></span><h2>knncolle.find_neighbors module<a class="headerlink" href="#module-knncolle.find_neighbors" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="knncolle.find_neighbors.FindNeighborsResults">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">knncolle.find_neighbors.</span></span><span class="sig-name descname"><span class="pre">FindNeighborsResults</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/find_neighbors.html#FindNeighborsResults"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.find_neighbors.FindNeighborsResults" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Results of <a class="reference internal" href="#knncolle.find_neighbors.find_neighbors" title="knncolle.find_neighbors.find_neighbors"><code class="xref py py-func docutils literal notranslate"><span class="pre">find_neighbors()</span></code></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">index</span></code> and <code class="docutils literal notranslate"><span class="pre">distance</span></code> are lists where each element corresponds to an
+observation in <code class="docutils literal notranslate"><span class="pre">X</span></code>. Each element is a NumPy array containing the indices
+of (for <code class="docutils literal notranslate"><span class="pre">index</span></code>) or distances to (for <code class="docutils literal notranslate"><span class="pre">distance</span></code>) the neighbors of the
+corresponding observation within the specified threshold distance. For each
+observation, neighbors are guaranteed to be sorted in order of increasing
+distance. Each element of <code class="docutils literal notranslate"><span class="pre">index</span></code> is guaranteed to not contain the index
+of the corresponding observation.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">get_index</span> <span class="pre">=</span> <span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">index</span></code> is set to None.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">get_distance</span> <span class="pre">=</span> <span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">distance</span></code> is set to None.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">subset</span></code> is provided, the length of <code class="docutils literal notranslate"><span class="pre">index</span></code> and <code class="docutils literal notranslate"><span class="pre">distance</span></code> is
+instead equal to the length of the subset. Each row or list entry
+corresponds to one of the observations in the subset.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="knncolle.find_neighbors.FindNeighborsResults.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#knncolle.find_neighbors.FindNeighborsResults.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="knncolle.find_neighbors.FindNeighborsResults.distance">
+<span class="sig-name descname"><span class="pre">distance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#knncolle.find_neighbors.FindNeighborsResults.distance" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="knncolle.find_neighbors.FindNeighborsResults.index">
+<span class="sig-name descname"><span class="pre">index</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#knncolle.find_neighbors.FindNeighborsResults.index" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="knncolle.find_neighbors.find_neighbors">
+<span class="sig-prename descclassname"><span class="pre">knncolle.find_neighbors.</span></span><span class="sig-name descname"><span class="pre">find_neighbors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/find_neighbors.html#find_neighbors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.find_neighbors.find_neighbors" title="Link to this definition">¶</a></dt>
+<dd><p>Find all neighbors within a certain distance for each observation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#knncolle.classes.Index" title="knncolle.classes.Index"><code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code></a></span>) – A prebuilt search index.</p></li>
+<li><p><strong>threshold</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Union" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>]</span>) – <p>Distance threshold at which to identify neighbors for each
+observation in <code class="docutils literal notranslate"><span class="pre">X</span></code>.</p>
+<p>Alternatively, this may be a sequence of non-negative floats of
+length equal to the number of observations in <code class="docutils literal notranslate"><span class="pre">X</span></code>, specifying
+the distance threshold to search for each observation.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">subset</span></code> is supplied and <code class="docutils literal notranslate"><span class="pre">threshold</span></code> is a sequence, it
+should have length equal to <code class="docutils literal notranslate"><span class="pre">subset</span></code> instead, and should specify
+the distance threshold for each observation in the subset.</p>
+</p></li>
+<li><p><strong>num_threads</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of threads to use for the search.</p></li>
+<li><p><strong>subset</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>]</span>) – Sequence of integers containing the indices of the observations for
+which to identify neighbors. All indices should be non-negative
+and less than the total number of observations.</p></li>
+<li><p><strong>get_index</strong> – Whether to report the indices of each nearest neighbor.</p></li>
+<li><p><strong>get_distance</strong> – Whether to report the distances to each nearest neighbor.</p></li>
+<li><p><strong>kwargs</strong> – Additional arguments to pass to specific methods.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#knncolle.find_neighbors.FindNeighborsResults" title="knncolle.find_neighbors.FindNeighborsResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">FindNeighborsResults</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Results of the neighbor search.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-knncolle.hnsw">
+<span id="knncolle-hnsw-module"></span><h2>knncolle.hnsw module<a class="headerlink" href="#module-knncolle.hnsw" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="knncolle.hnsw.HnswIndex">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">knncolle.hnsw.</span></span><span class="sig-name descname"><span class="pre">HnswIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ptr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/hnsw.html#HnswIndex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.hnsw.HnswIndex" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#knncolle.classes.GenericIndex" title="knncolle.classes.GenericIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenericIndex</span></code></a></p>
+<p>A prebuilt index for the hierarchical navigable small worlds (Hnsw)
+algorithm, created by <a class="reference internal" href="#knncolle.define_builder.define_builder" title="knncolle.define_builder.define_builder"><code class="xref py py-func docutils literal notranslate"><span class="pre">define_builder()</span></code></a>
+with a <a class="reference internal" href="#knncolle.hnsw.HnswParameters" title="knncolle.hnsw.HnswParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">HnswParameters</span></code></a> object.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="knncolle.hnsw.HnswIndex.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ptr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/hnsw.html#HnswIndex.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.hnsw.HnswIndex.__init__" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ptr</strong> – Shared pointer to a <code class="docutils literal notranslate"><span class="pre">knncolle::Prebuilt&lt;uint32_t,</span> <span class="pre">uint32_t,</span>
+<span class="pre">double&gt;</span></code>, created and wrapped by pybind11.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="knncolle.hnsw.HnswIndex.ptr">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ptr</span></span><a class="headerlink" href="#knncolle.hnsw.HnswIndex.ptr" title="Link to this definition">¶</a></dt>
+<dd><p>Pointer to a prebuilt index, see <a class="reference internal" href="#knncolle.hnsw.HnswIndex.__init__" title="knncolle.hnsw.HnswIndex.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="knncolle.hnsw.HnswParameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">knncolle.hnsw.</span></span><span class="sig-name descname"><span class="pre">HnswParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_links</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ef_construction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ef_search</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Euclidean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/hnsw.html#HnswParameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.hnsw.HnswParameters" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#knncolle.classes.Parameters" title="knncolle.classes.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a></p>
+<p>Parameters for the hierarchical navigable small worlds (HNSW)
+algorithm, see <a class="reference external" href="https://github.com/nmslib/hnswlib">here</a> for details.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="knncolle.hnsw.HnswParameters.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_links</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">16</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ef_construction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">200</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ef_search</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Euclidean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/hnsw.html#HnswParameters.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.hnsw.HnswParameters.__init__" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_links</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of bi-directional links to create per observation during
+index construction. Larger values improve accuracy at the
+expense of speed and memory usage.</p></li>
+<li><p><strong>ef_construction</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Size of the dynamic list for index generation. Larger values
+improve the quality of the index at the expense of time.</p></li>
+<li><p><strong>ef_search</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Size of the dynamic list for neighbor searching. Larger values
+improve accuracy at the expense of a slower search.</p></li>
+<li><p><strong>distance</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Literal" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code></a>[<code class="docutils literal notranslate"><span class="pre">'Euclidean'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Manhattan'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Cosine'</span></code>]</span>) – Distance metric for index construction and search. This should
+be one of <code class="docutils literal notranslate"><span class="pre">Euclidean</span></code>, <code class="docutils literal notranslate"><span class="pre">Manhattan</span></code> or <code class="docutils literal notranslate"><span class="pre">Cosine</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="knncolle.hnsw.HnswParameters.distance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">distance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#knncolle.hnsw.HnswParameters.distance" title="Link to this definition">¶</a></dt>
+<dd><p>Distance metric, see <a class="reference internal" href="#knncolle.hnsw.HnswParameters.__init__" title="knncolle.hnsw.HnswParameters.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="knncolle.hnsw.HnswParameters.ef_construction">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ef_construction</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#knncolle.hnsw.HnswParameters.ef_construction" title="Link to this definition">¶</a></dt>
+<dd><p>Size of the dynamic list during index construction, see
+<a class="reference internal" href="#knncolle.hnsw.HnswParameters.__init__" title="knncolle.hnsw.HnswParameters.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="knncolle.hnsw.HnswParameters.ef_search">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ef_search</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#knncolle.hnsw.HnswParameters.ef_search" title="Link to this definition">¶</a></dt>
+<dd><p>Size of the dynamic list during search, see <a class="reference internal" href="#knncolle.hnsw.HnswParameters.__init__" title="knncolle.hnsw.HnswParameters.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="knncolle.hnsw.HnswParameters.num_links">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">num_links</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#knncolle.hnsw.HnswParameters.num_links" title="Link to this definition">¶</a></dt>
+<dd><p>Number of links, see <a class="reference internal" href="#knncolle.hnsw.HnswParameters.__init__" title="knncolle.hnsw.HnswParameters.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-knncolle.kmknn">
+<span id="knncolle-kmknn-module"></span><h2>knncolle.kmknn module<a class="headerlink" href="#module-knncolle.kmknn" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="knncolle.kmknn.KmknnIndex">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">knncolle.kmknn.</span></span><span class="sig-name descname"><span class="pre">KmknnIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ptr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/kmknn.html#KmknnIndex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.kmknn.KmknnIndex" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#knncolle.classes.GenericIndex" title="knncolle.classes.GenericIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenericIndex</span></code></a></p>
+<p>A prebuilt index for the k-means k-nearest neighbors algorithm, created
+by <a class="reference internal" href="#knncolle.define_builder.define_builder" title="knncolle.define_builder.define_builder"><code class="xref py py-func docutils literal notranslate"><span class="pre">define_builder()</span></code></a> with a
+<a class="reference internal" href="#knncolle.kmknn.KmknnParameters" title="knncolle.kmknn.KmknnParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">KmknnParameters</span></code></a> instance.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="knncolle.kmknn.KmknnIndex.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ptr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/kmknn.html#KmknnIndex.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.kmknn.KmknnIndex.__init__" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ptr</strong> – Shared pointer to a <code class="docutils literal notranslate"><span class="pre">knncolle::Prebuilt&lt;uint32_t,</span> <span class="pre">uint32_t,</span>
+<span class="pre">double&gt;</span></code>, created and wrapped by pybind11.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="knncolle.kmknn.KmknnIndex.ptr">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ptr</span></span><a class="headerlink" href="#knncolle.kmknn.KmknnIndex.ptr" title="Link to this definition">¶</a></dt>
+<dd><p>Pointer to a prebuilt index, see <a class="reference internal" href="#knncolle.kmknn.KmknnIndex.__init__" title="knncolle.kmknn.KmknnIndex.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="knncolle.kmknn.KmknnParameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">knncolle.kmknn.</span></span><span class="sig-name descname"><span class="pre">KmknnParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Euclidean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/kmknn.html#KmknnParameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.kmknn.KmknnParameters" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#knncolle.classes.Parameters" title="knncolle.classes.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a></p>
+<p>Parameters for the k-means k-nearest neighbors (KMKNN) algorithm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="knncolle.kmknn.KmknnParameters.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Euclidean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/kmknn.html#KmknnParameters.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.kmknn.KmknnParameters.__init__" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>distance</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Literal" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code></a>[<code class="docutils literal notranslate"><span class="pre">'Euclidean'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Manhattan'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Cosine'</span></code>]</span>) – Distance metric for index construction and search. This should
+be one of <code class="docutils literal notranslate"><span class="pre">Euclidean</span></code>, <code class="docutils literal notranslate"><span class="pre">Manhattan</span></code> or <code class="docutils literal notranslate"><span class="pre">Cosine</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="knncolle.kmknn.KmknnParameters.distance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">distance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#knncolle.kmknn.KmknnParameters.distance" title="Link to this definition">¶</a></dt>
+<dd><p>Distance metric, see <a class="reference internal" href="#knncolle.kmknn.KmknnParameters.__init__" title="knncolle.kmknn.KmknnParameters.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-knncolle.query_distance">
+<span id="knncolle-query-distance-module"></span><h2>knncolle.query_distance module<a class="headerlink" href="#module-knncolle.query_distance" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="knncolle.query_distance.query_distance">
+<span class="sig-prename descclassname"><span class="pre">knncolle.query_distance.</span></span><span class="sig-name descname"><span class="pre">query_distance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_neighbors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/query_distance.html#query_distance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.query_distance.query_distance" title="Link to this definition">¶</a></dt>
+<dd><p>Find the distance to the k-th nearest neighbor in the search index for
+each observation in the query dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#knncolle.classes.Index" title="knncolle.classes.Index"><code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code></a></span>) – A prebuilt search index.</p></li>
+<li><p><strong>query</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Matrix of coordinates for the query observations. This should be a
+two-dimensional double-precision NumPy array in Fortran order where
+the rows are dimensions and columns are observations. The number of
+dimensions should be consistent with that in <code class="docutils literal notranslate"><span class="pre">X</span></code>.</p></li>
+<li><p><strong>num_neighbors</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Union" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>]</span>) – <p>Number of nearest neighbors in <code class="docutils literal notranslate"><span class="pre">X</span></code> at which to compute the
+distance from each observation in <code class="docutils literal notranslate"><span class="pre">query</span></code>, i.e., k. This is
+automatically capped at the total number of observations in <code class="docutils literal notranslate"><span class="pre">X</span></code>.</p>
+<p>Alternatively, this may be a sequence of integers of length equal
+to the number of observations in <code class="docutils literal notranslate"><span class="pre">query</span></code>, specifying the neighbor
+at which to compute the distance for each observation.</p>
+</p></li>
+<li><p><strong>num_threads</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of threads to use for the search.</p></li>
+<li><p><strong>kwargs</strong> – Additional arguments to pass to specific methods.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A NumPy array of length equal to the number of observations in
+<code class="docutils literal notranslate"><span class="pre">query</span></code> containing the distance to the <code class="docutils literal notranslate"><span class="pre">num_neighbors</span></code>-th point in
+<code class="docutils literal notranslate"><span class="pre">X</span></code> for each observation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-knncolle.query_knn">
+<span id="knncolle-query-knn-module"></span><h2>knncolle.query_knn module<a class="headerlink" href="#module-knncolle.query_knn" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="knncolle.query_knn.QueryKnnResults">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">knncolle.query_knn.</span></span><span class="sig-name descname"><span class="pre">QueryKnnResults</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/query_knn.html#QueryKnnResults"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.query_knn.QueryKnnResults" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Results of <a class="reference internal" href="#knncolle.query_knn.query_knn" title="knncolle.query_knn.query_knn"><code class="xref py py-func docutils literal notranslate"><span class="pre">query_knn()</span></code></a>.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">num_neighbors</span></code> is an integer, <code class="docutils literal notranslate"><span class="pre">index</span></code> and <code class="docutils literal notranslate"><span class="pre">distance</span></code> are both
+matrices. Each row corresponds to an observation in <code class="docutils literal notranslate"><span class="pre">query</span></code> and each
+column corresponds to one of its neighbors in <code class="docutils literal notranslate"><span class="pre">X</span></code>. <code class="docutils literal notranslate"><span class="pre">index</span></code> contains the
+indices of the nearest neighbors while <code class="docutils literal notranslate"><span class="pre">distance</span></code> contains the distance
+to those neighbors. In each row, neighbors are guaranteed to be sorted in
+order of increasing distance.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">num_neighbors</span></code> is a sequence, <code class="docutils literal notranslate"><span class="pre">index</span></code> and <code class="docutils literal notranslate"><span class="pre">distance</span></code> are lists
+instead. Each list element corresponds to an observation in <code class="docutils literal notranslate"><span class="pre">X</span></code> and is a
+NumPy array containing the indices (for <code class="docutils literal notranslate"><span class="pre">index</span></code>) or distances (for
+<code class="docutils literal notranslate"><span class="pre">distance</span></code>) to the requested number of neighbors for that observation.
+For each observation, the neighbors are guaranteed to be sorted in order of
+increasing distance.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">get_index</span> <span class="pre">=</span> <span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">index</span></code> is set to None.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">get_distance</span> <span class="pre">=</span> <span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">distance</span></code> is set to None.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="knncolle.query_knn.QueryKnnResults.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#knncolle.query_knn.QueryKnnResults.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="knncolle.query_knn.QueryKnnResults.distance">
+<span class="sig-name descname"><span class="pre">distance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a><span class="pre">[</span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#knncolle.query_knn.QueryKnnResults.distance" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="knncolle.query_knn.QueryKnnResults.index">
+<span class="sig-name descname"><span class="pre">index</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a><span class="pre">[</span><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#knncolle.query_knn.QueryKnnResults.index" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="knncolle.query_knn.query_knn">
+<span class="sig-prename descclassname"><span class="pre">knncolle.query_knn.</span></span><span class="sig-name descname"><span class="pre">query_knn</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">query</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_neighbors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/query_knn.html#query_knn"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.query_knn.query_knn" title="Link to this definition">¶</a></dt>
+<dd><p>Find the k-nearest neighbors in the search index for each observation in
+the query matrix.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#knncolle.classes.Index" title="knncolle.classes.Index"><code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code></a></span>) – A prebuilt search index.</p></li>
+<li><p><strong>query</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v2.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></span>) – Matrix of coordinates for the query observations. This should be a
+two-dimensional double-precision NumPy array in Fortran order where
+the rows are dimensions and columns are observations. The number of
+dimensions should be consistent with that in <code class="docutils literal notranslate"><span class="pre">X</span></code>.</p></li>
+<li><p><strong>num_neighbors</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Union" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>]</span>) – <p>Number of nearest neighbors in <code class="docutils literal notranslate"><span class="pre">X</span></code> to identify for each
+observation in <code class="docutils literal notranslate"><span class="pre">query</span></code>, i.e., k. This is automatically capped at the
+total number of observations in <code class="docutils literal notranslate"><span class="pre">X</span></code>.</p>
+<p>Alternatively, this may be a sequence of non-negative integers of
+length equal to the number of observations in <code class="docutils literal notranslate"><span class="pre">query</span></code>,
+specifying the number of neighbors to find for each observation.</p>
+</p></li>
+<li><p><strong>num_threads</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of threads to use for the search.</p></li>
+<li><p><strong>get_index</strong> – Whether to report the indices of each nearest neighbor.</p></li>
+<li><p><strong>get_distance</strong> – Whether to report the distances to each nearest neighbor.</p></li>
+<li><p><strong>kwargs</strong> – Additional arguments to pass to specific methods.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#knncolle.query_knn.QueryKnnResults" title="knncolle.query_knn.QueryKnnResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryKnnResults</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Results of the nearest-neighbor search.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-knncolle.query_neighbors">
+<span id="knncolle-query-neighbors-module"></span><h2>knncolle.query_neighbors module<a class="headerlink" href="#module-knncolle.query_neighbors" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="knncolle.query_neighbors.QueryNeighborsResults">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">knncolle.query_neighbors.</span></span><span class="sig-name descname"><span class="pre">QueryNeighborsResults</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/query_neighbors.html#QueryNeighborsResults"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.query_neighbors.QueryNeighborsResults" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.12/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Results of <a class="reference internal" href="#knncolle.query_neighbors.query_neighbors" title="knncolle.query_neighbors.query_neighbors"><code class="xref py py-func docutils literal notranslate"><span class="pre">query_neighbors()</span></code></a>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">index</span></code> and <code class="docutils literal notranslate"><span class="pre">distance</span></code> are lists where each element is a NumPy array
+that corresponds to an observation in <code class="docutils literal notranslate"><span class="pre">query</span></code>. Each array contains the
+indices of (for <code class="docutils literal notranslate"><span class="pre">index</span></code>) or distances to (for <code class="docutils literal notranslate"><span class="pre">distance</span></code>) the
+observations of <code class="docutils literal notranslate"><span class="pre">X</span></code> that neighbor the corresponding observation within
+the specified threshold distance. For each query observation, neighbors are
+guaranteed to be sorted in order of increasing distance.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">get_index</span> <span class="pre">=</span> <span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">index</span></code> is set to None.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">get_distance</span> <span class="pre">=</span> <span class="pre">False</span></code>, <code class="docutils literal notranslate"><span class="pre">distance</span></code> is set to None.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="knncolle.query_neighbors.QueryNeighborsResults.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#knncolle.query_neighbors.QueryNeighborsResults.__init__" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="knncolle.query_neighbors.QueryNeighborsResults.distance">
+<span class="sig-name descname"><span class="pre">distance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#knncolle.query_neighbors.QueryNeighborsResults.distance" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="knncolle.query_neighbors.QueryNeighborsResults.index">
+<span class="sig-name descname"><span class="pre">index</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Optional" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a><span class="pre">[</span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#list" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a><span class="pre">]</span></em><a class="headerlink" href="#knncolle.query_neighbors.QueryNeighborsResults.index" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="knncolle.query_neighbors.query_neighbors">
+<span class="sig-prename descclassname"><span class="pre">knncolle.query_neighbors.</span></span><span class="sig-name descname"><span class="pre">query_neighbors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_threads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">get_distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/query_neighbors.html#query_neighbors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.query_neighbors.query_neighbors" title="Link to this definition">¶</a></dt>
+<dd><p>Find all observations in the search index that lie within a threshold
+distance of each observation in the query dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#knncolle.classes.Index" title="knncolle.classes.Index"><code class="xref py py-class docutils literal notranslate"><span class="pre">Index</span></code></a></span>) – A prebuilt search index.</p></li>
+<li><p><strong>query</strong> – Matrix of coordinates for the query observations. This should be a
+two-dimensional double-precision NumPy array in Fortran order where
+the rows are dimensions and columns are observations. The number of
+dimensions should be consistent with that in <code class="docutils literal notranslate"><span class="pre">X</span></code>.</p></li>
+<li><p><strong>threshold</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Union" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3.12/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Sequence" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Sequence</span></code></a>]</span>) – <p>Distance threshold at which to identify neighbors for each
+observation in <code class="docutils literal notranslate"><span class="pre">X</span></code>.</p>
+<p>Alternatively, this may be a sequence of non-negative floats of
+length equal to the number of observations in <code class="docutils literal notranslate"><span class="pre">X</span></code>, specifying
+the distance threshold to search for each observation.</p>
+</p></li>
+<li><p><strong>num_threads</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span>) – Number of threads to use for the search.</p></li>
+<li><p><strong>get_index</strong> – Whether to report the indices of each nearest neighbor.</p></li>
+<li><p><strong>get_distance</strong> – Whether to report the distances to each nearest neighbor.</p></li>
+<li><p><strong>kwargs</strong> – Additional arguments to pass to specific methods.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference internal" href="#knncolle.query_neighbors.QueryNeighborsResults" title="knncolle.query_neighbors.QueryNeighborsResults"><code class="xref py py-class docutils literal notranslate"><span class="pre">QueryNeighborsResults</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Results of the neighbor search.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-knncolle.vptree">
+<span id="knncolle-vptree-module"></span><h2>knncolle.vptree module<a class="headerlink" href="#module-knncolle.vptree" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="knncolle.vptree.VptreeIndex">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">knncolle.vptree.</span></span><span class="sig-name descname"><span class="pre">VptreeIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ptr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/vptree.html#VptreeIndex"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.vptree.VptreeIndex" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#knncolle.classes.GenericIndex" title="knncolle.classes.GenericIndex"><code class="xref py py-class docutils literal notranslate"><span class="pre">GenericIndex</span></code></a></p>
+<p>A prebuilt index for the vantage point tree algorithm, created by
+<a class="reference internal" href="#knncolle.define_builder.define_builder" title="knncolle.define_builder.define_builder"><code class="xref py py-func docutils literal notranslate"><span class="pre">define_builder()</span></code></a> with a
+<a class="reference internal" href="#knncolle.vptree.VptreeParameters" title="knncolle.vptree.VptreeParameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">VptreeParameters</span></code></a> instance.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="knncolle.vptree.VptreeIndex.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ptr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/vptree.html#VptreeIndex.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.vptree.VptreeIndex.__init__" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ptr</strong> – Shared pointer to a <code class="docutils literal notranslate"><span class="pre">knncolle::Prebuilt&lt;uint32_t,</span> <span class="pre">uint32_t,</span>
+<span class="pre">double&gt;</span></code>, created and wrapped by pybind11.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="knncolle.vptree.VptreeIndex.ptr">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ptr</span></span><a class="headerlink" href="#knncolle.vptree.VptreeIndex.ptr" title="Link to this definition">¶</a></dt>
+<dd><p>Pointer to a prebuilt index, see <code class="xref py py-meth docutils literal notranslate"><span class="pre">__init-_()</span></code>.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="knncolle.vptree.VptreeParameters">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">knncolle.vptree.</span></span><span class="sig-name descname"><span class="pre">VptreeParameters</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Euclidean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/vptree.html#VptreeParameters"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.vptree.VptreeParameters" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#knncolle.classes.Parameters" title="knncolle.classes.Parameters"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameters</span></code></a></p>
+<p>Parameters for the vantage point (VP) tree algorithm.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="knncolle.vptree.VptreeParameters.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distance</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Euclidean'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/knncolle/vptree.html#VptreeParameters.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#knncolle.vptree.VptreeParameters.__init__" title="Link to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>distance</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.12/library/typing.html#typing.Literal" title="(in Python v3.12)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Literal</span></code></a>[<code class="docutils literal notranslate"><span class="pre">'Euclidean'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Manhattan'</span></code>, <code class="docutils literal notranslate"><span class="pre">'Cosine'</span></code>]</span>) – Distance metric for index construction and search. This should
+be one of <code class="docutils literal notranslate"><span class="pre">Euclidean</span></code>, <code class="docutils literal notranslate"><span class="pre">Manhattan</span></code> or <code class="docutils literal notranslate"><span class="pre">Cosine</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="knncolle.vptree.VptreeParameters.distance">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">distance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3.12/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#knncolle.vptree.VptreeParameters.distance" title="Link to this definition">¶</a></dt>
+<dd><p>Distance metric, see <a class="reference internal" href="#knncolle.vptree.VptreeParameters.__init__" title="knncolle.vptree.VptreeParameters.__init__"><code class="xref py py-meth docutils literal notranslate"><span class="pre">__init__()</span></code></a>.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          <a class="prev-page" href="modules.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">knncolle</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Aaron Lun
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">knncolle package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-knncolle.annoy">knncolle.annoy module</a><ul>
+<li><a class="reference internal" href="#knncolle.annoy.AnnoyIndex"><code class="docutils literal notranslate"><span class="pre">AnnoyIndex</span></code></a><ul>
+<li><a class="reference internal" href="#knncolle.annoy.AnnoyIndex.__init__"><code class="docutils literal notranslate"><span class="pre">AnnoyIndex.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.annoy.AnnoyIndex.ptr"><code class="docutils literal notranslate"><span class="pre">AnnoyIndex.ptr</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#knncolle.annoy.AnnoyParameters"><code class="docutils literal notranslate"><span class="pre">AnnoyParameters</span></code></a><ul>
+<li><a class="reference internal" href="#knncolle.annoy.AnnoyParameters.__init__"><code class="docutils literal notranslate"><span class="pre">AnnoyParameters.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.annoy.AnnoyParameters.distance"><code class="docutils literal notranslate"><span class="pre">AnnoyParameters.distance</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.annoy.AnnoyParameters.num_trees"><code class="docutils literal notranslate"><span class="pre">AnnoyParameters.num_trees</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.annoy.AnnoyParameters.search_mult"><code class="docutils literal notranslate"><span class="pre">AnnoyParameters.search_mult</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-knncolle.build_index">knncolle.build_index module</a><ul>
+<li><a class="reference internal" href="#knncolle.build_index.build_index"><code class="docutils literal notranslate"><span class="pre">build_index()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-knncolle.classes">knncolle.classes module</a><ul>
+<li><a class="reference internal" href="#knncolle.classes.GenericIndex"><code class="docutils literal notranslate"><span class="pre">GenericIndex</span></code></a><ul>
+<li><a class="reference internal" href="#knncolle.classes.GenericIndex.num_dimensions"><code class="docutils literal notranslate"><span class="pre">GenericIndex.num_dimensions()</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.classes.GenericIndex.num_observations"><code class="docutils literal notranslate"><span class="pre">GenericIndex.num_observations()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#knncolle.classes.Index"><code class="docutils literal notranslate"><span class="pre">Index</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.classes.Parameters"><code class="docutils literal notranslate"><span class="pre">Parameters</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-knncolle.define_builder">knncolle.define_builder module</a><ul>
+<li><a class="reference internal" href="#knncolle.define_builder.define_builder"><code class="docutils literal notranslate"><span class="pre">define_builder()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-knncolle.exhaustive">knncolle.exhaustive module</a><ul>
+<li><a class="reference internal" href="#knncolle.exhaustive.ExhaustiveIndex"><code class="docutils literal notranslate"><span class="pre">ExhaustiveIndex</span></code></a><ul>
+<li><a class="reference internal" href="#knncolle.exhaustive.ExhaustiveIndex.__init__"><code class="docutils literal notranslate"><span class="pre">ExhaustiveIndex.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.exhaustive.ExhaustiveIndex.ptr"><code class="docutils literal notranslate"><span class="pre">ExhaustiveIndex.ptr</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#knncolle.exhaustive.ExhaustiveParameters"><code class="docutils literal notranslate"><span class="pre">ExhaustiveParameters</span></code></a><ul>
+<li><a class="reference internal" href="#knncolle.exhaustive.ExhaustiveParameters.__init__"><code class="docutils literal notranslate"><span class="pre">ExhaustiveParameters.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.exhaustive.ExhaustiveParameters.distance"><code class="docutils literal notranslate"><span class="pre">ExhaustiveParameters.distance</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-knncolle.find_distance">knncolle.find_distance module</a><ul>
+<li><a class="reference internal" href="#knncolle.find_distance.find_distance"><code class="docutils literal notranslate"><span class="pre">find_distance()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-knncolle.find_knn">knncolle.find_knn module</a><ul>
+<li><a class="reference internal" href="#knncolle.find_knn.FindKnnResults"><code class="docutils literal notranslate"><span class="pre">FindKnnResults</span></code></a><ul>
+<li><a class="reference internal" href="#knncolle.find_knn.FindKnnResults.__init__"><code class="docutils literal notranslate"><span class="pre">FindKnnResults.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.find_knn.FindKnnResults.distance"><code class="docutils literal notranslate"><span class="pre">FindKnnResults.distance</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.find_knn.FindKnnResults.index"><code class="docutils literal notranslate"><span class="pre">FindKnnResults.index</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#knncolle.find_knn.find_knn"><code class="docutils literal notranslate"><span class="pre">find_knn()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-knncolle.find_neighbors">knncolle.find_neighbors module</a><ul>
+<li><a class="reference internal" href="#knncolle.find_neighbors.FindNeighborsResults"><code class="docutils literal notranslate"><span class="pre">FindNeighborsResults</span></code></a><ul>
+<li><a class="reference internal" href="#knncolle.find_neighbors.FindNeighborsResults.__init__"><code class="docutils literal notranslate"><span class="pre">FindNeighborsResults.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.find_neighbors.FindNeighborsResults.distance"><code class="docutils literal notranslate"><span class="pre">FindNeighborsResults.distance</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.find_neighbors.FindNeighborsResults.index"><code class="docutils literal notranslate"><span class="pre">FindNeighborsResults.index</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#knncolle.find_neighbors.find_neighbors"><code class="docutils literal notranslate"><span class="pre">find_neighbors()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-knncolle.hnsw">knncolle.hnsw module</a><ul>
+<li><a class="reference internal" href="#knncolle.hnsw.HnswIndex"><code class="docutils literal notranslate"><span class="pre">HnswIndex</span></code></a><ul>
+<li><a class="reference internal" href="#knncolle.hnsw.HnswIndex.__init__"><code class="docutils literal notranslate"><span class="pre">HnswIndex.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.hnsw.HnswIndex.ptr"><code class="docutils literal notranslate"><span class="pre">HnswIndex.ptr</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#knncolle.hnsw.HnswParameters"><code class="docutils literal notranslate"><span class="pre">HnswParameters</span></code></a><ul>
+<li><a class="reference internal" href="#knncolle.hnsw.HnswParameters.__init__"><code class="docutils literal notranslate"><span class="pre">HnswParameters.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.hnsw.HnswParameters.distance"><code class="docutils literal notranslate"><span class="pre">HnswParameters.distance</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.hnsw.HnswParameters.ef_construction"><code class="docutils literal notranslate"><span class="pre">HnswParameters.ef_construction</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.hnsw.HnswParameters.ef_search"><code class="docutils literal notranslate"><span class="pre">HnswParameters.ef_search</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.hnsw.HnswParameters.num_links"><code class="docutils literal notranslate"><span class="pre">HnswParameters.num_links</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-knncolle.kmknn">knncolle.kmknn module</a><ul>
+<li><a class="reference internal" href="#knncolle.kmknn.KmknnIndex"><code class="docutils literal notranslate"><span class="pre">KmknnIndex</span></code></a><ul>
+<li><a class="reference internal" href="#knncolle.kmknn.KmknnIndex.__init__"><code class="docutils literal notranslate"><span class="pre">KmknnIndex.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.kmknn.KmknnIndex.ptr"><code class="docutils literal notranslate"><span class="pre">KmknnIndex.ptr</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#knncolle.kmknn.KmknnParameters"><code class="docutils literal notranslate"><span class="pre">KmknnParameters</span></code></a><ul>
+<li><a class="reference internal" href="#knncolle.kmknn.KmknnParameters.__init__"><code class="docutils literal notranslate"><span class="pre">KmknnParameters.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.kmknn.KmknnParameters.distance"><code class="docutils literal notranslate"><span class="pre">KmknnParameters.distance</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-knncolle.query_distance">knncolle.query_distance module</a><ul>
+<li><a class="reference internal" href="#knncolle.query_distance.query_distance"><code class="docutils literal notranslate"><span class="pre">query_distance()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-knncolle.query_knn">knncolle.query_knn module</a><ul>
+<li><a class="reference internal" href="#knncolle.query_knn.QueryKnnResults"><code class="docutils literal notranslate"><span class="pre">QueryKnnResults</span></code></a><ul>
+<li><a class="reference internal" href="#knncolle.query_knn.QueryKnnResults.__init__"><code class="docutils literal notranslate"><span class="pre">QueryKnnResults.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.query_knn.QueryKnnResults.distance"><code class="docutils literal notranslate"><span class="pre">QueryKnnResults.distance</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.query_knn.QueryKnnResults.index"><code class="docutils literal notranslate"><span class="pre">QueryKnnResults.index</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#knncolle.query_knn.query_knn"><code class="docutils literal notranslate"><span class="pre">query_knn()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-knncolle.query_neighbors">knncolle.query_neighbors module</a><ul>
+<li><a class="reference internal" href="#knncolle.query_neighbors.QueryNeighborsResults"><code class="docutils literal notranslate"><span class="pre">QueryNeighborsResults</span></code></a><ul>
+<li><a class="reference internal" href="#knncolle.query_neighbors.QueryNeighborsResults.__init__"><code class="docutils literal notranslate"><span class="pre">QueryNeighborsResults.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.query_neighbors.QueryNeighborsResults.distance"><code class="docutils literal notranslate"><span class="pre">QueryNeighborsResults.distance</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.query_neighbors.QueryNeighborsResults.index"><code class="docutils literal notranslate"><span class="pre">QueryNeighborsResults.index</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#knncolle.query_neighbors.query_neighbors"><code class="docutils literal notranslate"><span class="pre">query_neighbors()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-knncolle.vptree">knncolle.vptree module</a><ul>
+<li><a class="reference internal" href="#knncolle.vptree.VptreeIndex"><code class="docutils literal notranslate"><span class="pre">VptreeIndex</span></code></a><ul>
+<li><a class="reference internal" href="#knncolle.vptree.VptreeIndex.__init__"><code class="docutils literal notranslate"><span class="pre">VptreeIndex.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.vptree.VptreeIndex.ptr"><code class="docutils literal notranslate"><span class="pre">VptreeIndex.ptr</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#knncolle.vptree.VptreeParameters"><code class="docutils literal notranslate"><span class="pre">VptreeParameters</span></code></a><ul>
+<li><a class="reference internal" href="#knncolle.vptree.VptreeParameters.__init__"><code class="docutils literal notranslate"><span class="pre">VptreeParameters.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#knncolle.vptree.VptreeParameters.distance"><code class="docutils literal notranslate"><span class="pre">VptreeParameters.distance</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=3f1b9271"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>
