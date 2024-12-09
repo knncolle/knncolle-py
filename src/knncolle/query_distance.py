@@ -43,9 +43,9 @@ def query_distance(
         kwargs:
             Additional arguments to pass to specific methods.
 
-    Return:
+    Returns:
         A NumPy array of length equal to the number of observations in
-        ``query`` containing the distance to the ``num_neighbor``-th point in
+        ``query`` containing the distance to the ``num_neighbors``-th point in
         ``X`` for each observation.
     """
     raise NotImplementedError("no available method for '" + str(type(X)) + "'")

@@ -78,7 +78,7 @@ def query_knn(
         kwargs:
             Additional arguments to pass to specific methods.
 
-    Return:
+    Returns:
         Results of the nearest-neighbor search.
     """
     raise NotImplementedError("no available method for '" + str(type(X)) + "'")

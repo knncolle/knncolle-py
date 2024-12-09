@@ -36,7 +36,7 @@ def query_neighbors(
     get_index = True,
     get_distance = True,
     **kwargs
-) -> numpy.ndarray:
+) -> QueryNeighborsResults:
     """Find all observations in the search index that lie within a threshold
     distance of each observation in the query dataset.
 
@@ -70,7 +70,7 @@ def query_neighbors(
         kwargs:
             Additional arguments to pass to specific methods.
 
-    Return:
+    Returns:
         Results of the neighbor search.
     """
     raise NotImplementedError("no available method for '" + str(type(X)) + "'")

@@ -26,9 +26,9 @@ def find_distance(
             each observation in ``X``, i.e., k. This is automatically capped at
             the number of observations minus 1.
 
-            Alternatively, this may be a sequence of integers of length equal
-            to the number of observations in ``X``, specifying the neighbor
-            at which to compute the distance for each observation.
+            Alternatively, this may be a sequence of non-negative integers of
+            length equal to the number of observations in ``X``, specifying the
+            neighbor at which to compute the distance for each observation.
 
             If ``subset`` is supplied and ``num_neighbors`` is a sequence, it
             should have length equal to ``subset`` instead, and should specify
@@ -45,10 +45,10 @@ def find_distance(
         kwargs:
             Additional arguments to pass to specific methods.
 
-    Return:
+    Returns:
         A NumPy array of length equal to the number of observations in
         ``X`` (or ``subset``, if provided) containing the distance to the
-        ``num_neighbor``-th point for each observation.
+        ``num_neighbors``-th point for each observation.
     """
     raise NotImplementedError("no available method for '" + str(type(X)) + "'")
 

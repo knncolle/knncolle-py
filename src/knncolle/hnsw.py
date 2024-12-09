@@ -120,17 +120,14 @@ class HnswIndex(GenericIndex):
         """
         Args:
             ptr:
-                Shared pointer to a `knncolle::Prebuilt<uint32_t, uint32_t,
-                double>`, created and wrapped by pybind11.
+                Shared pointer to a ``knncolle::Prebuilt<uint32_t, uint32_t,
+                double>``, created and wrapped by pybind11.
         """
         self._ptr = ptr
 
     @property
     def ptr(self):
-        """
-        Return:
-            See :py:meth:`~__init-_`.
-        """
+        """Pointer to a prebuilt index, see :py:meth:`~__init__`."""
         return self._ptr
 
 

@@ -41,10 +41,7 @@ class AnnoyParameters(Parameters):
 
     @property
     def distance(self) -> str:
-        """
-        Return:
-            Distance metric, see :meth:`~__init__()`.
-        """
+        """Distance metric, see :meth:`~__init__()`."""
         return self._distance
 
     @distance.setter
@@ -60,10 +57,7 @@ class AnnoyParameters(Parameters):
 
     @property
     def num_trees(self) -> int:
-        """
-        Return:
-            Number of trees, see :meth:`~__init__()`.
-        """
+        """Number of trees, see :meth:`~__init__()`."""
         return self._num_trees
 
     @num_trees.setter
@@ -79,10 +73,7 @@ class AnnoyParameters(Parameters):
 
     @property
     def search_mult(self) -> int:
-        """
-        Return:
-            Search multiplier, see :meth:`~__init__()`.
-        """
+        """Search multiplier, see :meth:`~__init__()`."""
         return self._search_mult
 
     @search_mult.setter
@@ -109,17 +100,14 @@ class AnnoyIndex(GenericIndex):
         """
         Args:
             ptr:
-                Shared pointer to a `knncolle::Prebuilt<uint32_t, uint32_t,
-                double>`, created and wrapped by pybind11.
+                Shared pointer to a ``knncolle::Prebuilt<uint32_t, uint32_t,
+                double>``, created and wrapped by pybind11.
         """
         self._ptr = ptr
 
     @property
     def ptr(self):
-        """
-        Return:
-            See :py:meth:`~__init-_`.
-        """
+        """Pointer to the prebuilt index, :py:meth:`~__init__`."""
         return self._ptr
 
 

@@ -34,7 +34,7 @@ except ImportError:
     from sphinx import apidoc
 
 output_dir = os.path.join(__location__, "api")
-module_dir = os.path.join(__location__, "../src/mattress")
+module_dir = os.path.join(__location__, "../src/knncolle")
 try:
     shutil.rmtree(output_dir)
 except FileNotFoundError:
@@ -43,7 +43,7 @@ except FileNotFoundError:
 try:
     import sphinx
 
-    cmd_line = f"sphinx-apidoc --implicit-namespaces -f -o {output_dir} {module_dir}"
+    cmd_line = f"sphinx-apidoc -M --implicit-namespaces -f -o {output_dir} {module_dir} {module_dir}/lib_*"
 
     args = cmd_line.split(" ")
     if tuple(sphinx.__version__.split(".")) >= ("1", "7"):
@@ -96,6 +96,10 @@ myst_enable_extensions = [
     "tasklist",
 ]
 
+autodoc_default_options = {
+    'special-members': '__init__'
+}
+
 # The suffix of source filenames.
 source_suffix = [".rst", ".md"]
 
@@ -106,8 +110,8 @@ source_suffix = [".rst", ".md"]
 master_doc = "index"
 
 # General information about the project.
-project = "mattress"
-copyright = "2023, Jayaram Kancherla"
+project = "knncolle"
+copyright = "2024, Aaron Lun"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -118,7 +122,7 @@ copyright = "2023, Jayaram Kancherla"
 # If you don’t need the separation provided between version and release,
 # just set them both to the same value.
 try:
-    from mattress import __version__ as version
+    from knncolle import __version__ as version
 except ImportError:
     version = ""
 
@@ -248,7 +252,7 @@ html_static_path = ["_static"]
 # html_file_suffix = None
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = "mattress-doc"
+htmlhelp_basename = "knncolle-doc"
 
 
 # -- Options for LaTeX output ------------------------------------------------
@@ -265,7 +269,7 @@ latex_elements = {
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title, author, documentclass [howto/manual]).
 latex_documents = [
-    ("index", "user_guide.tex", "mattress Documentation", "Jayaram Kancherla", "manual")
+    ("index", "user_guide.tex", "knncolle Documentation", "Aaron Lun", "manual")
 ]
 
 # The name of an image file (relative to this directory) to place at the top of

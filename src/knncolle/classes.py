@@ -6,7 +6,7 @@ class Parameters(ABC):
     """
     Abstract base class for the parameters of a nearest neighbor search. Each
     search algorithm should implement a subclass that contains the relevant
-    parameters for adjusting the index construction or search.
+    parameters for controlling index construction or search.
     """
     pass
 

@@ -12,13 +12,13 @@ from ._utils import process_threshold, process_subset
 class FindNeighborsResults:
     """Results of :py:func:`~knncolle.find_neighbors.find_neighbors`.
 
-    ``index`` and ``distance`` are lists where each element is a NumPy array
-    that corresponds to an observation in ``X``. Each array contains the
-    indices of (for ``index``) or distances to (for ``distance``) the neighbors
-    of the corresponding observation within the specified threshold distance.
-    For each observation, neighbors are guaranteed to be sorted in order of
-    increasing distance. Each element of ``index`` is guaranteed to not contain
-    the index of the corresponding observation.
+    ``index`` and ``distance`` are lists where each element corresponds to an
+    observation in ``X``. Each element is a NumPy array containing the indices
+    of (for ``index``) or distances to (for ``distance``) the neighbors of the
+    corresponding observation within the specified threshold distance. For each
+    observation, neighbors are guaranteed to be sorted in order of increasing
+    distance. Each element of ``index`` is guaranteed to not contain the index
+    of the corresponding observation.
 
     If ``get_index = False``, ``index`` is set to None.
 
@@ -41,7 +41,7 @@ def find_neighbors(
     get_index = True,
     get_distance = True,
     **kwargs
-) -> numpy.ndarray:
+) -> FindNeighborsResults:
     """Find all neighbors within a certain distance for each observation.
 
     Args:
@@ -77,7 +77,7 @@ def find_neighbors(
         kwargs:
             Additional arguments to pass to specific methods.
 
-    Return:
+    Returns:
         Results of the neighbor search.
     """
     raise NotImplementedError("no available method for '" + str(type(X)) + "'")
