@@ -47,8 +47,8 @@ def find_knn(
     num_neighbors: Union[int, Sequence],
     num_threads: int = 1,
     subset: Optional[Sequence] = None, 
-    get_index = True,
-    get_distance = True,
+    get_index: bool = True,
+    get_distance: bool = True,
     **kwargs
 ) -> FindKnnResults:
     """Find the k-nearest neighbors for each observation.
@@ -99,8 +99,8 @@ def _find_knn_generic(
     num_neighbors: Union[int, Sequence],
     num_threads: int = 1,
     subset: Optional[Sequence] = None,
-    get_index = True,
-    get_distance = True,
+    get_index: bool = True,
+    get_distance: bool = True,
     **kwargs
 ) -> FindKnnResults:
     num_neighbors, force_variable = process_num_neighbors(num_neighbors)

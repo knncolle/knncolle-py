@@ -3,7 +3,7 @@
 ```{toctree}
 :maxdepth: 2
 
-Overview <readme>
+Usage <readme>
 Contributions & Help <contributing>
 License <license>
 Authors <authors>

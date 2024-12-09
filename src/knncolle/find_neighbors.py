@@ -38,8 +38,8 @@ def find_neighbors(
     threshold: Union[float, Sequence],
     num_threads: int = 1,
     subset: Optional[Sequence] = None, 
-    get_index = True,
-    get_distance = True,
+    get_index: bool = True,
+    get_distance: bool = True,
     **kwargs
 ) -> FindNeighborsResults:
     """Find all neighbors within a certain distance for each observation.
@@ -89,8 +89,8 @@ def _find_neighbors_generic(
     threshold: Union[int, Sequence],
     num_threads: int = 1,
     subset: Optional[Sequence] = None,
-    get_index = True,
-    get_distance = True,
+    get_index: bool = True,
+    get_distance: bool = True,
     **kwargs
 ) -> FindNeighborsResults:
     idx, dist = lib.generic_find_all(

@@ -55,7 +55,7 @@ class VptreeIndex(GenericIndex):
 
     @property
     def ptr(self):
-        """Pointer to a prebuilt index, see :py:meth:`~__init-_`."""
+        """Pointer to a prebuilt index, see :py:meth:`~__init__`."""
         return self._ptr
 
 

@@ -40,8 +40,8 @@ def query_knn(
     query: numpy.ndarray,
     num_neighbors: Union[int, Sequence],
     num_threads: int = 1,
-    get_index = True,
-    get_distance = True,
+    get_index: bool = True,
+    get_distance: bool = True,
     **kwargs
 ) -> QueryKnnResults:
     """Find the k-nearest neighbors in the search index for each observation in
@@ -90,8 +90,8 @@ def _query_knn_generic(
     query: numpy.ndarray,
     num_neighbors: Union[int, Sequence],
     num_threads: int = 1,
-    get_index = True,
-    get_distance = True,
+    get_index: bool = True,
+    get_distance: bool = True,
     **kwargs
 ) -> QueryKnnResults:
     num_neighbors, force_variable = process_num_neighbors(num_neighbors)

@@ -33,8 +33,8 @@ def query_neighbors(
     threshold: Union[float, Sequence],
     num_threads: int = 1,
     subset: Optional[Sequence] = None, 
-    get_index = True,
-    get_distance = True,
+    get_index: bool = True,
+    get_distance: bool = True,
     **kwargs
 ) -> QueryNeighborsResults:
     """Find all observations in the search index that lie within a threshold
@@ -82,8 +82,8 @@ def _query_neighbors_generic(
     query: numpy.ndarray,
     threshold: Union[float, Sequence],
     num_threads: int = 1,
-    get_index = True,
-    get_distance = True,
+    get_index: bool = True,
+    get_distance: bool = True,
     **kwargs
 ) -> QueryNeighborsResults:
     idx, dist = lib.generic_query_all(
