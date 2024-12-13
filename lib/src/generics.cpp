@@ -1,4 +1,5 @@
-#include "def.h"
+#include "knncolle_py.h"
+
 #include "pybind11/pybind11.h"
 #include "pybind11/numpy.h"
 #include "pybind11/stl.h"
@@ -6,20 +7,38 @@
 #include <algorithm>
 #include <cstdint>
 #include <optional>
+#include <memory>
+#include <stdexcept>
+#include <vector>
 
 typedef pybind11::array_t<double, pybind11::array::f_style | pybind11::array::forcecast> DataMatrix;
 
-PrebuiltPointer generic_build(const BuilderPointer& builder, const DataMatrix& data) {
-    auto buffer = data.request();
-    uint32_t NR = buffer.shape[0], NC = buffer.shape[1];
-    return PrebuiltPointer(builder->build_raw(SimpleMatrix(NR, NC, static_cast<const double*>(buffer.ptr))));
+void free_builder(uintptr_t builder_ptr) {
+    delete knncolle_py::cast_builder(builder_ptr);
 }
 
-uint32_t generic_num_obs(const PrebuiltPointer& prebuilt) {
+uintptr_t generic_build(uintptr_t builder_ptr, const DataMatrix& data) {
+    auto buffer = data.request();
+    uint32_t NR = buffer.shape[0], NC = buffer.shape[1];
+
+    auto builder = knncolle_py::cast_builder(builder_ptr);
+    auto tmp = std::make_unique<knncolle_py::WrappedPrebuilt>();
+    tmp->ptr.reset(builder->ptr->build_raw(knncolle_py::SimpleMatrix(NR, NC, static_cast<const double*>(buffer.ptr))));
+
+    return reinterpret_cast<uintptr_t>(static_cast<void*>(tmp.release()));
+}
+
+void free_prebuilt(uintptr_t prebuilt_ptr) {
+    delete knncolle_py::cast_prebuilt(prebuilt_ptr);
+}
+
+uint32_t generic_num_obs(uintptr_t prebuilt_ptr) {
+    const auto& prebuilt = knncolle_py::cast_prebuilt(prebuilt_ptr)->ptr;
     return prebuilt->num_observations();
 }
 
-uint32_t generic_num_dims(const PrebuiltPointer& prebuilt) {
+uint32_t generic_num_dims(uintptr_t prebuilt_ptr) {
+    const auto& prebuilt = knncolle_py::cast_prebuilt(prebuilt_ptr)->ptr;
     return prebuilt->num_dimensions();
 }
 
@@ -54,7 +73,7 @@ typedef pybind11::array_t<uint32_t, pybind11::array::f_style | pybind11::array::
 typedef pybind11::array_t<uint32_t, pybind11::array::f_style | pybind11::array::forcecast> ChosenVector;
 
 pybind11::object generic_find_knn(
-    const PrebuiltPointer& prebuilt,
+    uintptr_t prebuilt_ptr,
     const NeighborVector& num_neighbors,
     bool force_variable_neighbors,
     std::optional<ChosenVector> chosen,
@@ -63,6 +82,7 @@ pybind11::object generic_find_knn(
     bool report_index,
     bool report_distance)
 {
+    const auto& prebuilt = knncolle_py::cast_prebuilt(prebuilt_ptr)->ptr;
     uint32_t nobs = prebuilt->num_observations();
 
     // Checking if we have to handle subsets.
@@ -206,7 +226,7 @@ pybind11::object generic_find_knn(
 } 
 
 pybind11::object generic_query_knn(
-    const PrebuiltPointer& prebuilt,
+    uintptr_t prebuilt_ptr,
     const DataMatrix& query,
     const NeighborVector& num_neighbors,
     bool force_variable_neighbors,
@@ -215,18 +235,19 @@ pybind11::object generic_query_knn(
     bool report_index,
     bool report_distance)
 {
-    int nobs = prebuilt->num_observations();
-    size_t ndim = prebuilt->num_dimensions();
+    const auto& prebuilt = knncolle_py::cast_prebuilt(prebuilt_ptr)->ptr;
+    uint32_t nobs = prebuilt->num_observations();
+    uint32_t ndim = prebuilt->num_dimensions();
 
     auto buf_info = query.request();
     uint32_t nquery = buf_info.shape[1];
     const double* query_ptr = static_cast<const double*>(buf_info.ptr);
-    if (static_cast<size_t>(buf_info.shape[0]) != ndim) {
+    if (static_cast<uint32_t>(buf_info.shape[0]) != ndim) {
         throw std::runtime_error("mismatch in dimensionality between index and 'query'");
     }
 
     // Checking that 'k' is valid.
-    auto sanitize_k = [&](int k) -> int {
+    auto sanitize_k = [&](uint32_t k) -> int {
         if (k <= nobs) {
             return k;
         }
@@ -354,13 +375,14 @@ pybind11::object generic_query_knn(
 typedef pybind11::array_t<double, pybind11::array::f_style | pybind11::array::forcecast> ThresholdVector;
 
 pybind11::object generic_find_all(
-    const PrebuiltPointer& prebuilt, 
+    uintptr_t prebuilt_ptr, 
     std::optional<ChosenVector> chosen,
     const ThresholdVector& thresholds,
     int num_threads,
     bool report_index,
     bool report_distance) 
 {
+    const auto& prebuilt = knncolle_py::cast_prebuilt(prebuilt_ptr)->ptr;
     uint32_t nobs = prebuilt->num_observations();
 
     uint32_t num_output = nobs;
@@ -438,13 +460,14 @@ pybind11::object generic_find_all(
 } 
 
 pybind11::object generic_query_all(
-    const PrebuiltPointer& prebuilt, 
+    uintptr_t prebuilt_ptr, 
     const DataMatrix& query,
     const ThresholdVector& thresholds,
     int num_threads,
     bool report_index,
     bool report_distance) 
 {
+    const auto& prebuilt = knncolle_py::cast_prebuilt(prebuilt_ptr)->ptr;
     size_t ndim = prebuilt->num_dimensions();
 
     auto buf_info = query.request();
@@ -522,7 +545,9 @@ pybind11::object generic_query_all(
  *********************************/
 
 void init_generics(pybind11::module& m) {
+    m.def("free_builder", &free_builder);
     m.def("generic_build", &generic_build);
+    m.def("free_prebuilt", &free_prebuilt);
     m.def("generic_num_obs", &generic_num_obs);
     m.def("generic_num_dims", &generic_num_dims);
     m.def("generic_find_knn", &generic_find_knn);

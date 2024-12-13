@@ -35,14 +35,14 @@ def test_query_neighbors_basic(helpers):
     out = knncolle.query_neighbors(idx, q, threshold=d)
     ref_i, ref_d = ref_query_all(Y, q, d)
     helpers.compare_lists(ref_i, out.index)
-    helpers.compare_lists(ref_d, out.distance)
+    helpers.compare_lists_close(ref_d, out.distance)
 
     idx = knncolle.build_index(knncolle.VptreeParameters(distance="Manhattan"), Y)
     d = numpy.median(knncolle.query_distance(idx, q, num_neighbors=8))
     out = knncolle.query_neighbors(idx, q, threshold=d)
     ref_i, ref_d = ref_query_all(Y, q, d, distance="manhattan")
     helpers.compare_lists(ref_i, out.index)
-    helpers.compare_lists(ref_d, out.distance)
+    helpers.compare_lists_close(ref_d, out.distance)
 
     idx = knncolle.build_index(knncolle.VptreeParameters(distance="Cosine"), Y)
     d = numpy.median(knncolle.query_distance(idx, q, num_neighbors=8))
@@ -51,7 +51,7 @@ def test_query_neighbors_basic(helpers):
     qnormed = q / numpy.sqrt((q**2).sum(axis=0))
     ref_i, ref_d = ref_query_all(normed, qnormed, d)
     helpers.compare_lists(ref_i, out.index)
-    helpers.compare_lists(ref_d, out.distance)
+    helpers.compare_lists_close(ref_d, out.distance)
 
 
 def test_query_neighbors_parallel(helpers):

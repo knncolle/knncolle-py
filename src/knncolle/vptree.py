@@ -2,7 +2,7 @@ from .classes import Parameters, GenericIndex
 from typing import Literal, Tuple
 
 from . import lib_knncolle as lib
-from .classes import Parameters, GenericIndex
+from .classes import Parameters, GenericIndex, Builder
 from .define_builder import define_builder
 
 
@@ -48,17 +48,12 @@ class VptreeIndex(GenericIndex):
         """
         Args:
             ptr:
-                Shared pointer to a ``knncolle::Prebuilt<uint32_t, uint32_t,
-                double>``, created and wrapped by pybind11.
+                Address of a ``knncolle_py::WrappedPrebuilt`` containing a
+                VP tree search index, allocated in C++.
         """
-        self._ptr = ptr
-
-    @property
-    def ptr(self):
-        """Pointer to a prebuilt index, see :py:meth:`~__init__`."""
-        return self._ptr
+        super().__init__(ptr)
 
 
 @define_builder.register
 def _define_builder_vptree(x: VptreeParameters) -> Tuple:
-    return (lib.create_vptree_builder(x.distance), VptreeIndex)
+    return (Builder(lib.create_vptree_builder(x.distance)), VptreeIndex)

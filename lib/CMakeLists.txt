@@ -20,6 +20,7 @@ pybind11_add_module(knncolle_py
 )
 
 target_include_directories(knncolle_py PRIVATE "${ASSORTHEAD_INCLUDE_DIR}")
+target_include_directories(knncolle_py PRIVATE "../src/knncolle/include")
 
 set_property(TARGET knncolle_py PROPERTY CXX_STANDARD 17)
 

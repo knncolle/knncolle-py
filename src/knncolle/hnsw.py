@@ -2,7 +2,7 @@ from .classes import Parameters, GenericIndex
 from typing import Literal, Optional, Tuple
 
 from . import lib_knncolle as lib
-from .classes import Parameters, GenericIndex
+from .classes import Parameters, GenericIndex, Builder
 from .define_builder import define_builder
 
 
@@ -111,7 +111,7 @@ class HnswParameters(Parameters):
 
 
 class HnswIndex(GenericIndex):
-    """A prebuilt index for the hierarchical navigable small worlds (Hnsw)
+    """A prebuilt index for the hierarchical navigable small worlds (HNSW)
     algorithm, created by :py:func:`~knncolle.define_builder.define_builder`
     with a :py:class:`~knncolle.hnsw.HnswParameters` object.
     """
@@ -120,17 +120,12 @@ class HnswIndex(GenericIndex):
         """
         Args:
             ptr:
-                Shared pointer to a ``knncolle::Prebuilt<uint32_t, uint32_t,
-                double>``, created and wrapped by pybind11.
+                Address of a ``knncolle_py::WrappedPrebuilt`` containing a
+                HNSW search index, allocated in C++.
         """
-        self._ptr = ptr
-
-    @property
-    def ptr(self):
-        """Pointer to a prebuilt index, see :py:meth:`~__init__`."""
-        return self._ptr
+        super().__init__(ptr)
 
 
 @define_builder.register
 def _define_builder_hnsw(x: HnswParameters) -> Tuple:
-    return (lib.create_hnsw_builder(x.num_links, x.ef_construction, x.ef_search, x.distance), HnswIndex)
+    return (Builder(lib.create_hnsw_builder(x.num_links, x.ef_construction, x.ef_search, x.distance)), HnswIndex)

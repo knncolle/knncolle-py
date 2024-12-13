@@ -29,5 +29,5 @@ def build_index(param: Parameters, x: numpy.ndarray, **kwargs) -> Index:
         Instance of a :py:class:`~knncolle.classes.Index` subclass.
     """
     builder, cls = define_builder(param)
-    prebuilt = lib.generic_build(builder, x)
+    prebuilt = lib.generic_build(builder.ptr, x)
     return cls(prebuilt)

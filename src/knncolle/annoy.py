@@ -3,7 +3,7 @@ from typing import Literal, Optional, Tuple
 
 from . import lib_knncolle as lib
 from .define_builder import define_builder
-from .classes import Index, GenericIndex, Parameters
+from .classes import Index, Builder, GenericIndex, Parameters
 
 
 class AnnoyParameters(Parameters):
@@ -96,21 +96,16 @@ class AnnoyIndex(GenericIndex):
     with a :py:class:`~knncolle.annoy.AnnoyParameters` object.
     """
 
-    def __init__(self, ptr):
+    def __init__(self, ptr: int):
         """
         Args:
             ptr:
-                Shared pointer to a ``knncolle::Prebuilt<uint32_t, uint32_t,
-                double>``, created and wrapped by pybind11.
+                Address of a ``knncolle_py::WrappedPrebuilt`` containing an
+                Annoy search index, allocated in C++.
         """
-        self._ptr = ptr
-
-    @property
-    def ptr(self):
-        """Pointer to the prebuilt index, :py:meth:`~__init__`."""
-        return self._ptr
+        super().__init__(ptr)
 
 
 @define_builder.register
 def _define_builder_annoy(x: AnnoyParameters) -> Tuple:
-    return (lib.create_annoy_builder(x.num_trees, x.search_mult, x.distance), AnnoyIndex)
+    return (Builder(lib.create_annoy_builder(x.num_trees, x.search_mult, x.distance)), AnnoyIndex)

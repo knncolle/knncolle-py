@@ -1,19 +1,24 @@
-#include "def.h"
+#include "knncolle_py.h"
 #include "pybind11/pybind11.h"
 
-BuilderPointer create_exhaustive_builder(std::string distance) {
+#include <memory>
+#include <stdexcept>
+
+uintptr_t create_exhaustive_builder(std::string distance) {
+    auto tmp = std::make_unique<knncolle_py::WrappedBuilder>();
+
     if (distance == "Manhattan") {
-        return BuilderPointer(new knncolle::BruteforceBuilder<knncolle::ManhattanDistance, SimpleMatrix, double>);
+        tmp->ptr.reset(new knncolle::BruteforceBuilder<knncolle::ManhattanDistance, knncolle_py::SimpleMatrix, knncolle_py::Distance>);
 
     } else if (distance == "Euclidean") {
-        return BuilderPointer(new knncolle::BruteforceBuilder<knncolle::EuclideanDistance, SimpleMatrix, double>);
+        tmp->ptr.reset(new knncolle::BruteforceBuilder<knncolle::EuclideanDistance, knncolle_py::SimpleMatrix, knncolle_py::Distance>);
 
     } else if (distance == "Cosine") {
-        return BuilderPointer(
+        tmp->ptr.reset(
             new knncolle::L2NormalizedBuilder(
                 new knncolle::BruteforceBuilder<
                     knncolle::EuclideanDistance,
-                    knncolle::L2NormalizedMatrix<SimpleMatrix>,
+                    knncolle::L2NormalizedMatrix<knncolle_py::SimpleMatrix>,
                     double
                 >
             )
@@ -21,8 +26,9 @@ BuilderPointer create_exhaustive_builder(std::string distance) {
 
     } else {
         throw std::runtime_error("unknown distance type '" + distance + "'");
-        return BuilderPointer();
     }
+
+    return reinterpret_cast<uintptr_t>(static_cast<void*>(tmp.release()));
 }
 
 void init_exhaustive(pybind11::module& m) {

@@ -49,6 +49,14 @@ class Helpers:
         for i, val in enumerate(x):
             assert (val == y[i]).all()
 
+    @staticmethod
+    def compare_lists_close(x, y):
+        import numpy
+        assert len(x) == len(y)
+        for i, val in enumerate(x):
+            assert numpy.isclose(val, y[i]).all()
+
+
 
 @pytest.fixture
 def helpers():

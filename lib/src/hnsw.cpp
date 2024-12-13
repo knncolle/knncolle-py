@@ -1,4 +1,4 @@
-#include "def.h"
+#include "knncolle_py.h"
 #include "pybind11/pybind11.h"
 
 // Turn off manual vectorization always, to avoid small inconsistencies in
@@ -7,26 +7,27 @@
 
 #include "knncolle_hnsw/knncolle_hnsw.hpp"
 
-BuilderPointer create_hnsw_builder(int nlinks, int ef_construct, int ef_search, std::string distance) {
+uintptr_t create_hnsw_builder(int nlinks, int ef_construct, int ef_search, std::string distance) {
     knncolle_hnsw::HnswOptions<uint32_t, float> opt;
     opt.num_links = nlinks;
     opt.ef_construction = ef_construct;
     opt.ef_search = ef_search;
+    auto tmp = std::make_unique<knncolle_py::WrappedBuilder>();
 
     if (distance == "Manhattan") {
         opt.distance_options.create = [&](int dim) -> hnswlib::SpaceInterface<float>* {
             return new knncolle_hnsw::ManhattanDistance<float>(dim);
         };
-        return BuilderPointer(new knncolle_hnsw::HnswBuilder<SimpleMatrix, double>(opt));
+        tmp->ptr.reset(new knncolle_hnsw::HnswBuilder<knncolle_py::SimpleMatrix, knncolle_py::Distance>(opt));
 
     } else if (distance == "Euclidean") {
-        return BuilderPointer(new knncolle_hnsw::HnswBuilder<SimpleMatrix, double>(opt));
+        tmp->ptr.reset(new knncolle_hnsw::HnswBuilder<knncolle_py::SimpleMatrix, knncolle_py::Distance>(opt));
 
     } else if (distance == "Cosine") {
-        return BuilderPointer(
-            new knncolle::L2NormalizedBuilder<SimpleMatrix, double>(
+        tmp->ptr.reset(
+            new knncolle::L2NormalizedBuilder<knncolle_py::SimpleMatrix, knncolle_py::Distance>(
                 new knncolle_hnsw::HnswBuilder<
-                    knncolle::L2NormalizedMatrix<SimpleMatrix>,
+                    knncolle::L2NormalizedMatrix<knncolle_py::SimpleMatrix>,
                     double
                 >(opt)
             )
@@ -34,8 +35,9 @@ BuilderPointer create_hnsw_builder(int nlinks, int ef_construct, int ef_search, 
 
     } else {
         throw std::runtime_error("unknown distance type '" + distance + "'");
-        return BuilderPointer();
     }
+
+    return reinterpret_cast<uintptr_t>(static_cast<void*>(tmp.release()));
 }
 
 void init_hnsw(pybind11::module& m) {
