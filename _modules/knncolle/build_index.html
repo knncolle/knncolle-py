@@ -198,7 +198,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../readme.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributions &amp; Help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
@@ -275,7 +275,7 @@
 <span class="sd">        Instance of a :py:class:`~knncolle.classes.Index` subclass.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">builder</span><span class="p">,</span> <span class="bp">cls</span> <span class="o">=</span> <span class="n">define_builder</span><span class="p">(</span><span class="n">param</span><span class="p">)</span>
-    <span class="n">prebuilt</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">generic_build</span><span class="p">(</span><span class="n">builder</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">prebuilt</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">generic_build</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">ptr</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">prebuilt</span><span class="p">)</span></div>
 
 </pre></div>

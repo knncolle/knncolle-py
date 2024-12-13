@@ -1,14 +1,14 @@
 <!doctype html>
-<html class="no-js" lang="en" data-content_root="../../">
+<html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
 
     <!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
-        <title>knncolle.vptree - knncolle unknown documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
+        <title>knncolle - knncolle unknown documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
     
     
 
@@ -165,7 +165,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">knncolle unknown documentation</div></a>
+      <a href="../index.html"><div class="brand">knncolle unknown documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -186,25 +186,25 @@
   <aside class="sidebar-drawer">
     <div class="sidebar-container">
       
-      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
   <span class="sidebar-brand-text">knncolle unknown documentation</span>
   
-</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../readme.html">Usage</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributions &amp; Help</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../../api/modules.html">Module Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Module Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../api/knncolle.html">knncolle package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../readme.html">Usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contributing.html">Contributions &amp; Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../license.html">License</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../authors.html">Authors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../api/modules.html">Module Reference</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Module Reference</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/knncolle.html">knncolle package</a></li>
 </ul>
 </li>
 </ul>
@@ -241,78 +241,53 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <h1>Source code for knncolle.vptree</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">.classes</span> <span class="kn">import</span> <span class="n">Parameters</span><span class="p">,</span> <span class="n">GenericIndex</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Tuple</span>
+          <h1>Source code for knncolle</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sys</span>
 
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">lib_knncolle</span> <span class="k">as</span> <span class="n">lib</span>
-<span class="kn">from</span> <span class="nn">.classes</span> <span class="kn">import</span> <span class="n">Parameters</span><span class="p">,</span> <span class="n">GenericIndex</span><span class="p">,</span> <span class="n">Builder</span>
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
+    <span class="c1"># TODO: Import directly (no need for conditional) when `python_requires = &gt;= 3.8`</span>
+    <span class="kn">from</span> <span class="nn">importlib.metadata</span> <span class="kn">import</span> <span class="n">PackageNotFoundError</span><span class="p">,</span> <span class="n">version</span>  <span class="c1"># pragma: no cover</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">importlib_metadata</span> <span class="kn">import</span> <span class="n">PackageNotFoundError</span><span class="p">,</span> <span class="n">version</span>  <span class="c1"># pragma: no cover</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="c1"># Change here if project is renamed and does not equal the package name</span>
+    <span class="n">dist_name</span> <span class="o">=</span> <span class="vm">__name__</span>
+    <span class="n">__version__</span> <span class="o">=</span> <span class="n">version</span><span class="p">(</span><span class="n">dist_name</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">PackageNotFoundError</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+    <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;unknown&quot;</span>
+<span class="k">finally</span><span class="p">:</span>
+    <span class="k">del</span> <span class="n">version</span><span class="p">,</span> <span class="n">PackageNotFoundError</span>
+
+<span class="kn">from</span> <span class="nn">.classes</span> <span class="kn">import</span> <span class="n">Parameters</span><span class="p">,</span> <span class="n">Index</span><span class="p">,</span> <span class="n">GenericIndex</span>
+<span class="kn">from</span> <span class="nn">.annoy</span> <span class="kn">import</span> <span class="n">AnnoyParameters</span><span class="p">,</span> <span class="n">AnnoyIndex</span>
+<span class="kn">from</span> <span class="nn">.build_index</span> <span class="kn">import</span> <span class="n">build_index</span>
 <span class="kn">from</span> <span class="nn">.define_builder</span> <span class="kn">import</span> <span class="n">define_builder</span>
+<span class="kn">from</span> <span class="nn">.exhaustive</span> <span class="kn">import</span> <span class="n">ExhaustiveParameters</span><span class="p">,</span> <span class="n">ExhaustiveIndex</span>
+<span class="kn">from</span> <span class="nn">.find_distance</span> <span class="kn">import</span> <span class="n">find_distance</span>
+<span class="kn">from</span> <span class="nn">.find_knn</span> <span class="kn">import</span> <span class="n">find_knn</span>
+<span class="kn">from</span> <span class="nn">.find_neighbors</span> <span class="kn">import</span> <span class="n">find_neighbors</span>
+<span class="kn">from</span> <span class="nn">.hnsw</span> <span class="kn">import</span> <span class="n">HnswParameters</span><span class="p">,</span> <span class="n">HnswIndex</span>
+<span class="kn">from</span> <span class="nn">.kmknn</span> <span class="kn">import</span> <span class="n">KmknnParameters</span><span class="p">,</span> <span class="n">KmknnIndex</span>
+<span class="kn">from</span> <span class="nn">.query_distance</span> <span class="kn">import</span> <span class="n">query_distance</span>
+<span class="kn">from</span> <span class="nn">.query_knn</span> <span class="kn">import</span> <span class="n">query_knn</span>
+<span class="kn">from</span> <span class="nn">.query_neighbors</span> <span class="kn">import</span> <span class="n">query_neighbors</span>
+<span class="kn">from</span> <span class="nn">.vptree</span> <span class="kn">import</span> <span class="n">VptreeParameters</span><span class="p">,</span> <span class="n">VptreeIndex</span>
 
 
-<div class="viewcode-block" id="VptreeParameters">
-<a class="viewcode-back" href="../../api/knncolle.html#knncolle.vptree.VptreeParameters">[docs]</a>
-<span class="k">class</span> <span class="nc">VptreeParameters</span><span class="p">(</span><span class="n">Parameters</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parameters for the vantage point (VP) tree algorithm.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="includes">
+<a class="viewcode-back" href="../api/knncolle.html#knncolle.includes">[docs]</a>
+<span class="k">def</span> <span class="nf">includes</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Provides access to ``knncolle_py.h`` C++ header.</span>
 
-<div class="viewcode-block" id="VptreeParameters.__init__">
-<a class="viewcode-back" href="../../api/knncolle.html#knncolle.vptree.VptreeParameters.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">distance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;Euclidean&quot;</span><span class="p">,</span> <span class="s2">&quot;Manhattan&quot;</span><span class="p">,</span> <span class="s2">&quot;Cosine&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Euclidean&quot;</span><span class="p">,</span>
-    <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Args:</span>
-<span class="sd">            distance:</span>
-<span class="sd">                Distance metric for index construction and search. This should</span>
-<span class="sd">                be one of ``Euclidean``, ``Manhattan`` or ``Cosine``.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">distance</span> <span class="o">=</span> <span class="n">distance</span></div>
-
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Distance metric, see :meth:`~__init__()`.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_distance</span>
-
-    <span class="nd">@distance</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Args:</span>
-<span class="sd">            distance:</span>
-<span class="sd">                Distance metric, see :meth:`~__init__()`.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">distance</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;Euclidean&quot;</span><span class="p">,</span> <span class="s2">&quot;Manhattan&quot;</span><span class="p">,</span> <span class="s2">&quot;Cosine&quot;</span><span class="p">]:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;unsupported &#39;distance&#39;&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_distance</span> <span class="o">=</span> <span class="n">distance</span></div>
-
-
-
-<div class="viewcode-block" id="VptreeIndex">
-<a class="viewcode-back" href="../../api/knncolle.html#knncolle.vptree.VptreeIndex">[docs]</a>
-<span class="k">class</span> <span class="nc">VptreeIndex</span><span class="p">(</span><span class="n">GenericIndex</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A prebuilt index for the vantage point tree algorithm, created by</span>
-<span class="sd">    :py:func:`~knncolle.define_builder.define_builder` with a</span>
-<span class="sd">    :py:class:`~knncolle.vptree.VptreeParameters` instance.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Path to a directory containing the header.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span> <span class="nn">inspect</span>
+    <span class="n">dirname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">getfile</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">currentframe</span><span class="p">())))</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">,</span> <span class="s2">&quot;include&quot;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="VptreeIndex.__init__">
-<a class="viewcode-back" href="../../api/knncolle.html#knncolle.vptree.VptreeIndex.__init__">[docs]</a>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ptr</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Args:</span>
-<span class="sd">            ptr:</span>
-<span class="sd">                Address of a ``knncolle_py::WrappedPrebuilt`` containing a</span>
-<span class="sd">                VP tree search index, allocated in C++.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span></div>
-</div>
-
-
-
-<span class="nd">@define_builder</span><span class="o">.</span><span class="n">register</span>
-<span class="k">def</span> <span class="nf">_define_builder_vptree</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">VptreeParameters</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">Builder</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">create_vptree_builder</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">distance</span><span class="p">)),</span> <span class="n">VptreeIndex</span><span class="p">)</span>
 </pre></div>
         </article>
       </div>
@@ -345,9 +320,9 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=3f1b9271"></script>
-    <script src="../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
+</div><script src="../_static/documentation_options.js?v=3f1b9271"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
     </body>
 </html>

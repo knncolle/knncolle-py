@@ -198,7 +198,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../readme.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributions &amp; Help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
@@ -246,7 +246,7 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">lib_knncolle</span> <span class="k">as</span> <span class="n">lib</span>
-<span class="kn">from</span> <span class="nn">.classes</span> <span class="kn">import</span> <span class="n">Parameters</span><span class="p">,</span> <span class="n">GenericIndex</span>
+<span class="kn">from</span> <span class="nn">.classes</span> <span class="kn">import</span> <span class="n">Parameters</span><span class="p">,</span> <span class="n">GenericIndex</span><span class="p">,</span> <span class="n">Builder</span>
 <span class="kn">from</span> <span class="nn">.define_builder</span> <span class="kn">import</span> <span class="n">define_builder</span>
 
 
@@ -363,7 +363,7 @@
 <div class="viewcode-block" id="HnswIndex">
 <a class="viewcode-back" href="../../api/knncolle.html#knncolle.hnsw.HnswIndex">[docs]</a>
 <span class="k">class</span> <span class="nc">HnswIndex</span><span class="p">(</span><span class="n">GenericIndex</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A prebuilt index for the hierarchical navigable small worlds (Hnsw)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A prebuilt index for the hierarchical navigable small worlds (HNSW)</span>
 <span class="sd">    algorithm, created by :py:func:`~knncolle.define_builder.define_builder`</span>
 <span class="sd">    with a :py:class:`~knncolle.hnsw.HnswParameters` object.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -374,22 +374,17 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
 <span class="sd">            ptr:</span>
-<span class="sd">                Shared pointer to a ``knncolle::Prebuilt&lt;uint32_t, uint32_t,</span>
-<span class="sd">                double&gt;``, created and wrapped by pybind11.</span>
+<span class="sd">                Address of a ``knncolle_py::WrappedPrebuilt`` containing a</span>
+<span class="sd">                HNSW search index, allocated in C++.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span> <span class="o">=</span> <span class="n">ptr</span></div>
-
-
-    <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">ptr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Pointer to a prebuilt index, see :py:meth:`~__init__`.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span></div>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span></div>
+</div>
 
 
 
 <span class="nd">@define_builder</span><span class="o">.</span><span class="n">register</span>
 <span class="k">def</span> <span class="nf">_define_builder_hnsw</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">HnswParameters</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">create_hnsw_builder</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">num_links</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">ef_construction</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">ef_search</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">distance</span><span class="p">),</span> <span class="n">HnswIndex</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">Builder</span><span class="p">(</span><span class="n">lib</span><span class="o">.</span><span class="n">create_hnsw_builder</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">num_links</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">ef_construction</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">ef_search</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">distance</span><span class="p">)),</span> <span class="n">HnswIndex</span><span class="p">)</span>
 </pre></div>
         </article>
       </div>

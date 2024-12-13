@@ -198,7 +198,7 @@
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../readme.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../readme.html">Usage</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributions &amp; Help</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../license.html">License</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../authors.html">Authors</a></li>
@@ -262,10 +262,8 @@
 <span class="sd">            Parameters for a particular search algorithm.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Tuple where the first element is a shared pointer to a</span>
-<span class="sd">        ``knncolle::Builder&lt;knncolle::SimpleMatrix&lt;uint32_t, uint32_t, double&gt;,</span>
-<span class="sd">        double&gt;`` instance, and the second element is a</span>
-<span class="sd">        :py:class:`~knncolle.classes.GenericIndex` subclass.</span>
+<span class="sd">        Tuple where the first element is a :py:class:`~knncolle.classes.Builder`</span>
+<span class="sd">        and the second element is a :py:class:`~knncolle.classes.GenericIndex`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;no available method for &#39;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span></div>
 
