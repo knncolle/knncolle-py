@@ -106,22 +106,21 @@ The idea is that downstream packages will link against the **knncolle** C++ inte
 This allows downstream packages to (i) save time by avoiding the need to re-compile all algorithms and (ii) support more algorithms in **knncolle** extensions.
 To do so:
 
-1. Add `assorthead.includes()` to the compiler's include path for your package.
+1. Add `knncolle.includes()` and `assorthead.includes()` to the compiler's include path for the package.
 This can be done through `include_dirs=` of the `Extension()` definition in `setup.py`
-or by adding a `target_include_directories()` in CMake, depending on your build system.
+or by adding a `target_include_directories()` in CMake, depending on the build system.
 2. Call `knncolle.build_index()` to construct a `GenericIndex` instance.
 This exposes a shared pointer to the C++-allocated index via its `ptr` property.
-3. Pass `ptr` to **pybind11**-wrapped C++ code as a [shared pointer to a `knncolle::Prebuilt`](lib/src/def.h),
+3. Pass `ptr` to C++ code as a `uintptr_t` referencing a `knncolle::Prebuilt`.
 which can be interrogated as described in the [**knncolle** documentation](https://github.com/knncolle/knncolle).
 
 So, for example, the C++ code in our downstream package might look like this:
 
 ```cpp
-int do_something(
-    const std::shared_ptr<
-        knncolle::Prebuilt<uint32_t, uint32_t, double> 
-    >& index) 
-{
+#include "knncolle_py.h"
+
+int do_something(uintptr_t ptr) {
+    const auto& prebuilt = knncolle_py::cast_prebuilt(ptr)->ptr;
     // Do something with the search index interface.
     return 1;
 }
@@ -143,17 +142,13 @@ def do_something(idx: GenericIndex):
 
 In some scenarios, it may be more convenient to construct the search index inside C++,
 e.g., if the dataset to be searched is not available before the call to the C++ function.
-This can be accommodated by accepting a [shared pointer to a `knncolle::Builder`](lib/src/def.h) in the C++ code:
+This can be accommodated by accepting a `uintptr_t` to a `knncolle::Builder` in the C++ code:
 
 ```cpp
-int do_something_mk2(
-    const std::shared_ptr<
-        knncolle::Builder<
-            knncolle::SimpleMatrix<uint32_t, uint32_t, double>,
-            double
-        >
-    >& builder) 
-{
+#include "knncolle_py.h"
+
+int do_something_mk2(uintptr_t ptr) {
+    const auto& builder = knncolle_py::cast_builder(ptr)->ptr;
     // The builder is a algorithm-specific factory that accepts a matrix and
     // returns a search index for that algorithm. Presumably we construct a
     // new search index inside this function and use it.
@@ -176,24 +171,24 @@ def do_something(param: Parameters):
     return lib.do_something_mk2(builder.ptr)
 ```
 
-See also the definitions in [`lib/src/def.h`](lib/src/def.h) for the types of the pointers to be used in the C++ code.
+Check out [the included header](src/knncolle/include/knncolle_py.h) for more definitions.
 
 ## Extending to more algorithms
 
 ### Via `define_builder()`
 
 The best way to extend **knncolle** is to do so in C++.
-This involves writing subclasses of the `Builder`, `Prebuilt` and `Searcher` interfaces in the [**knncolle**](https://github.com/knncolle/knncolle) library.
+This involves writing subclasses of the interfaces in the [**knncolle**](https://github.com/knncolle/knncolle) library.
 Once this is done, it is a simple matter of writing the following Python bindings:
 
 - Implement a `SomeNewParameters` class that inherits from `Parameters`.
 - Implement a `SomeNewIndex` class that inherits from `GenericIndex`.
   This should accept a single `ptr` in its constructor and have a `ptr` property that returns the same value.
 - Register a `define_builder()` method that dispatches on `SomeNewParameters`.
-  This should call into C++ and return a tuple containing a **pybind11**-wrapped [`BuilderPointer`](lib/src/def.h) and the `SomeNewIndex` constructor.
+  This should call into C++ and return a tuple containing a `Builder` object and the `SomeNewIndex` constructor.
 
 No new methods are required for `find_knn()`, `build_index()`, etc. as the default method will work automatically if a `define_builder()` method is available.
-This approach also allows the new method to be used in C++ code of downstream packages that accept a [`PrebuiltPointer`](lib/src/def.h) instance.
+This approach also allows the new method to be used in C++ code of downstream packages. 
 
 ### Without `define_builder()`
 
