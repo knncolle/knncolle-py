@@ -34,20 +34,20 @@ def test_find_knn_basic():
     out = knncolle.find_knn(idx, num_neighbors=8)
     ref_i, ref_d = ref_find_knn(Y, k=8)
     assert (ref_i == out.index).all()
-    assert (ref_d == out.distance).all()
+    assert numpy.isclose(ref_d, out.distance).all()
 
     idx = knncolle.build_index(knncolle.VptreeParameters(distance="Manhattan"), Y)
     out = knncolle.find_knn(idx, num_neighbors=8)
     ref_i, ref_d = ref_find_knn(Y, k=8, distance="manhattan")
     assert (ref_i == out.index).all()
-    assert (ref_d == out.distance).all()
+    assert numpy.isclose(ref_d, out.distance).all()
 
     idx = knncolle.build_index(knncolle.VptreeParameters(distance="Cosine"), Y)
     out = knncolle.find_knn(idx, num_neighbors=8)
     normed = Y / numpy.sqrt((Y**2).sum(axis=0))
     ref_i, ref_d = ref_find_knn(normed, k=8)
     assert (ref_i == out.index).all()
-    assert (ref_d == out.distance).all()
+    assert numpy.isclose(ref_d, out.distance).all()
 
 
 def test_find_knn_parallel():

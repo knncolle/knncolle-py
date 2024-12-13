@@ -16,9 +16,7 @@ def define_builder(param: Parameters) -> Tuple:
             Parameters for a particular search algorithm.
 
     Returns:
-        Tuple where the first element is a shared pointer to a
-        ``knncolle::Builder<knncolle::SimpleMatrix<uint32_t, uint32_t, double>,
-        double>`` instance, and the second element is a
-        :py:class:`~knncolle.classes.GenericIndex` subclass.
+        Tuple where the first element is a :py:class:`~knncolle.classes.Builder`
+        and the second element is a :py:class:`~knncolle.classes.GenericIndex`.
     """
     raise NotImplementedError("no available method for '" + str(type(x)) + "'")

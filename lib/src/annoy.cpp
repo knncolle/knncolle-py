@@ -1,5 +1,8 @@
-#include "def.h"
+#include "knncolle_py.h"
 #include "pybind11/pybind11.h"
+
+#include <memory>
+#include <stdexcept>
 
 // Turn off manual vectorization always, to avoid small inconsistencies in
 // distance calculations across otherwise-compliant machines. 
@@ -7,23 +10,24 @@
 
 #include "knncolle_annoy/knncolle_annoy.hpp"
 
-BuilderPointer create_annoy_builder(int num_trees, double search_mult, std::string distance) {
+uintptr_t create_annoy_builder(int num_trees, double search_mult, std::string distance) {
     knncolle_annoy::AnnoyOptions opt;
     opt.num_trees = num_trees;
     opt.search_mult = search_mult;
+    auto tmp = std::make_unique<knncolle_py::WrappedBuilder>();
 
     if (distance == "Manhattan") {
-        return BuilderPointer(new knncolle_annoy::AnnoyBuilder<Annoy::Manhattan, SimpleMatrix, double>(opt));
+        tmp->ptr.reset(new knncolle_annoy::AnnoyBuilder<Annoy::Manhattan, knncolle_py::SimpleMatrix, knncolle_py::Distance>(opt));
 
     } else if (distance == "Euclidean") {
-        return BuilderPointer(new knncolle_annoy::AnnoyBuilder<Annoy::Euclidean, SimpleMatrix, double>(opt));
+        tmp->ptr.reset(new knncolle_annoy::AnnoyBuilder<Annoy::Euclidean, knncolle_py::SimpleMatrix, knncolle_py::Distance>(opt));
 
     } else if (distance == "Cosine") {
-        return BuilderPointer(
-            new knncolle::L2NormalizedBuilder<SimpleMatrix, double>(
+        tmp->ptr.reset(
+            new knncolle::L2NormalizedBuilder<knncolle_py::SimpleMatrix, knncolle_py::Distance>(
                 new knncolle_annoy::AnnoyBuilder<
                     Annoy::Euclidean,
-                    knncolle::L2NormalizedMatrix<SimpleMatrix>,
+                    knncolle::L2NormalizedMatrix<knncolle_py::SimpleMatrix>,
                     double
                 >(opt)
             )
@@ -31,8 +35,9 @@ BuilderPointer create_annoy_builder(int num_trees, double search_mult, std::stri
 
     } else {
         throw std::runtime_error("unknown distance type '" + distance + "'");
-        return BuilderPointer();
     }
+
+    return reinterpret_cast<uintptr_t>(static_cast<void*>(tmp.release()));
 }
 
 void init_annoy(pybind11::module& m) {
