@@ -29,3 +29,15 @@ from .query_distance import query_distance
 from .query_knn import query_knn
 from .query_neighbors import query_neighbors
 from .vptree import VptreeParameters, VptreeIndex
+
+
+def includes() -> str:
+    """Provides access to ``knncolle_py.h`` C++ header.
+
+    Returns:
+        Path to a directory containing the header.
+    """
+    import os
+    import inspect
+    dirname = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+    return os.path.join(dirname, "include")
