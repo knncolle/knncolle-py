@@ -21,13 +21,13 @@ from .build_index import build_index
 from .define_builder import define_builder
 from .exhaustive import ExhaustiveParameters, ExhaustiveIndex
 from .find_distance import find_distance
-from .find_knn import find_knn
-from .find_neighbors import find_neighbors
+from .find_knn import find_knn, FindKnnResults
+from .find_neighbors import find_neighbors, FindNeighborsResults
 from .hnsw import HnswParameters, HnswIndex
 from .kmknn import KmknnParameters, KmknnIndex
 from .query_distance import query_distance
-from .query_knn import query_knn
-from .query_neighbors import query_neighbors
+from .query_knn import query_knn, QueryKnnResults
+from .query_neighbors import query_neighbors, QueryNeighborsResults
 from .vptree import VptreeParameters, VptreeIndex
 
 

@@ -19,4 +19,4 @@ def define_builder(param: Parameters) -> Tuple:
         Tuple where the first element is a :py:class:`~knncolle.classes.Builder`
         and the second element is a :py:class:`~knncolle.classes.GenericIndex`.
     """
-    raise NotImplementedError("no available method for '" + str(type(x)) + "'")
+    raise NotImplementedError("no available method for '" + str(type(param)) + "'")
