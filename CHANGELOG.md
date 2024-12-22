@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.1.2
+
+- Exported the various `*Results` classes.
+- Fixed error message in the default `define_builder()` method.
+
 ## Version 0.1.1
 
 - Cast pointers to/from `uintptr_t` so that downstream packages aren't forced to rely on **pybind10** converters.

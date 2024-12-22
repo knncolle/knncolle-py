@@ -50,7 +50,7 @@ Check out the [reference documentation](https://knncolle.github.io/knncolle-py) 
 
 ## Switching algorithms
 
-We can easily switch to a different algorithm by just passing a different `params` object.
+We can easily switch to a different NN search algorithm by supplying a different `params` object.
 For example, we could use the [Approximate Nearest Neighbors Oh Yeah](https://github.com/spotify/annoy) (Annoy) algorithm:
 
 ```python
@@ -58,7 +58,7 @@ an_params = knncolle.AnnoyParameters()
 an_idx = knncolle.build_index(an_params, y)
 ```
 
-We can also tweak the search parameters in our `Parameters` object, during or after construction.
+We can also tweak the search parameters in our `Parameters` object during or after its construction.
 For example, with the [hierarchical navigable small worlds](https://github.com/nmslib/hnswlib) (HNSW) algorithm:
 
 ```python
@@ -67,12 +67,12 @@ h_params.ef_construction = 150
 h_idx = knncolle.build_index(h_params, y)
 ```
 
-Currently, we support Annoy, HNSW, vantage point trees, k-means k-nearest neighbors, and (for testing) an exhaustive brute-force search.
+Currently, we support Annoy, HNSW, vantage point trees, k-means k-nearest neighbors, and an exhaustive brute-force search.
 More algorithms can be added by extending **knncolle** as described [below](#extending-to-more-algorithms) without any change to end-user code.
 
 ## Other searches 
 
-Given a query dataset, we can find the nearest neighbors in the prebuilt search index:
+Given a separate query dataset of the same dimensionality, we can find the nearest neighbors in the prebuilt NN search index:
 
 ```python
 q = numpy.random.rand(20, 50)
@@ -91,7 +91,8 @@ var_res.distance
 ```
 
 We can find all observations within a distance threshold of each observation via `find_neighbors()`.
-This also supports a variable threshold for each observation as well as querying of observations in a separate dataset.
+The related `query_neighbors()` function handles querying of observations in a separate dataset.
+Both functions also accept a variable threshold for each observation.
 
 ```python
 range_res = knncolle.find_neighbors(idx, threshold=10)
@@ -101,9 +102,9 @@ range_res.distance
 
 ## Use with C++
 
-The raison d'être of the **knncolle** Python package is to enable re-use within ([**pybind11**](https://pybind11.readthedocs.io)-wrapped) C++ code in other Python packages.
+The raison d'être of the **knncolle** Python package is to facilitate the re-use of the neighbor search algorithms by C++ code in other Python packages.
 The idea is that downstream packages will link against the **knncolle** C++ interface so that they can re-use the search indices created by the **knncolle** Python package.
-This allows downstream packages to (i) save time by avoiding the need to re-compile all algorithms and (ii) support more algorithms in **knncolle** extensions.
+This allows developers to (i) save time by avoiding the need to re-compile all desired algorithms and (ii) support more algorithms in extensions to the **knncolle** framework.
 To do so:
 
 1. Add `knncolle.includes()` and `assorthead.includes()` to the compiler's include path for the package.
@@ -160,7 +161,7 @@ PYBIND11_MODULE(lib_downstream, m) {
 }
 ```
 
-A pointer to the `knncolle::Builder` is then be created in Python by the `define_builder()` function, and then passed to C++:
+A pointer to the `knncolle::Builder` can be created by the `define_builder()` function in Python, and then passed to the C++ code:
 
 ```python
 from . import lib_downstream as lib
