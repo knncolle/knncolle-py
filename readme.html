@@ -294,25 +294,25 @@ This is inspired by the <a class="reference external" href="https://bioconductor
 </section>
 <section id="switching-algorithms">
 <h2>Switching algorithms<a class="headerlink" href="#switching-algorithms" title="Link to this heading">¶</a></h2>
-<p>We can easily switch to a different algorithm by just passing a different <code class="docutils literal notranslate"><span class="pre">params</span></code> object.
+<p>We can easily switch to a different NN search algorithm by supplying a different <code class="docutils literal notranslate"><span class="pre">params</span></code> object.
 For example, we could use the <a class="reference external" href="https://github.com/spotify/annoy">Approximate Nearest Neighbors Oh Yeah</a> (Annoy) algorithm:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">an_params</span> <span class="o">=</span> <span class="n">knncolle</span><span class="o">.</span><span class="n">AnnoyParameters</span><span class="p">()</span>
 <span class="n">an_idx</span> <span class="o">=</span> <span class="n">knncolle</span><span class="o">.</span><span class="n">build_index</span><span class="p">(</span><span class="n">an_params</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>We can also tweak the search parameters in our <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> object, during or after construction.
+<p>We can also tweak the search parameters in our <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> object during or after its construction.
 For example, with the <a class="reference external" href="https://github.com/nmslib/hnswlib">hierarchical navigable small worlds</a> (HNSW) algorithm:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">h_params</span> <span class="o">=</span> <span class="n">knncolle</span><span class="o">.</span><span class="n">HnswParameters</span><span class="p">(</span><span class="n">num_links</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">distance</span><span class="o">=</span><span class="s2">&quot;Manhattan&quot;</span><span class="p">)</span>
 <span class="n">h_params</span><span class="o">.</span><span class="n">ef_construction</span> <span class="o">=</span> <span class="mi">150</span>
 <span class="n">h_idx</span> <span class="o">=</span> <span class="n">knncolle</span><span class="o">.</span><span class="n">build_index</span><span class="p">(</span><span class="n">h_params</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Currently, we support Annoy, HNSW, vantage point trees, k-means k-nearest neighbors, and (for testing) an exhaustive brute-force search.
+<p>Currently, we support Annoy, HNSW, vantage point trees, k-means k-nearest neighbors, and an exhaustive brute-force search.
 More algorithms can be added by extending <strong>knncolle</strong> as described <a class="reference internal" href="#extending-to-more-algorithms"><span class="xref myst">below</span></a> without any change to end-user code.</p>
 </section>
 <section id="other-searches">
 <h2>Other searches<a class="headerlink" href="#other-searches" title="Link to this heading">¶</a></h2>
-<p>Given a query dataset, we can find the nearest neighbors in the prebuilt search index:</p>
+<p>Given a separate query dataset of the same dimensionality, we can find the nearest neighbors in the prebuilt NN search index:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
 <span class="n">qres</span> <span class="o">=</span> <span class="n">knncolle</span><span class="o">.</span><span class="n">query_knn</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">num_neighbors</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">qres</span><span class="o">.</span><span class="n">index</span>
@@ -327,7 +327,8 @@ More algorithms can be added by extending <strong>knncolle</strong> as described
 </pre></div>
 </div>
 <p>We can find all observations within a distance threshold of each observation via <code class="docutils literal notranslate"><span class="pre">find_neighbors()</span></code>.
-This also supports a variable threshold for each observation as well as querying of observations in a separate dataset.</p>
+The related <code class="docutils literal notranslate"><span class="pre">query_neighbors()</span></code> function handles querying of observations in a separate dataset.
+Both functions also accept a variable threshold for each observation.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">range_res</span> <span class="o">=</span> <span class="n">knncolle</span><span class="o">.</span><span class="n">find_neighbors</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">range_res</span><span class="o">.</span><span class="n">index</span>
 <span class="n">range_res</span><span class="o">.</span><span class="n">distance</span>
@@ -336,25 +337,24 @@ This also supports a variable threshold for each observation as well as querying
 </section>
 <section id="use-with-c">
 <h2>Use with C++<a class="headerlink" href="#use-with-c" title="Link to this heading">¶</a></h2>
-<p>The raison d’être of the <strong>knncolle</strong> Python package is to enable re-use within (<a class="reference external" href="https://pybind11.readthedocs.io"><strong>pybind11</strong></a>-wrapped) C++ code in other Python packages.
+<p>The raison d’être of the <strong>knncolle</strong> Python package is to facilitate the re-use of the neighbor search algorithms by C++ code in other Python packages.
 The idea is that downstream packages will link against the <strong>knncolle</strong> C++ interface so that they can re-use the search indices created by the <strong>knncolle</strong> Python package.
-This allows downstream packages to (i) save time by avoiding the need to re-compile all algorithms and (ii) support more algorithms in <strong>knncolle</strong> extensions.
+This allows developers to (i) save time by avoiding the need to re-compile all desired algorithms and (ii) support more algorithms in extensions to the <strong>knncolle</strong> framework.
 To do so:</p>
 <ol class="arabic simple">
-<li><p>Add <code class="docutils literal notranslate"><span class="pre">assorthead.includes()</span></code> to the compiler’s include path for your package.
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">knncolle.includes()</span></code> and <code class="docutils literal notranslate"><span class="pre">assorthead.includes()</span></code> to the compiler’s include path for the package.
 This can be done through <code class="docutils literal notranslate"><span class="pre">include_dirs=</span></code> of the <code class="docutils literal notranslate"><span class="pre">Extension()</span></code> definition in <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>
-or by adding a <code class="docutils literal notranslate"><span class="pre">target_include_directories()</span></code> in CMake, depending on your build system.</p></li>
+or by adding a <code class="docutils literal notranslate"><span class="pre">target_include_directories()</span></code> in CMake, depending on the build system.</p></li>
 <li><p>Call <code class="docutils literal notranslate"><span class="pre">knncolle.build_index()</span></code> to construct a <code class="docutils literal notranslate"><span class="pre">GenericIndex</span></code> instance.
 This exposes a shared pointer to the C+±allocated index via its <code class="docutils literal notranslate"><span class="pre">ptr</span></code> property.</p></li>
-<li><p>Pass <code class="docutils literal notranslate"><span class="pre">ptr</span></code> to <strong>pybind11</strong>-wrapped C++ code as a <a class="reference internal" href="#lib/src/def.h"><span class="xref myst">shared pointer to a <code class="docutils literal notranslate"><span class="pre">knncolle::Prebuilt</span></code></span></a>,
+<li><p>Pass <code class="docutils literal notranslate"><span class="pre">ptr</span></code> to C++ code as a <code class="docutils literal notranslate"><span class="pre">uintptr_t</span></code> referencing a <code class="docutils literal notranslate"><span class="pre">knncolle::Prebuilt</span></code>.
 which can be interrogated as described in the <a class="reference external" href="https://github.com/knncolle/knncolle"><strong>knncolle</strong> documentation</a>.</p></li>
 </ol>
 <p>So, for example, the C++ code in our downstream package might look like this:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">do_something</span><span class="p">(</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span>
-<span class="w">        </span><span class="n">knncolle</span><span class="o">::</span><span class="n">Prebuilt</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span>
-<span class="w">    </span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">index</span><span class="p">)</span><span class="w"> </span>
-<span class="p">{</span>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;knncolle_py.h&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">do_something</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">prebuilt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">knncolle_py</span><span class="o">::</span><span class="n">cast_prebuilt</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">// Do something with the search index interface.</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 <span class="p">}</span>
@@ -374,15 +374,11 @@ which can be interrogated as described in the <a class="reference external" href
 </div>
 <p>In some scenarios, it may be more convenient to construct the search index inside C++,
 e.g., if the dataset to be searched is not available before the call to the C++ function.
-This can be accommodated by accepting a <a class="reference internal" href="#lib/src/def.h"><span class="xref myst">shared pointer to a <code class="docutils literal notranslate"><span class="pre">knncolle::Builder</span></code></span></a> in the C++ code:</p>
-<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="kt">int</span><span class="w"> </span><span class="nf">do_something_mk2</span><span class="p">(</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span>
-<span class="w">        </span><span class="n">knncolle</span><span class="o">::</span><span class="n">Builder</span><span class="o">&lt;</span>
-<span class="w">            </span><span class="n">knncolle</span><span class="o">::</span><span class="n">SimpleMatrix</span><span class="o">&lt;</span><span class="kt">uint32_t</span><span class="p">,</span><span class="w"> </span><span class="kt">uint32_t</span><span class="p">,</span><span class="w"> </span><span class="kt">double</span><span class="o">&gt;</span><span class="p">,</span>
-<span class="w">            </span><span class="kt">double</span>
-<span class="w">        </span><span class="o">&gt;</span>
-<span class="w">    </span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">builder</span><span class="p">)</span><span class="w"> </span>
-<span class="p">{</span>
+This can be accommodated by accepting a <code class="docutils literal notranslate"><span class="pre">uintptr_t</span></code> to a <code class="docutils literal notranslate"><span class="pre">knncolle::Builder</span></code> in the C++ code:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;knncolle_py.h&quot;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">do_something_mk2</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="w"> </span><span class="n">ptr</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">builder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">knncolle_py</span><span class="o">::</span><span class="n">cast_builder</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">;</span>
 <span class="w">    </span><span class="c1">// The builder is a algorithm-specific factory that accepts a matrix and</span>
 <span class="w">    </span><span class="c1">// returns a search index for that algorithm. Presumably we construct a</span>
 <span class="w">    </span><span class="c1">// new search index inside this function and use it.</span>
@@ -394,7 +390,7 @@ This can be accommodated by accepting a <a class="reference internal" href="#lib
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>A pointer to the <code class="docutils literal notranslate"><span class="pre">knncolle::Builder</span></code> is then be created in Python by the <code class="docutils literal notranslate"><span class="pre">define_builder()</span></code> function, and then passed to C++:</p>
+<p>A pointer to the <code class="docutils literal notranslate"><span class="pre">knncolle::Builder</span></code> can be created by the <code class="docutils literal notranslate"><span class="pre">define_builder()</span></code> function in Python, and then passed to the C++ code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">lib_downstream</span> <span class="k">as</span> <span class="n">lib</span>
 <span class="kn">from</span> <span class="nn">knncolle</span> <span class="kn">import</span> <span class="n">define_builder</span><span class="p">,</span> <span class="n">Parameters</span>
 
@@ -403,24 +399,24 @@ This can be accommodated by accepting a <a class="reference internal" href="#lib
     <span class="k">return</span> <span class="n">lib</span><span class="o">.</span><span class="n">do_something_mk2</span><span class="p">(</span><span class="n">builder</span><span class="o">.</span><span class="n">ptr</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>See also the definitions in <a class="reference internal" href="#lib/src/def.h"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">lib/src/def.h</span></code></span></a> for the types of the pointers to be used in the C++ code.</p>
+<p>Check out <a class="reference internal" href="#src/knncolle/include/knncolle_py.h"><span class="xref myst">the included header</span></a> for more definitions.</p>
 </section>
 <section id="extending-to-more-algorithms">
 <h2>Extending to more algorithms<a class="headerlink" href="#extending-to-more-algorithms" title="Link to this heading">¶</a></h2>
 <section id="via-define-builder">
 <h3>Via <code class="docutils literal notranslate"><span class="pre">define_builder()</span></code><a class="headerlink" href="#via-define-builder" title="Link to this heading">¶</a></h3>
 <p>The best way to extend <strong>knncolle</strong> is to do so in C++.
-This involves writing subclasses of the <code class="docutils literal notranslate"><span class="pre">Builder</span></code>, <code class="docutils literal notranslate"><span class="pre">Prebuilt</span></code> and <code class="docutils literal notranslate"><span class="pre">Searcher</span></code> interfaces in the <a class="reference external" href="https://github.com/knncolle/knncolle"><strong>knncolle</strong></a> library.
+This involves writing subclasses of the interfaces in the <a class="reference external" href="https://github.com/knncolle/knncolle"><strong>knncolle</strong></a> library.
 Once this is done, it is a simple matter of writing the following Python bindings:</p>
 <ul class="simple">
 <li><p>Implement a <code class="docutils literal notranslate"><span class="pre">SomeNewParameters</span></code> class that inherits from <code class="docutils literal notranslate"><span class="pre">Parameters</span></code>.</p></li>
 <li><p>Implement a <code class="docutils literal notranslate"><span class="pre">SomeNewIndex</span></code> class that inherits from <code class="docutils literal notranslate"><span class="pre">GenericIndex</span></code>.
 This should accept a single <code class="docutils literal notranslate"><span class="pre">ptr</span></code> in its constructor and have a <code class="docutils literal notranslate"><span class="pre">ptr</span></code> property that returns the same value.</p></li>
 <li><p>Register a <code class="docutils literal notranslate"><span class="pre">define_builder()</span></code> method that dispatches on <code class="docutils literal notranslate"><span class="pre">SomeNewParameters</span></code>.
-This should call into C++ and return a tuple containing a <strong>pybind11</strong>-wrapped <a class="reference internal" href="#lib/src/def.h"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">BuilderPointer</span></code></span></a> and the <code class="docutils literal notranslate"><span class="pre">SomeNewIndex</span></code> constructor.</p></li>
+This should call into C++ and return a tuple containing a <code class="docutils literal notranslate"><span class="pre">Builder</span></code> object and the <code class="docutils literal notranslate"><span class="pre">SomeNewIndex</span></code> constructor.</p></li>
 </ul>
 <p>No new methods are required for <code class="docutils literal notranslate"><span class="pre">find_knn()</span></code>, <code class="docutils literal notranslate"><span class="pre">build_index()</span></code>, etc. as the default method will work automatically if a <code class="docutils literal notranslate"><span class="pre">define_builder()</span></code> method is available.
-This approach also allows the new method to be used in C++ code of downstream packages that accept a <a class="reference internal" href="#lib/src/def.h"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">PrebuiltPointer</span></code></span></a> instance.</p>
+This approach also allows the new method to be used in C++ code of downstream packages.</p>
 </section>
 <section id="without-define-builder">
 <h3>Without <code class="docutils literal notranslate"><span class="pre">define_builder()</span></code><a class="headerlink" href="#without-define-builder" title="Link to this heading">¶</a></h3>
