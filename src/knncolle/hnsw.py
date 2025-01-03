@@ -7,8 +7,7 @@ from .define_builder import define_builder
 
 
 class HnswParameters(Parameters):
-    """Parameters for the hierarchical navigable small worlds (HNSW)
-    algorithm, see `here <https://github.com/nmslib/hnswlib>`_ for details.
+    """Parameters for the hierarchical navigable small worlds (HNSW) algorithm, see `here <https://github.com/nmslib/hnswlib>`_ for details.
     """
 
     def __init__(
@@ -21,21 +20,19 @@ class HnswParameters(Parameters):
         """
         Args:
             num_links:
-                Number of bi-directional links to create per observation during
-                index construction. Larger values improve accuracy at the
-                expense of speed and memory usage.
+                Number of bi-directional links to create per observation during index construction.
+                Larger values improve accuracy at the expense of speed and memory usage.
 
             ef_construction:
-                Size of the dynamic list for index generation. Larger values
-                improve the quality of the index at the expense of time.
+                Size of the dynamic list for index generation.
+                Larger values improve the quality of the index at the expense of time.
 
             ef_search
-                Size of the dynamic list for neighbor searching. Larger values
-                improve accuracy at the expense of a slower search.
+                Size of the dynamic list for neighbor searching.
+                Larger values improve accuracy at the expense of a slower search.
 
             distance:
-                Distance metric for index construction and search. This should
-                be one of ``Euclidean``, ``Manhattan`` or ``Cosine``.
+                Distance metric for index construction and search.
         """
         self.num_links = num_links
         self.ef_construction = ef_construction
@@ -76,8 +73,7 @@ class HnswParameters(Parameters):
 
     @property
     def ef_construction(self) -> int:
-        """Size of the dynamic list during index construction, see
-        :meth:`~__init__()`."""
+        """Size of the dynamic list during index construction, see :meth:`~__init__()`."""
         return self._ef_construction
 
     @ef_construction.setter
@@ -85,8 +81,7 @@ class HnswParameters(Parameters):
         """
         Args:
             ef_construction:
-                Size of the dynamic list during index construction, see
-                :meth:`~__init__()`.
+                Size of the dynamic list during index construction, see :meth:`~__init__()`.
         """
         if ef_construction < 1:
             raise ValueError("'ef_construction' should be a positive integer")
@@ -102,8 +97,7 @@ class HnswParameters(Parameters):
         """
         Args:
             ef_search:
-                Size of the dynamic list during search, see
-                :meth:`~__init__()`.
+                Size of the dynamic list during search, see :meth:`~__init__()`.
         """
         if ef_search < 1:
             raise ValueError("'ef_search' should be a positive integer")
@@ -111,17 +105,15 @@ class HnswParameters(Parameters):
 
 
 class HnswIndex(GenericIndex):
-    """A prebuilt index for the hierarchical navigable small worlds (HNSW)
-    algorithm, created by :py:func:`~knncolle.define_builder.define_builder`
-    with a :py:class:`~knncolle.hnsw.HnswParameters` object.
+    """A prebuilt index for the hierarchical navigable small worlds (HNSW) algorithm,
+    created by :py:func:`~knncolle.define_builder.define_builder` with a :py:class:`~knncolle.hnsw.HnswParameters` object.
     """
 
     def __init__(self, ptr):
         """
         Args:
             ptr:
-                Address of a ``knncolle_py::WrappedPrebuilt`` containing a
-                HNSW search index, allocated in C++.
+                Address of a ``knncolle_py::WrappedPrebuilt`` containing a HNSW search index, allocated in C++.
         """
         super().__init__(ptr)
 

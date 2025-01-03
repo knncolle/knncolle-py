@@ -16,8 +16,7 @@ class ExhaustiveParameters(Parameters):
         """
         Args:
             distance:
-                Distance metric for index construction and search. This should
-                be one of ``Euclidean``, ``Manhattan`` or ``Cosine``.
+                Distance metric for index construction and search.
         """
         self.distance = distance
 
@@ -39,17 +38,13 @@ class ExhaustiveParameters(Parameters):
 
 
 class ExhaustiveIndex(GenericIndex):
-    """A prebuilt index for an exhaustive search, created by
-    :py:func:`~knncolle.define_builder.define_builder` with a
-    :py:class:`~knncolle.exhaustive.ExhaustiveParameters` instance.
-    """
+    """A prebuilt index for an exhaustive search, created by :py:func:`~knncolle.define_builder.define_builder` with a :py:class:`~knncolle.exhaustive.ExhaustiveParameters` instance."""
 
     def __init__(self, ptr):
         """
         Args:
             ptr:
-                Address of a ``knncolle_py::WrappedPrebuilt`` containing an
-                exhaustive search index, allocated in C++.
+                Address of a ``knncolle_py::WrappedPrebuilt`` containing an exhaustive search index, allocated in C++.
         """
         super().__init__(ptr)
 

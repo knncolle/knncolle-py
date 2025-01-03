@@ -16,8 +16,7 @@ class KmknnParameters(Parameters):
         """
         Args:
             distance:
-                Distance metric for index construction and search. This should
-                be one of ``Euclidean``, ``Manhattan`` or ``Cosine``.
+                Distance metric for index construction and search.
         """
         self.distance = distance
 
@@ -39,17 +38,15 @@ class KmknnParameters(Parameters):
 
 
 class KmknnIndex(GenericIndex):
-    """A prebuilt index for the k-means k-nearest neighbors algorithm, created
-    by :py:func:`~knncolle.define_builder.define_builder` with a
-    :py:class:`~knncolle.kmknn.KmknnParameters` instance.
+    """A prebuilt index for the k-means k-nearest neighbors algorithm,
+    created by :py:func:`~knncolle.define_builder.define_builder` with a :py:class:`~knncolle.kmknn.KmknnParameters` instance.
     """
 
     def __init__(self, ptr):
         """
         Args:
             ptr:
-                Address of a ``knncolle_py::WrappedPrebuilt`` containing a
-                KMKNN search index, allocated in C++.
+                Address of a ``knncolle_py::WrappedPrebuilt`` containing a KMKNN search index, allocated in C++.
         """
         super().__init__(ptr)
 

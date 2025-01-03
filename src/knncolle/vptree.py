@@ -16,8 +16,7 @@ class VptreeParameters(Parameters):
         """
         Args:
             distance:
-                Distance metric for index construction and search. This should
-                be one of ``Euclidean``, ``Manhattan`` or ``Cosine``.
+                Distance metric for index construction and search.
         """
         self.distance = distance
 
@@ -39,17 +38,15 @@ class VptreeParameters(Parameters):
 
 
 class VptreeIndex(GenericIndex):
-    """A prebuilt index for the vantage point tree algorithm, created by
-    :py:func:`~knncolle.define_builder.define_builder` with a
-    :py:class:`~knncolle.vptree.VptreeParameters` instance.
+    """A prebuilt index for the vantage point tree algorithm,
+    created by :py:func:`~knncolle.define_builder.define_builder` with a :py:class:`~knncolle.vptree.VptreeParameters` instance.
     """
 
     def __init__(self, ptr):
         """
         Args:
             ptr:
-                Address of a ``knncolle_py::WrappedPrebuilt`` containing a
-                VP tree search index, allocated in C++.
+                Address of a ``knncolle_py::WrappedPrebuilt`` containing a VP tree search index, allocated in C++.
         """
         super().__init__(ptr)
 

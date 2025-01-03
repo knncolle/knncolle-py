@@ -12,12 +12,9 @@ from ._utils import process_threshold, process_subset
 class QueryNeighborsResults:
     """Results of :py:func:`~knncolle.query_neighbors.query_neighbors`.
 
-    ``index`` and ``distance`` are lists where each element is a NumPy array
-    that corresponds to an observation in ``query``. Each array contains the
-    indices of (for ``index``) or distances to (for ``distance``) the
-    observations of ``X`` that neighbor the corresponding observation within
-    the specified threshold distance. For each query observation, neighbors are
-    guaranteed to be sorted in order of increasing distance. 
+    ``index`` and ``distance`` are lists where each element is a NumPy array that corresponds to an observation in ``query``.
+    Each array contains the indices of (for ``index``) or distances to (for ``distance``) the observations of ``X`` that neighbor the corresponding observation within the specified threshold distance.
+    For each query observation, neighbors are guaranteed to be sorted in order of increasing distance. 
 
     If ``get_index = False``, ``index`` is set to None.
 
@@ -37,8 +34,7 @@ def query_neighbors(
     get_distance: bool = True,
     **kwargs
 ) -> QueryNeighborsResults:
-    """Find all observations in the search index that lie within a threshold
-    distance of each observation in the query dataset.
+    """Find all observations in the search index that lie within a threshold distance of each observation in the query dataset.
 
     Args:
         X:
@@ -50,12 +46,9 @@ def query_neighbors(
             The number of dimensions should be consistent with that in ``X``.
 
         threshold:
-            Distance threshold at which to identify neighbors for each
-            observation in ``X``. 
+            Distance threshold at which to identify neighbors for each observation in ``X``. 
 
-            Alternatively, this may be a sequence of non-negative floats of
-            length equal to the number of observations in ``X``, specifying
-            the distance threshold to search for each observation.
+            Alternatively, this may be a sequence of non-negative floats of length equal to the number of observations in ``X``, specifying the distance threshold to search for each observation.
 
         num_threads:
             Number of threads to use for the search.

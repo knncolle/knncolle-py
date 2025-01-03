@@ -12,19 +12,14 @@ from ._utils import process_num_neighbors, process_subset
 class QueryKnnResults:
     """Results of :py:func:`~knncolle.query_knn.query_knn`.
 
-    If ``num_neighbors`` is an integer, ``index`` and ``distance`` are both
-    matrices. Each row corresponds to an observation in ``query`` and each
-    column corresponds to one of its neighbors in ``X``. ``index`` contains the
-    indices of the nearest neighbors while ``distance`` contains the distance
-    to those neighbors. In each row, neighbors are guaranteed to be sorted in
-    order of increasing distance.
+    If ``num_neighbors`` is an integer, ``index`` and ``distance`` are both matrices.
+    Each row corresponds to an observation in ``query`` and each column corresponds to one of its neighbors in ``X``.
+    ``index`` contains the indices of the nearest neighbors while ``distance`` contains the distance to those neighbors.
+    In each row, neighbors are guaranteed to be sorted in order of increasing distance.
 
-    If ``num_neighbors`` is a sequence, ``index`` and ``distance`` are lists
-    instead. Each list element corresponds to an observation in ``X`` and is a
-    NumPy array containing the indices (for ``index``) or distances (for
-    ``distance``) to the requested number of neighbors for that observation.
-    For each observation, the neighbors are guaranteed to be sorted in order of
-    increasing distance. 
+    If ``num_neighbors`` is a sequence, ``index`` and ``distance`` are lists instead.
+    Each list element corresponds to an observation in ``X`` and is a NumPy array containing the indices (for ``index``) or distances (for ``distance``) to the requested number of neighbors for that observation.
+    For each observation, the neighbors are guaranteed to be sorted in order of increasing distance. 
 
     If ``get_index = False``, ``index`` is set to None.
 
@@ -44,8 +39,7 @@ def query_knn(
     get_distance: bool = True,
     **kwargs
 ) -> QueryKnnResults:
-    """Find the k-nearest neighbors in the search index for each observation in
-    the query matrix.
+    """Find the k-nearest neighbors in the search index for each observation in the query matrix.
 
     Args:
         X:
@@ -57,13 +51,11 @@ def query_knn(
             The number of dimensions should be consistent with that in ``X``.
 
         num_neighbors:
-            Number of nearest neighbors in ``X`` to identify for each
-            observation in ``query``, i.e., k. This is automatically capped at the
-            total number of observations in ``X``. 
+            Number of nearest neighbors in ``X`` to identify for each observation in ``query``, i.e., k.
+            This is automatically capped at the total number of observations in ``X``. 
 
-            Alternatively, this may be a sequence of non-negative integers of
-            length equal to the number of observations in ``query``, 
-            specifying the number of neighbors to find for each observation.
+            Alternatively, this may be a sequence of non-negative integers of length equal to the number of observations in ``query``.
+            This should specify the number of neighbors to find for each observation.
 
         num_threads:
             Number of threads to use for the search.

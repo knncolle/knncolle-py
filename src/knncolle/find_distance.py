@@ -22,33 +22,28 @@ def find_distance(
             A prebuilt search index.
 
         num_neighbors:
-            Number of nearest neighbors at which to compute the distance from
-            each observation in ``X``, i.e., k. This is automatically capped at
-            the number of observations minus 1.
+            Number of nearest neighbors at which to compute the distance from each observation in ``X``, i.e., k.
+            This is automatically capped at the number of observations minus 1.
 
-            Alternatively, this may be a sequence of non-negative integers of
-            length equal to the number of observations in ``X``, specifying the
-            neighbor at which to compute the distance for each observation.
+            Alternatively, this may be a sequence of non-negative integers of length equal to the number of observations in ``X``.
+            Each element should specify the neighbor at which to compute the distance for each observation.
 
-            If ``subset`` is supplied and ``num_neighbors`` is a sequence, it
-            should have length equal to ``subset`` instead, and should specify
-            the neighbor for each observation in the subset.
+            If ``subset`` is supplied and ``num_neighbors`` is a sequence, it should have length equal to ``subset`` instead.
+            Each element should specify the neighbor at which to compute the distance for each observation in the subset.
 
         num_threads:
             Number of threads to use for the search.
 
         subset:
-            Sequence of integers containing the indices of the observations for
-            which to compute the distances. All indices should be non-negative
-            and less than the total number of observations.
+            Sequence of integers containing the indices of the observations for which to compute the distances.
+            All indices should be non-negative and less than the total number of observations.
 
         kwargs:
             Additional arguments to pass to specific methods.
 
     Returns:
-        A NumPy array of length equal to the number of observations in
-        ``X`` (or ``subset``, if provided) containing the distance to the
-        ``num_neighbors``-th point for each observation.
+        A NumPy array of length equal to the number of observations in ``X`` (or ``subset``, if provided).
+        Each element contains the distance to the ``num_neighbors``-th point for each observation.
     """
     raise NotImplementedError("no available method for '" + str(type(X)) + "'")
 

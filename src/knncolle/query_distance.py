@@ -15,8 +15,7 @@ def query_distance(
     num_threads: int = 1,
     **kwargs
 ) -> numpy.ndarray:
-    """Find the distance to the k-th nearest neighbor in the search index for
-    each observation in the query dataset.
+    """Find the distance to the k-th nearest neighbor in the search index for each observation in the query dataset.
 
     Args:
         X:
@@ -28,13 +27,11 @@ def query_distance(
             The number of dimensions should be consistent with that in ``X``.
 
         num_neighbors:
-            Number of nearest neighbors in ``X`` at which to compute the
-            distance from each observation in ``query``, i.e., k. This is
-            automatically capped at the total number of observations in ``X``.
+            Number of nearest neighbors in ``X`` at which to compute the distance from each observation in ``query``, i.e., k.
+            This is automatically capped at the total number of observations in ``X``.
 
-            Alternatively, this may be a sequence of integers of length equal
-            to the number of observations in ``query``, specifying the neighbor
-            at which to compute the distance for each observation.
+            Alternatively, this may be a sequence of integers of length equal to the number of observations in ``query``.
+            Each element should specify the neighbor at which to compute the distance for each observation.
 
         num_threads:
             Number of threads to use for the search.
@@ -43,9 +40,7 @@ def query_distance(
             Additional arguments to pass to specific methods.
 
     Returns:
-        A NumPy array of length equal to the number of observations in
-        ``query`` containing the distance to the ``num_neighbors``-th point in
-        ``X`` for each observation.
+        A NumPy array of length equal to the number of observations in ``query`` containing the distance to the ``num_neighbors``-th point in ``X`` for each observation.
     """
     raise NotImplementedError("no available method for '" + str(type(X)) + "'")
 
