@@ -42,8 +42,31 @@ idx = knncolle.build_index(params, y)
 
 # Performing the search:
 res = knncolle.find_knn(idx, num_neighbors=10)
-res.index
-res.distance
+
+res.index # each row is an observation, each column is a neighbor
+## array([[881,  74, 959, ..., 917, 385, 522],
+##        [586,   8, 874, ..., 895,  52, 591],
+##        [290, 215, 298, ..., 148, 627, 443],
+##        ...,
+##        [773,  44, 669, ..., 775, 287, 819],
+##        [658, 847, 691, ..., 630, 861, 434],
+##        [796, 158,  11, ..., 606, 815, 882]],
+##       shape=(1000, 10), dtype=uint32)
+
+res.distance # distances to the neighbors in 'index'
+## array([[1.12512471, 1.12792771, 1.15229055, ..., 1.21499808, 1.2176659 ,
+##         1.23952456],
+##        [0.9988856 , 1.03782045, 1.08870223, ..., 1.16899062, 1.17007634,
+##         1.17147675],
+##        [1.2471501 , 1.26328659, 1.2643019 , ..., 1.32229768, 1.32679721,
+##         1.33451926],
+##        ...,
+##        [1.05765983, 1.08981287, 1.11295647, ..., 1.18395012, 1.1976068 ,
+##         1.21577234],
+##        [0.96758957, 1.02363497, 1.05326212, ..., 1.21518925, 1.22847612,
+##         1.24106054],
+##        [1.17846147, 1.22299985, 1.2248128 , ..., 1.35088373, 1.39274142,
+##         1.40207528]], shape=(1000, 10))
 ```
 
 Check out the [reference documentation](https://knncolle.github.io/knncolle-py) for details.
@@ -77,17 +100,41 @@ Given a separate query dataset of the same dimensionality, we can find the neare
 ```python
 q = numpy.random.rand(50, 20)
 qres = knncolle.query_knn(idx, q, num_neighbors=10)
-qres.index
-qres.distance
+
+qres.index.shape # each row is an observation in 'q'
+## (50, 10)
+qres.distance.shape
+## (50, 10)
+
+qres.index[0,:]
+## array([712, 947, 924, 506, 640, 228, 424, 662, 299, 473], dtype=uint32)
+
+qres.distance[0,:]
+## array([0.9846863 , 0.99493741, 1.01642662, 1.02303339, 1.02915264,
+##        1.05241022, 1.0690309 , 1.09889404, 1.1327715 , 1.14832321])
 ```
 
 We can ask `find_knn()` to report variable numbers of neighbors for each observation:
 
 ```python
-variable_k = (numpy.random.rand(y.shape[1]) * 10).astype(numpy.uint32)
+variable_k = (numpy.random.rand(y.shape[0]) * 10).astype(numpy.uint32)
 var_res = knncolle.find_knn(idx, num_neighbors=variable_k)
-var_res.index
-var_res.distance
+
+len(var_res.index)
+## 1000
+
+len(var_res.distance)
+## 1000
+
+variable_k[0]
+## np.uint32(7)
+
+var_res.index[0]
+## array([881,  74, 959, 135, 148, 946, 276], dtype=uint32)
+
+var_res.distance[0]
+## array([1.12512471, 1.12792771, 1.15229055, 1.16210922, 1.19067866,
+##        1.19773984, 1.21375003])
 ```
 
 We can find all observations within a distance threshold of each observation via `find_neighbors()`.
@@ -95,9 +142,20 @@ The related `query_neighbors()` function handles querying of observations in a s
 Both functions also accept a variable threshold for each observation.
 
 ```python
-range_res = knncolle.find_neighbors(idx, threshold=10)
-range_res.index
-range_res.distance
+range_res = knncolle.find_neighbors(idx, threshold=1.2)
+
+len(range_res.index)
+## 1000
+
+len(range_res.distance)
+## 1000
+
+range_res.index[0]
+## array([881,  74, 959, 135, 148, 946], dtype=uint32)
+
+range_res.distance[0]
+## array([1.12512471, 1.12792771, 1.15229055, 1.16210922, 1.19067866,
+##        1.19773984])
 ```
 
 ## Use with C++
