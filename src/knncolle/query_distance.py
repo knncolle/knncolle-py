@@ -23,10 +23,9 @@ def query_distance(
             A prebuilt search index.
 
         query:
-            Matrix of coordinates for the query observations. This should be a
-            two-dimensional double-precision NumPy array in Fortran order where
-            the rows are dimensions and columns are observations. The number of
-            dimensions should be consistent with that in ``X``.
+            Matrix of coordinates for the query observations.
+            This should be a double-precision row-major NumPy matrix where the rows are dimensions and columns are observations.
+            The number of dimensions should be consistent with that in ``X``.
 
         num_neighbors:
             Number of nearest neighbors in ``X`` at which to compute the

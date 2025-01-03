@@ -11,7 +11,7 @@
 #include <stdexcept>
 #include <vector>
 
-typedef pybind11::array_t<double, pybind11::array::f_style | pybind11::array::forcecast> DataMatrix;
+typedef pybind11::array_t<double, pybind11::array::c_style | pybind11::array::forcecast> DataMatrix;
 
 void free_builder(uintptr_t builder_ptr) {
     delete knncolle_py::cast_builder(builder_ptr);
@@ -19,11 +19,14 @@ void free_builder(uintptr_t builder_ptr) {
 
 uintptr_t generic_build(uintptr_t builder_ptr, const DataMatrix& data) {
     auto buffer = data.request();
-    uint32_t NR = buffer.shape[0], NC = buffer.shape[1];
+
+    // All input NumPy matrices are row-major layouts with observations in rows,
+    // which is trivially transposed to give us the expected column-major layout with observations in columns.
+    uint32_t nobs = buffer.shape[0], ndim = buffer.shape[1];
 
     auto builder = knncolle_py::cast_builder(builder_ptr);
     auto tmp = std::make_unique<knncolle_py::WrappedPrebuilt>();
-    tmp->ptr.reset(builder->ptr->build_raw(knncolle_py::SimpleMatrix(NR, NC, static_cast<const double*>(buffer.ptr))));
+    tmp->ptr.reset(builder->ptr->build_raw(knncolle_py::SimpleMatrix(ndim, nobs, static_cast<const double*>(buffer.ptr))));
 
     return reinterpret_cast<uintptr_t>(static_cast<void*>(tmp.release()));
 }
@@ -239,10 +242,11 @@ pybind11::object generic_query_knn(
     uint32_t nobs = prebuilt->num_observations();
     uint32_t ndim = prebuilt->num_dimensions();
 
+    // Remember, all input NumPy matrices are row-major layouts with observations in rows.
     auto buf_info = query.request();
-    uint32_t nquery = buf_info.shape[1];
+    uint32_t nquery = buf_info.shape[0];
     const double* query_ptr = static_cast<const double*>(buf_info.ptr);
-    if (static_cast<uint32_t>(buf_info.shape[0]) != ndim) {
+    if (static_cast<uint32_t>(buf_info.shape[1]) != ndim) {
         throw std::runtime_error("mismatch in dimensionality between index and 'query'");
     }
 
@@ -470,10 +474,11 @@ pybind11::object generic_query_all(
     const auto& prebuilt = knncolle_py::cast_prebuilt(prebuilt_ptr)->ptr;
     size_t ndim = prebuilt->num_dimensions();
 
+    // Remember, all input NumPy matrices are row-major layouts with observations in rows.
     auto buf_info = query.request();
-    uint32_t nquery = buf_info.shape[1];
+    uint32_t nquery = buf_info.shape[0];
     const double* query_ptr = static_cast<const double*>(buf_info.ptr);
-    if (static_cast<size_t>(buf_info.shape[0]) != ndim) {
+    if (static_cast<size_t>(buf_info.shape[1]) != ndim) {
         throw std::runtime_error("mismatch in dimensionality between index and 'query'");
     }
 

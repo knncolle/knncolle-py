@@ -4,7 +4,7 @@ import pytest
 
 
 def test_find_distance_basic():
-    Y = numpy.random.rand(20, 500)
+    Y = numpy.random.rand(500, 20)
 
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
     dist = knncolle.find_distance(idx, num_neighbors=8)
@@ -18,7 +18,7 @@ def test_find_distance_basic():
 
 
 def test_find_distance_parallel():
-    Y = numpy.random.rand(20, 500)
+    Y = numpy.random.rand(500, 20)
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
     dist = knncolle.find_distance(idx, num_neighbors=8)
     pdist = knncolle.find_distance(idx, num_neighbors=8, num_threads=2)
@@ -26,7 +26,7 @@ def test_find_distance_parallel():
 
 
 def test_find_distance_subset():
-    Y = numpy.random.rand(20, 500)
+    Y = numpy.random.rand(500, 20)
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
     full = knncolle.find_distance(idx, num_neighbors=8)
     sub = knncolle.find_distance(idx, num_neighbors=8, subset=range(5, 20))
@@ -35,13 +35,13 @@ def test_find_distance_subset():
     with pytest.raises(Exception, match='out-of-range'):
         knncolle.find_distance(idx, num_neighbors=8, subset=[1000])
 
-    eidx = knncolle.build_index(knncolle.VptreeParameters(), Y[:,0:0])
+    eidx = knncolle.build_index(knncolle.VptreeParameters(), Y[0:0,:])
     empty = knncolle.find_distance(eidx, num_neighbors=10)
     assert len(empty) == 0
 
 
 def test_find_distance_variable_k():
-    Y = numpy.random.rand(20, 500)
+    Y = numpy.random.rand(500, 20)
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
 
     with pytest.raises(Exception, match='must be equal'):

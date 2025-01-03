@@ -4,12 +4,11 @@ import pytest
 
 
 def ref_find_knn(X, k, distance="euclidean"):
-    tX = X.T
     collected_index = []
     collected_distance = []
 
-    for i in range(X.shape[1]):
-        delta = tX - X[:,i]
+    for i in range(X.shape[0]):
+        delta = X - X[i,:]
         if distance == "euclidean":
             all_dist = numpy.sqrt((delta**2).sum(axis=1))
         else:
@@ -28,7 +27,7 @@ def ref_find_knn(X, k, distance="euclidean"):
 
 
 def test_find_knn_basic():
-    Y = numpy.random.rand(20, 500)
+    Y = numpy.random.rand(500, 20)
 
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
     out = knncolle.find_knn(idx, num_neighbors=8)
@@ -44,14 +43,14 @@ def test_find_knn_basic():
 
     idx = knncolle.build_index(knncolle.VptreeParameters(distance="Cosine"), Y)
     out = knncolle.find_knn(idx, num_neighbors=8)
-    normed = Y / numpy.sqrt((Y**2).sum(axis=0))
+    normed = (Y.T / numpy.sqrt((Y**2).sum(axis=1))).T
     ref_i, ref_d = ref_find_knn(normed, k=8)
     assert (ref_i == out.index).all()
     assert numpy.isclose(ref_d, out.distance).all()
 
 
 def test_find_knn_parallel():
-    Y = numpy.random.rand(20, 500)
+    Y = numpy.random.rand(500, 20)
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
     out = knncolle.find_knn(idx, num_neighbors=8)
     pout = knncolle.find_knn(idx, num_neighbors=8, num_threads=2)
@@ -60,7 +59,7 @@ def test_find_knn_parallel():
 
 
 def test_find_knn_subset():
-    Y = numpy.random.rand(20, 500)
+    Y = numpy.random.rand(500, 20)
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
     full = knncolle.find_knn(idx, num_neighbors=8)
 
@@ -71,14 +70,14 @@ def test_find_knn_subset():
     with pytest.raises(Exception, match='out-of-range'):
         knncolle.find_distance(idx, num_neighbors=8, subset=[1000])
 
-    eidx = knncolle.build_index(knncolle.VptreeParameters(), Y[:,0:0])
+    eidx = knncolle.build_index(knncolle.VptreeParameters(), Y[0:0,:])
     empty = knncolle.find_knn(eidx, num_neighbors=8)
     assert empty.index.shape[0] == 0
     assert empty.distance.shape[0] == 0
 
 
 def test_find_knn_variable_k():
-    Y = numpy.random.rand(20, 500)
+    Y = numpy.random.rand(500, 20)
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
 
     with pytest.raises(Exception, match='must be equal'):
@@ -99,7 +98,7 @@ def test_find_knn_variable_k():
 
 
 def test_find_knn_variable_output():
-    Y = numpy.random.rand(20, 500)
+    Y = numpy.random.rand(500, 20)
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
     out = knncolle.find_knn(idx, num_neighbors=8)
 

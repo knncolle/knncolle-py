@@ -33,7 +33,7 @@ And run the desired search:
 ```python
 # Mocking up data with 20 dimensions, 1000 observations
 import numpy
-y = numpy.random.rand(20, 1000) 
+y = numpy.random.rand(1000, 20) 
 
 # Building a search index with vantage point trees:
 import knncolle
@@ -75,7 +75,7 @@ More algorithms can be added by extending **knncolle** as described [below](#ext
 Given a separate query dataset of the same dimensionality, we can find the nearest neighbors in the prebuilt NN search index:
 
 ```python
-q = numpy.random.rand(20, 50)
+q = numpy.random.rand(50, 20)
 qres = knncolle.query_knn(idx, q, num_neighbors=10)
 qres.index
 qres.distance

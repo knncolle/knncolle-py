@@ -10,7 +10,7 @@ def test_exhaustive_parameters():
 
 
 def test_exhaustive_basic(helpers):
-    x = numpy.random.rand(50, 200)
+    x = numpy.random.rand(200, 50)
     idx = knncolle.build_index(knncolle.ExhaustiveParameters(), x) 
 
     res = knncolle.find_knn(idx, 20)
@@ -24,7 +24,7 @@ def test_exhaustive_basic(helpers):
 
 
 def test_exhaustive_distances(helpers):
-    x = numpy.random.rand(50, 200)
+    x = numpy.random.rand(200, 50)
 
     # Checking that the Manhattan distance has some effect.
     idx_m = knncolle.build_index(knncolle.ExhaustiveParameters(distance="Manhattan"), x) 
@@ -40,7 +40,7 @@ def test_exhaustive_distances(helpers):
     idx_c = knncolle.build_index(knncolle.ExhaustiveParameters(distance="Cosine"), x) 
     res_c = knncolle.find_knn(idx_c, 10)
 
-    norm = x / numpy.sqrt((x**2).sum(axis=0))
+    norm = (x.T / numpy.sqrt((x**2).sum(axis=1))).T
     idx_ce = knncolle.build_index(knncolle.ExhaustiveParameters(), norm) 
     res_ce = knncolle.find_knn(idx_ce, 10)
     assert (res_c.index == res_ce.index).all()

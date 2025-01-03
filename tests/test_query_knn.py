@@ -4,12 +4,11 @@ import pytest
 
 
 def ref_query_knn(X, q, k, distance="euclidean"):
-    tX = X.T
     collected_index = []
     collected_distance = []
 
-    for i in range(q.shape[1]):
-        delta = tX - q[:,i]
+    for i in range(q.shape[0]):
+        delta = X - q[i,:]
         if distance == "euclidean":
             all_dist = numpy.sqrt((delta**2).sum(axis=1))
         else:
@@ -27,8 +26,8 @@ def ref_query_knn(X, q, k, distance="euclidean"):
 
 
 def test_query_knn_basic():
-    Y = numpy.random.rand(20, 500)
-    q = numpy.random.rand(20, 100)
+    Y = numpy.random.rand(500, 20)
+    q = numpy.random.rand(100, 20)
 
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
     out = knncolle.query_knn(idx, q, num_neighbors=8)
@@ -44,16 +43,16 @@ def test_query_knn_basic():
 
     idx = knncolle.build_index(knncolle.VptreeParameters(distance="Cosine"), Y)
     out = knncolle.query_knn(idx, q, num_neighbors=8)
-    normed = Y / numpy.sqrt((Y**2).sum(axis=0))
-    qnormed = q / numpy.sqrt((q**2).sum(axis=0))
+    normed = (Y.T / numpy.sqrt((Y**2).sum(axis=1))).T
+    qnormed = (q.T / numpy.sqrt((q**2).sum(axis=1))).T
     ref_i, ref_d = ref_query_knn(normed, qnormed, k=8)
     assert (ref_i == out.index).all()
     assert numpy.isclose(ref_d, out.distance).all()
 
 
 def test_query_knn_parallel():
-    Y = numpy.random.rand(20, 500)
-    q = numpy.random.rand(20, 100)
+    Y = numpy.random.rand(500, 20)
+    q = numpy.random.rand(100, 20)
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
     out = knncolle.query_knn(idx, q, num_neighbors=8)
     pout = knncolle.query_knn(idx, q, num_neighbors=8, num_threads=2)
@@ -62,8 +61,8 @@ def test_query_knn_parallel():
 
 
 def test_query_knn_variable_k():
-    Y = numpy.random.rand(20, 500)
-    q = numpy.random.rand(20, 100)
+    Y = numpy.random.rand(500, 20)
+    q = numpy.random.rand(100, 20)
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
 
     with pytest.raises(Exception, match='must be equal'):
@@ -84,8 +83,8 @@ def test_query_knn_variable_k():
 
 
 def test_query_knn_variable_output():
-    Y = numpy.random.rand(20, 500)
-    q = numpy.random.rand(20, 100)
+    Y = numpy.random.rand(500, 20)
+    q = numpy.random.rand(100, 20)
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
     out = knncolle.query_knn(idx, q, num_neighbors=8)
 

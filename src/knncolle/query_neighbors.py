@@ -45,10 +45,9 @@ def query_neighbors(
             A prebuilt search index.
 
         query:
-            Matrix of coordinates for the query observations. This should be a
-            two-dimensional double-precision NumPy array in Fortran order where
-            the rows are dimensions and columns are observations. The number of
-            dimensions should be consistent with that in ``X``.
+            Matrix of coordinates for the query observations.
+            This should be a double-precision row-major NumPy matrix where the rows are dimensions and columns are observations.
+            The number of dimensions should be consistent with that in ``X``.
 
         threshold:
             Distance threshold at which to identify neighbors for each

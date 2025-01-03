@@ -4,8 +4,8 @@ import pytest
 
 
 def test_query_distance_basic():
-    Y = numpy.random.rand(20, 500)
-    q = numpy.random.rand(20, 100)
+    Y = numpy.random.rand(500, 20)
+    q = numpy.random.rand(100, 20)
 
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
     dist = knncolle.query_distance(idx, q, num_neighbors=8)
@@ -18,12 +18,12 @@ def test_query_distance_basic():
     assert (dist != dist2).any()
 
     with pytest.raises(Exception, match='dimensionality'):
-        knncolle.query_distance(idx, q[1:10,:], num_neighbors=8)
+        knncolle.query_distance(idx, q[:,1:10], num_neighbors=8)
 
 
 def test_query_distance_parallel():
-    Y = numpy.random.rand(20, 500)
-    q = numpy.random.rand(20, 100)
+    Y = numpy.random.rand(500, 20)
+    q = numpy.random.rand(100, 20)
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
     dist = knncolle.query_distance(idx, q, num_neighbors=8)
     pdist = knncolle.query_distance(idx, q, num_neighbors=8, num_threads=2)
@@ -31,8 +31,8 @@ def test_query_distance_parallel():
 
 
 def test_query_distance_variable_k():
-    Y = numpy.random.rand(20, 500)
-    q = numpy.random.rand(20, 100)
+    Y = numpy.random.rand(500, 20)
+    q = numpy.random.rand(100, 20)
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
 
     with pytest.raises(Exception, match='must be equal'):
