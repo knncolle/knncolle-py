@@ -258,19 +258,14 @@
 <span class="k">class</span> <span class="nc">QueryKnnResults</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Results of :py:func:`~knncolle.query_knn.query_knn`.</span>
 
-<span class="sd">    If ``num_neighbors`` is an integer, ``index`` and ``distance`` are both</span>
-<span class="sd">    matrices. Each row corresponds to an observation in ``query`` and each</span>
-<span class="sd">    column corresponds to one of its neighbors in ``X``. ``index`` contains the</span>
-<span class="sd">    indices of the nearest neighbors while ``distance`` contains the distance</span>
-<span class="sd">    to those neighbors. In each row, neighbors are guaranteed to be sorted in</span>
-<span class="sd">    order of increasing distance.</span>
+<span class="sd">    If ``num_neighbors`` is an integer, ``index`` and ``distance`` are both matrices.</span>
+<span class="sd">    Each row corresponds to an observation in ``query`` and each column corresponds to one of its neighbors in ``X``.</span>
+<span class="sd">    ``index`` contains the indices of the nearest neighbors while ``distance`` contains the distance to those neighbors.</span>
+<span class="sd">    In each row, neighbors are guaranteed to be sorted in order of increasing distance.</span>
 
-<span class="sd">    If ``num_neighbors`` is a sequence, ``index`` and ``distance`` are lists</span>
-<span class="sd">    instead. Each list element corresponds to an observation in ``X`` and is a</span>
-<span class="sd">    NumPy array containing the indices (for ``index``) or distances (for</span>
-<span class="sd">    ``distance``) to the requested number of neighbors for that observation.</span>
-<span class="sd">    For each observation, the neighbors are guaranteed to be sorted in order of</span>
-<span class="sd">    increasing distance. </span>
+<span class="sd">    If ``num_neighbors`` is a sequence, ``index`` and ``distance`` are lists instead.</span>
+<span class="sd">    Each list element corresponds to an observation in ``X`` and is a NumPy array containing the indices (for ``index``) or distances (for ``distance``) to the requested number of neighbors for that observation.</span>
+<span class="sd">    For each observation, the neighbors are guaranteed to be sorted in order of increasing distance. </span>
 
 <span class="sd">    If ``get_index = False``, ``index`` is set to None.</span>
 
@@ -293,27 +288,23 @@
     <span class="n">get_distance</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QueryKnnResults</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the k-nearest neighbors in the search index for each observation in</span>
-<span class="sd">    the query matrix.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the k-nearest neighbors in the search index for each observation in the query matrix.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        X:</span>
 <span class="sd">            A prebuilt search index.</span>
 
 <span class="sd">        query:</span>
-<span class="sd">            Matrix of coordinates for the query observations. This should be a</span>
-<span class="sd">            two-dimensional double-precision NumPy array in Fortran order where</span>
-<span class="sd">            the rows are dimensions and columns are observations. The number of</span>
-<span class="sd">            dimensions should be consistent with that in ``X``.</span>
+<span class="sd">            Matrix of coordinates for the query observations.</span>
+<span class="sd">            This should be a double-precision row-major NumPy matrix where the rows are dimensions and columns are observations.</span>
+<span class="sd">            The number of dimensions should be consistent with that in ``X``.</span>
 
 <span class="sd">        num_neighbors:</span>
-<span class="sd">            Number of nearest neighbors in ``X`` to identify for each</span>
-<span class="sd">            observation in ``query``, i.e., k. This is automatically capped at the</span>
-<span class="sd">            total number of observations in ``X``. </span>
+<span class="sd">            Number of nearest neighbors in ``X`` to identify for each observation in ``query``, i.e., k.</span>
+<span class="sd">            This is automatically capped at the total number of observations in ``X``. </span>
 
-<span class="sd">            Alternatively, this may be a sequence of non-negative integers of</span>
-<span class="sd">            length equal to the number of observations in ``query``, </span>
-<span class="sd">            specifying the number of neighbors to find for each observation.</span>
+<span class="sd">            Alternatively, this may be a sequence of non-negative integers of length equal to the number of observations in ``query``.</span>
+<span class="sd">            This should specify the number of neighbors to find for each observation.</span>
 
 <span class="sd">        num_threads:</span>
 <span class="sd">            Number of threads to use for the search.</span>

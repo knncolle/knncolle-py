@@ -258,12 +258,9 @@
 <span class="k">class</span> <span class="nc">QueryNeighborsResults</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Results of :py:func:`~knncolle.query_neighbors.query_neighbors`.</span>
 
-<span class="sd">    ``index`` and ``distance`` are lists where each element is a NumPy array</span>
-<span class="sd">    that corresponds to an observation in ``query``. Each array contains the</span>
-<span class="sd">    indices of (for ``index``) or distances to (for ``distance``) the</span>
-<span class="sd">    observations of ``X`` that neighbor the corresponding observation within</span>
-<span class="sd">    the specified threshold distance. For each query observation, neighbors are</span>
-<span class="sd">    guaranteed to be sorted in order of increasing distance. </span>
+<span class="sd">    ``index`` and ``distance`` are lists where each element is a NumPy array that corresponds to an observation in ``query``.</span>
+<span class="sd">    Each array contains the indices of (for ``index``) or distances to (for ``distance``) the observations of ``X`` that neighbor the corresponding observation within the specified threshold distance.</span>
+<span class="sd">    For each query observation, neighbors are guaranteed to be sorted in order of increasing distance. </span>
 
 <span class="sd">    If ``get_index = False``, ``index`` is set to None.</span>
 
@@ -286,26 +283,21 @@
     <span class="n">get_distance</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QueryNeighborsResults</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find all observations in the search index that lie within a threshold</span>
-<span class="sd">    distance of each observation in the query dataset.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find all observations in the search index that lie within a threshold distance of each observation in the query dataset.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        X:</span>
 <span class="sd">            A prebuilt search index.</span>
 
 <span class="sd">        query:</span>
-<span class="sd">            Matrix of coordinates for the query observations. This should be a</span>
-<span class="sd">            two-dimensional double-precision NumPy array in Fortran order where</span>
-<span class="sd">            the rows are dimensions and columns are observations. The number of</span>
-<span class="sd">            dimensions should be consistent with that in ``X``.</span>
+<span class="sd">            Matrix of coordinates for the query observations.</span>
+<span class="sd">            This should be a double-precision row-major NumPy matrix where the rows are dimensions and columns are observations.</span>
+<span class="sd">            The number of dimensions should be consistent with that in ``X``.</span>
 
 <span class="sd">        threshold:</span>
-<span class="sd">            Distance threshold at which to identify neighbors for each</span>
-<span class="sd">            observation in ``X``. </span>
+<span class="sd">            Distance threshold at which to identify neighbors for each observation in ``X``. </span>
 
-<span class="sd">            Alternatively, this may be a sequence of non-negative floats of</span>
-<span class="sd">            length equal to the number of observations in ``X``, specifying</span>
-<span class="sd">            the distance threshold to search for each observation.</span>
+<span class="sd">            Alternatively, this may be a sequence of non-negative floats of length equal to the number of observations in ``X``, specifying the distance threshold to search for each observation.</span>
 
 <span class="sd">        num_threads:</span>
 <span class="sd">            Number of threads to use for the search.</span>

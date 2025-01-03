@@ -264,8 +264,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
 <span class="sd">            distance:</span>
-<span class="sd">                Distance metric for index construction and search. This should</span>
-<span class="sd">                be one of ``Euclidean``, ``Manhattan`` or ``Cosine``.</span>
+<span class="sd">                Distance metric for index construction and search.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">distance</span> <span class="o">=</span> <span class="n">distance</span></div>
 
@@ -291,10 +290,7 @@
 <div class="viewcode-block" id="ExhaustiveIndex">
 <a class="viewcode-back" href="../../api/knncolle.html#knncolle.exhaustive.ExhaustiveIndex">[docs]</a>
 <span class="k">class</span> <span class="nc">ExhaustiveIndex</span><span class="p">(</span><span class="n">GenericIndex</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A prebuilt index for an exhaustive search, created by</span>
-<span class="sd">    :py:func:`~knncolle.define_builder.define_builder` with a</span>
-<span class="sd">    :py:class:`~knncolle.exhaustive.ExhaustiveParameters` instance.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A prebuilt index for an exhaustive search, created by :py:func:`~knncolle.define_builder.define_builder` with a :py:class:`~knncolle.exhaustive.ExhaustiveParameters` instance.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="ExhaustiveIndex.__init__">
 <a class="viewcode-back" href="../../api/knncolle.html#knncolle.exhaustive.ExhaustiveIndex.__init__">[docs]</a>
@@ -302,8 +298,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
 <span class="sd">            ptr:</span>
-<span class="sd">                Address of a ``knncolle_py::WrappedPrebuilt`` containing an</span>
-<span class="sd">                exhaustive search index, allocated in C++.</span>
+<span class="sd">                Address of a ``knncolle_py::WrappedPrebuilt`` containing an exhaustive search index, allocated in C++.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span></div>
 </div>

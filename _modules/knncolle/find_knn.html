@@ -258,30 +258,23 @@
 <span class="k">class</span> <span class="nc">FindKnnResults</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Results of :py:func:`~knncolle.find_knn.find_knn`.</span>
 
-<span class="sd">    If ``num_neighbors`` is an integer, ``index`` and ``distance`` are both</span>
-<span class="sd">    matrices. Each row corresponds to an observation in ``X`` and each column</span>
-<span class="sd">    corresponds to one of its neighbors. ``index`` contains the indices of the</span>
-<span class="sd">    nearest neighbors while ``distance`` contains the distance to those</span>
-<span class="sd">    neighbors. In each row, neighbors are guaranteed to be sorted in order of</span>
-<span class="sd">    increasing distance. Each row of ``index`` is guaranteed to not contain the</span>
-<span class="sd">    index of the corresponding observation.</span>
+<span class="sd">    If ``num_neighbors`` is an integer, ``index`` and ``distance`` are both matrices.</span>
+<span class="sd">    Each row corresponds to an observation in ``X`` and each column corresponds to one of its neighbors.</span>
+<span class="sd">    ``index`` contains the indices of the nearest neighbors while ``distance`` contains the distance to those neighbors.</span>
+<span class="sd">    In each row, neighbors are guaranteed to be sorted in order of increasing distance.</span>
+<span class="sd">    Each row of ``index`` is guaranteed to not contain the index of the corresponding observation.</span>
 
-<span class="sd">    If ``num_neighbors`` is a sequence, ``index`` and ``distance`` are lists</span>
-<span class="sd">    instead. Each list element corresponds to an observation in ``X`` and is a</span>
-<span class="sd">    NumPy array containing the indices (for ``index``) or distances (for</span>
-<span class="sd">    ``distance``) to the requested number of neighbors for that observation.</span>
-<span class="sd">    For each observation, the neighbors are guaranteed to be sorted in order of</span>
-<span class="sd">    increasing distance. Each element of ``index`` is guaranteed to not contain</span>
-<span class="sd">    the index of the corresponding observation.</span>
+<span class="sd">    If ``num_neighbors`` is a sequence, ``index`` and ``distance`` are instead lists.</span>
+<span class="sd">    Each list element corresponds to an observation in ``X`` and is a NumPy array containing the indices (for ``index``) or distances (for ``distance``) to the requested number of neighbors for that observation.</span>
+<span class="sd">    For each observation, the neighbors are guaranteed to be sorted in order of increasing distance.</span>
+<span class="sd">    Each element of ``index`` is guaranteed to not contain the index of the corresponding observation.</span>
 
 <span class="sd">    If ``get_index = False``, ``index`` is set to None.</span>
 
 <span class="sd">    If ``get_distance = False``, ``distance`` is set to None.</span>
 
-<span class="sd">    If ``subset`` is provided, the number of rows in ``index`` and ``distance``</span>
-<span class="sd">    (if ``num_neighbors`` is an integer) or their length (otherwise) is instead</span>
-<span class="sd">    equal to the length of the subset. Each row or list entry corresponds to</span>
-<span class="sd">    one of the observations in the subset.</span>
+<span class="sd">    If ``subset`` is provided, the number of rows in ``index`` and ``distance`` (if ``num_neighbors`` is an integer) or their length (otherwise) is instead equal to the length of the subset.</span>
+<span class="sd">    Each row or list entry corresponds to one of the observations in the subset.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span>
     <span class="n">distance</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span></div>
@@ -307,25 +300,21 @@
 <span class="sd">            A prebuilt search index.</span>
 
 <span class="sd">        num_neighbors:</span>
-<span class="sd">            Number of nearest neighbors to identify for each observation in</span>
-<span class="sd">            ``X``. This is automatically capped at the number of observations</span>
-<span class="sd">            minus 1.</span>
+<span class="sd">            Number of nearest neighbors to identify for each observation in ``X``.</span>
+<span class="sd">            This is automatically capped at the number of observations minus 1.</span>
 
-<span class="sd">            Alternatively, this may be a sequence of non-negative integers of</span>
-<span class="sd">            length equal to the number of observations in ``X``, specifying the</span>
-<span class="sd">            number of neighbors to find for each observation.</span>
+<span class="sd">            Alternatively, this may be a sequence of non-negative integers of length equal to the number of observations in ``X``.</span>
+<span class="sd">            Each element specifies the number of neighbors to find for each observation.</span>
 
-<span class="sd">            If ``subset`` is supplied and ``num_neighbors`` is a sequence, it</span>
-<span class="sd">            should have length equal to ``subset`` instead, and should specify</span>
-<span class="sd">            the number of neighbors for each observation in the subset.</span>
+<span class="sd">            If ``subset`` is supplied and ``num_neighbors`` is a sequence, it should have length equal to ``subset`` instead.</span>
+<span class="sd">            Each element should specify the number of neighbors for each observation in the subset.</span>
 
 <span class="sd">        num_threads:</span>
 <span class="sd">            Number of threads to use for the search.</span>
 
 <span class="sd">        subset:</span>
-<span class="sd">            Sequence of integers containing the indices of the observations for</span>
-<span class="sd">            which to identify neighbors. All indices should be non-negative</span>
-<span class="sd">            and less than the total number of observations.</span>
+<span class="sd">            Sequence of integers containing the indices of the observations for which to identify neighbors.</span>
+<span class="sd">            All indices should be non-negative and less than the total number of observations.</span>
 
 <span class="sd">        get_index:</span>
 <span class="sd">            Whether to report the indices of each nearest neighbor.</span>

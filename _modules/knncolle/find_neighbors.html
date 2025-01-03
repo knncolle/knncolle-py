@@ -258,21 +258,17 @@
 <span class="k">class</span> <span class="nc">FindNeighborsResults</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Results of :py:func:`~knncolle.find_neighbors.find_neighbors`.</span>
 
-<span class="sd">    ``index`` and ``distance`` are lists where each element corresponds to an</span>
-<span class="sd">    observation in ``X``. Each element is a NumPy array containing the indices</span>
-<span class="sd">    of (for ``index``) or distances to (for ``distance``) the neighbors of the</span>
-<span class="sd">    corresponding observation within the specified threshold distance. For each</span>
-<span class="sd">    observation, neighbors are guaranteed to be sorted in order of increasing</span>
-<span class="sd">    distance. Each element of ``index`` is guaranteed to not contain the index</span>
-<span class="sd">    of the corresponding observation.</span>
+<span class="sd">    ``index`` and ``distance`` are lists where each element corresponds to an observation in ``X``.</span>
+<span class="sd">    Each element is a NumPy array containing the indices of (for ``index``) or distances to (for ``distance``) the neighbors of the corresponding observation within the specified threshold distance.</span>
+<span class="sd">    For each observation, neighbors are guaranteed to be sorted in order of increasing distance.</span>
+<span class="sd">    Each element of ``index`` is guaranteed to not contain the index of the corresponding observation.</span>
 
 <span class="sd">    If ``get_index = False``, ``index`` is set to None.</span>
 
 <span class="sd">    If ``get_distance = False``, ``distance`` is set to None.</span>
 
-<span class="sd">    If ``subset`` is provided, the length of ``index`` and ``distance`` is</span>
-<span class="sd">    instead equal to the length of the subset. Each row or list entry</span>
-<span class="sd">    corresponds to one of the observations in the subset.</span>
+<span class="sd">    If ``subset`` is provided, the length of ``index`` and ``distance`` is instead equal to the length of the subset.</span>
+<span class="sd">    Each row or list entry corresponds to one of the observations in the subset.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">index</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span>
     <span class="n">distance</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span></div>
@@ -298,24 +294,20 @@
 <span class="sd">            A prebuilt search index.</span>
 
 <span class="sd">        threshold:</span>
-<span class="sd">            Distance threshold at which to identify neighbors for each</span>
-<span class="sd">            observation in ``X``. </span>
+<span class="sd">            Distance threshold at which to identify neighbors for each observation in ``X``. </span>
 
-<span class="sd">            Alternatively, this may be a sequence of non-negative floats of</span>
-<span class="sd">            length equal to the number of observations in ``X``, specifying</span>
-<span class="sd">            the distance threshold to search for each observation.</span>
+<span class="sd">            Alternatively, this may be a sequence of non-negative floats of length equal to the number of observations in ``X``.</span>
+<span class="sd">            Each element should specify the distance threshold to search for each observation.</span>
 
-<span class="sd">            If ``subset`` is supplied and ``threshold`` is a sequence, it</span>
-<span class="sd">            should have length equal to ``subset`` instead, and should specify</span>
-<span class="sd">            the distance threshold for each observation in the subset.</span>
+<span class="sd">            If ``subset`` is supplied and ``threshold`` is a sequence, it should have length equal to ``subset`` instead.</span>
+<span class="sd">            Each element should specify the distance threshold for each observation in the subset.</span>
 
 <span class="sd">        num_threads:</span>
 <span class="sd">            Number of threads to use for the search.</span>
 
 <span class="sd">        subset:</span>
-<span class="sd">            Sequence of integers containing the indices of the observations for</span>
-<span class="sd">            which to identify neighbors. All indices should be non-negative</span>
-<span class="sd">            and less than the total number of observations.</span>
+<span class="sd">            Sequence of integers containing the indices of the observations for which to identify neighbors.</span>
+<span class="sd">            All indices should be non-negative and less than the total number of observations.</span>
 
 <span class="sd">        get_index:</span>
 <span class="sd">            Whether to report the indices of each nearest neighbor.</span>

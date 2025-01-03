@@ -253,9 +253,7 @@
 <div class="viewcode-block" id="AnnoyParameters">
 <a class="viewcode-back" href="../../api/knncolle.html#knncolle.annoy.AnnoyParameters">[docs]</a>
 <span class="k">class</span> <span class="nc">AnnoyParameters</span><span class="p">(</span><span class="n">Parameters</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parameters for the Approximate Nearest Neighbors Oh Yeah (Annoy)</span>
-<span class="sd">    algorithm, see `here &lt;https://github.com/spotify/annoy&gt;`_ for details.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parameters for the Approximate Nearest Neighbors Oh Yeah (Annoy) algorithm, see `here &lt;https://github.com/spotify/annoy&gt;`_ for details.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="AnnoyParameters.__init__">
 <a class="viewcode-back" href="../../api/knncolle.html#knncolle.annoy.AnnoyParameters.__init__">[docs]</a>
@@ -268,20 +266,16 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
 <span class="sd">            num_trees:</span>
-<span class="sd">                Number of trees to use to generate the search index. More trees</span>
-<span class="sd">                increase accuracy at the cost of more computational work, in terms </span>
-<span class="sd">                of both the indexing time and search speed.</span>
+<span class="sd">                Number of trees to use to generate the search index.</span>
+<span class="sd">                More trees increase accuracy at the cost of more computational work, in terms of both the indexing time and search speed.</span>
 
 <span class="sd">            search_mult:</span>
 <span class="sd">                Multiplier for the number of observations to search.</span>
-<span class="sd">                Specifically, the product of ``k`` and ``search_mult`` is used</span>
-<span class="sd">                to define the number of points to search exhaustively and</span>
-<span class="sd">                dictates the balance between search speed and accuracy.</span>
-<span class="sd">                If None, this defaults to the value of ``num_trees``.</span>
+<span class="sd">                Specifically, the product of ``k`` and ``search_mult`` is used to define the number of points to search exhaustively and dictates the balance between search speed and accuracy.</span>
+<span class="sd">                If ``None``, this defaults to the value of ``num_trees``.</span>
 
 <span class="sd">            distance:</span>
-<span class="sd">                Distance metric for index construction and search. This should</span>
-<span class="sd">                be one of ``Euclidean``, ``Manhattan`` or ``Cosine``.</span>
+<span class="sd">                Distance metric for index construction and search.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_trees</span> <span class="o">=</span> <span class="n">num_trees</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">search_mult</span> <span class="o">=</span> <span class="n">search_mult</span>
@@ -343,9 +337,8 @@
 <div class="viewcode-block" id="AnnoyIndex">
 <a class="viewcode-back" href="../../api/knncolle.html#knncolle.annoy.AnnoyIndex">[docs]</a>
 <span class="k">class</span> <span class="nc">AnnoyIndex</span><span class="p">(</span><span class="n">GenericIndex</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A prebuilt index for the Approximate Nearest Neighbors Oh Yeah (Annoy)</span>
-<span class="sd">    algorithm, created by :py:func:`~knncolle.define_builder.define_builder`</span>
-<span class="sd">    with a :py:class:`~knncolle.annoy.AnnoyParameters` object.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A prebuilt index for the Approximate Nearest Neighbors Oh Yeah (Annoy) algorithm,</span>
+<span class="sd">    created by :py:func:`~knncolle.define_builder.define_builder` with a :py:class:`~knncolle.annoy.AnnoyParameters` object.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="AnnoyIndex.__init__">
@@ -354,8 +347,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
 <span class="sd">            ptr:</span>
-<span class="sd">                Address of a ``knncolle_py::WrappedPrebuilt`` containing an</span>
-<span class="sd">                Annoy search index, allocated in C++.</span>
+<span class="sd">                Address of a ``knncolle_py::WrappedPrebuilt`` containing an Annoy search index, allocated in C++.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span></div>
 </div>

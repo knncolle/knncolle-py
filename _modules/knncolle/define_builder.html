@@ -254,16 +254,14 @@
 <span class="k">def</span> <span class="nf">define_builder</span><span class="p">(</span><span class="n">param</span><span class="p">:</span> <span class="n">Parameters</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a builder instance for a given nearest neighbor search algorithm.</span>
-<span class="sd">    The builder can be used in :py:func:`~knncolle.build_index.build_index`</span>
-<span class="sd">    to create a search index from a matrix of observations.</span>
+<span class="sd">    The builder can be used in :py:func:`~knncolle.build_index.build_index` to create a search index from a matrix of observations.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        param:</span>
 <span class="sd">            Parameters for a particular search algorithm.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        Tuple where the first element is a :py:class:`~knncolle.classes.Builder`</span>
-<span class="sd">        and the second element is a :py:class:`~knncolle.classes.GenericIndex`.</span>
+<span class="sd">        Tuple where the first element is a :py:class:`~knncolle.classes.Builder` and the second element is a :py:class:`~knncolle.classes.GenericIndex` type.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;no available method for &#39;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">param</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span></div>
 

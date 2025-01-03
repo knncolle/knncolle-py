@@ -268,33 +268,28 @@
 <span class="sd">            A prebuilt search index.</span>
 
 <span class="sd">        num_neighbors:</span>
-<span class="sd">            Number of nearest neighbors at which to compute the distance from</span>
-<span class="sd">            each observation in ``X``, i.e., k. This is automatically capped at</span>
-<span class="sd">            the number of observations minus 1.</span>
+<span class="sd">            Number of nearest neighbors at which to compute the distance from each observation in ``X``, i.e., k.</span>
+<span class="sd">            This is automatically capped at the number of observations minus 1.</span>
 
-<span class="sd">            Alternatively, this may be a sequence of non-negative integers of</span>
-<span class="sd">            length equal to the number of observations in ``X``, specifying the</span>
-<span class="sd">            neighbor at which to compute the distance for each observation.</span>
+<span class="sd">            Alternatively, this may be a sequence of non-negative integers of length equal to the number of observations in ``X``.</span>
+<span class="sd">            Each element should specify the neighbor at which to compute the distance for each observation.</span>
 
-<span class="sd">            If ``subset`` is supplied and ``num_neighbors`` is a sequence, it</span>
-<span class="sd">            should have length equal to ``subset`` instead, and should specify</span>
-<span class="sd">            the neighbor for each observation in the subset.</span>
+<span class="sd">            If ``subset`` is supplied and ``num_neighbors`` is a sequence, it should have length equal to ``subset`` instead.</span>
+<span class="sd">            Each element should specify the neighbor at which to compute the distance for each observation in the subset.</span>
 
 <span class="sd">        num_threads:</span>
 <span class="sd">            Number of threads to use for the search.</span>
 
 <span class="sd">        subset:</span>
-<span class="sd">            Sequence of integers containing the indices of the observations for</span>
-<span class="sd">            which to compute the distances. All indices should be non-negative</span>
-<span class="sd">            and less than the total number of observations.</span>
+<span class="sd">            Sequence of integers containing the indices of the observations for which to compute the distances.</span>
+<span class="sd">            All indices should be non-negative and less than the total number of observations.</span>
 
 <span class="sd">        kwargs:</span>
 <span class="sd">            Additional arguments to pass to specific methods.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A NumPy array of length equal to the number of observations in</span>
-<span class="sd">        ``X`` (or ``subset``, if provided) containing the distance to the</span>
-<span class="sd">        ``num_neighbors``-th point for each observation.</span>
+<span class="sd">        A NumPy array of length equal to the number of observations in ``X`` (or ``subset``, if provided).</span>
+<span class="sd">        Each element contains the distance to the ``num_neighbors``-th point for each observation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;no available method for &#39;&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">X</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;&#39;&quot;</span><span class="p">)</span></div>
 

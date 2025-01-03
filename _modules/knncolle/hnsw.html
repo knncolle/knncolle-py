@@ -253,8 +253,7 @@
 <div class="viewcode-block" id="HnswParameters">
 <a class="viewcode-back" href="../../api/knncolle.html#knncolle.hnsw.HnswParameters">[docs]</a>
 <span class="k">class</span> <span class="nc">HnswParameters</span><span class="p">(</span><span class="n">Parameters</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parameters for the hierarchical navigable small worlds (HNSW)</span>
-<span class="sd">    algorithm, see `here &lt;https://github.com/nmslib/hnswlib&gt;`_ for details.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parameters for the hierarchical navigable small worlds (HNSW) algorithm, see `here &lt;https://github.com/nmslib/hnswlib&gt;`_ for details.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="HnswParameters.__init__">
@@ -269,21 +268,19 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
 <span class="sd">            num_links:</span>
-<span class="sd">                Number of bi-directional links to create per observation during</span>
-<span class="sd">                index construction. Larger values improve accuracy at the</span>
-<span class="sd">                expense of speed and memory usage.</span>
+<span class="sd">                Number of bi-directional links to create per observation during index construction.</span>
+<span class="sd">                Larger values improve accuracy at the expense of speed and memory usage.</span>
 
 <span class="sd">            ef_construction:</span>
-<span class="sd">                Size of the dynamic list for index generation. Larger values</span>
-<span class="sd">                improve the quality of the index at the expense of time.</span>
+<span class="sd">                Size of the dynamic list for index generation.</span>
+<span class="sd">                Larger values improve the quality of the index at the expense of time.</span>
 
 <span class="sd">            ef_search</span>
-<span class="sd">                Size of the dynamic list for neighbor searching. Larger values</span>
-<span class="sd">                improve accuracy at the expense of a slower search.</span>
+<span class="sd">                Size of the dynamic list for neighbor searching.</span>
+<span class="sd">                Larger values improve accuracy at the expense of a slower search.</span>
 
 <span class="sd">            distance:</span>
-<span class="sd">                Distance metric for index construction and search. This should</span>
-<span class="sd">                be one of ``Euclidean``, ``Manhattan`` or ``Cosine``.</span>
+<span class="sd">                Distance metric for index construction and search.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">num_links</span> <span class="o">=</span> <span class="n">num_links</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ef_construction</span> <span class="o">=</span> <span class="n">ef_construction</span>
@@ -325,8 +322,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ef_construction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Size of the dynamic list during index construction, see</span>
-<span class="sd">        :meth:`~__init__()`.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Size of the dynamic list during index construction, see :meth:`~__init__()`.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ef_construction</span>
 
     <span class="nd">@ef_construction</span><span class="o">.</span><span class="n">setter</span>
@@ -334,8 +330,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
 <span class="sd">            ef_construction:</span>
-<span class="sd">                Size of the dynamic list during index construction, see</span>
-<span class="sd">                :meth:`~__init__()`.</span>
+<span class="sd">                Size of the dynamic list during index construction, see :meth:`~__init__()`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">ef_construction</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;ef_construction&#39; should be a positive integer&quot;</span><span class="p">)</span>
@@ -351,8 +346,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
 <span class="sd">            ef_search:</span>
-<span class="sd">                Size of the dynamic list during search, see</span>
-<span class="sd">                :meth:`~__init__()`.</span>
+<span class="sd">                Size of the dynamic list during search, see :meth:`~__init__()`.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">ef_search</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;ef_search&#39; should be a positive integer&quot;</span><span class="p">)</span>
@@ -363,9 +357,8 @@
 <div class="viewcode-block" id="HnswIndex">
 <a class="viewcode-back" href="../../api/knncolle.html#knncolle.hnsw.HnswIndex">[docs]</a>
 <span class="k">class</span> <span class="nc">HnswIndex</span><span class="p">(</span><span class="n">GenericIndex</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A prebuilt index for the hierarchical navigable small worlds (HNSW)</span>
-<span class="sd">    algorithm, created by :py:func:`~knncolle.define_builder.define_builder`</span>
-<span class="sd">    with a :py:class:`~knncolle.hnsw.HnswParameters` object.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A prebuilt index for the hierarchical navigable small worlds (HNSW) algorithm,</span>
+<span class="sd">    created by :py:func:`~knncolle.define_builder.define_builder` with a :py:class:`~knncolle.hnsw.HnswParameters` object.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="HnswIndex.__init__">
@@ -374,8 +367,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
 <span class="sd">            ptr:</span>
-<span class="sd">                Address of a ``knncolle_py::WrappedPrebuilt`` containing a</span>
-<span class="sd">                HNSW search index, allocated in C++.</span>
+<span class="sd">                Address of a ``knncolle_py::WrappedPrebuilt`` containing a HNSW search index, allocated in C++.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span></div>
 </div>

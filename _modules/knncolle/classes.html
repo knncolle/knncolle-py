@@ -249,11 +249,8 @@
 <div class="viewcode-block" id="Parameters">
 <a class="viewcode-back" href="../../api/knncolle.html#knncolle.classes.Parameters">[docs]</a>
 <span class="k">class</span> <span class="nc">Parameters</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Abstract base class for the parameters of a nearest neighbor search. Each</span>
-<span class="sd">    search algorithm should implement a subclass that contains the relevant</span>
-<span class="sd">    parameters for controlling index construction or search.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract base class for the parameters of a nearest neighbor search.</span>
+<span class="sd">    Each search algorithm should implement a subclass that contains the relevant parameters for controlling index construction or search.&quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 
@@ -261,11 +258,8 @@
 <div class="viewcode-block" id="Builder">
 <a class="viewcode-back" href="../../api/knncolle.html#knncolle.classes.Builder">[docs]</a>
 <span class="k">class</span> <span class="nc">Builder</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Pointer to a search index builder, i.e., ``knncolle_py::WrappedBuilder``,</span>
-<span class="sd">    for use in C++ to build new neighbor search indices. The associated memory</span>
-<span class="sd">    is automatically freed upon garbage collection.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Pointer to a search index builder, i.e., ``knncolle_py::WrappedBuilder``, for use in C++ to build new neighbor search indices.</span>
+<span class="sd">    The associated memory is automatically freed upon garbage collection.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Builder.__init__">
 <a class="viewcode-back" href="../../api/knncolle.html#knncolle.classes.Builder.__init__">[docs]</a>
@@ -284,21 +278,16 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ptr</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Address of a ``knncolle_py::WrappedBuilder``, to be passed into</span>
-<span class="sd">        C++ as a ``uintptr_t``; see ``knncolle_py.h`` for details.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Address of a ``knncolle_py::WrappedBuilder``, to be passed into C++ as a ``uintptr_t``; see ``knncolle_py.h`` for details.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span></div>
-
 
 
 
 <div class="viewcode-block" id="Index">
 <a class="viewcode-back" href="../../api/knncolle.html#knncolle.classes.Index">[docs]</a>
 <span class="k">class</span> <span class="nc">Index</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Abstract base class for a prebuilt nearest neighbor-search index. Each</span>
-<span class="sd">    search algorithm should implement their own subclasses, but are free</span>
-<span class="sd">    to use any data structure to represent their search indices.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract base class for a prebuilt nearest neighbor-search index.</span>
+<span class="sd">    Each search algorithm should implement their own subclasses, but are free to use any data structure to represent their search indices.&quot;&quot;&quot;</span>
     <span class="k">pass</span></div>
 
 
@@ -306,11 +295,8 @@
 <div class="viewcode-block" id="GenericIndex">
 <a class="viewcode-back" href="../../api/knncolle.html#knncolle.classes.GenericIndex">[docs]</a>
 <span class="k">class</span> <span class="nc">GenericIndex</span><span class="p">(</span><span class="n">Index</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Abstract base class for a prebuilt nearest neighbor-search index that holds</span>
-<span class="sd">    an address to a ``knncolle_py::WrappedPrebuilt`` instance in C++. The</span>
-<span class="sd">    associated memory is automatically freed upon garbage collection.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Abstract base class for a prebuilt nearest neighbor-search index that holds an address to a ``knncolle_py::WrappedPrebuilt`` instance in C++.</span>
+<span class="sd">    The associated memory is automatically freed upon garbage collection.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="GenericIndex.__init__">
 <a class="viewcode-back" href="../../api/knncolle.html#knncolle.classes.GenericIndex.__init__">[docs]</a>
@@ -325,8 +311,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">ptr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Address of a ``knncolle_py::WrappedPrebuilt``, to be passed into</span>
-<span class="sd">        C++ as a ``uintptr_t``; see ``knncolle_py.h`` for details.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Address of a ``knncolle_py::WrappedPrebuilt``, to be passed into C++ as a ``uintptr_t``; see ``knncolle_py.h`` for details.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ptr</span>
 
     <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

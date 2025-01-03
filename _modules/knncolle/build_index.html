@@ -255,18 +255,16 @@
 <span class="nd">@singledispatch</span>
 <span class="k">def</span> <span class="nf">build_index</span><span class="p">(</span><span class="n">param</span><span class="p">:</span> <span class="n">Parameters</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Index</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Build a search index for a given nearest neighbor search algorithm. The</span>
-<span class="sd">    default method calls :py:func:`~knncolle.define_builder.define_builder` to</span>
-<span class="sd">    obtain an algorithm-specific factory that builds the index from ``x``. </span>
+<span class="sd">    Build a search index for a given nearest neighbor search algorithm.</span>
+<span class="sd">    The default method calls :py:func:`~knncolle.define_builder.define_builder` to obtain an algorithm-specific factory that builds the index from ``x``. </span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        param:</span>
 <span class="sd">            Parameters for a particular search algorithm.</span>
 
 <span class="sd">        x:</span>
-<span class="sd">            Matrix of coordinates for the observations to be searched. This</span>
-<span class="sd">            should be a two-dimensional double-precision NumPy array in Fortran</span>
-<span class="sd">            order where the rows are dimensions and columns are observations.</span>
+<span class="sd">            Matrix of coordinates for the observations to be searched.</span>
+<span class="sd">            This should be a double-precision row-major NumPy matrix where the rows are observations and columns are dimensions.</span>
 
 <span class="sd">        kwargs:</span>
 <span class="sd">            Additional arguments to be passed to individual methods.</span>
