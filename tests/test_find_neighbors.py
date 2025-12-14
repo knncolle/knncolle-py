@@ -28,23 +28,27 @@ def ref_find_all(X, threshold, distance="euclidean"):
 
 def test_find_neighbors_basic(helpers):
     Y = numpy.random.rand(500, 20)
-
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
-    d = numpy.median(knncolle.find_distance(idx, num_neighbors=8))
+
+    # Scale it slightly to avoid exact equality to the median, which could
+    # result in slight differences in behavior between ref_query_all and our
+    # C++ code depending on the precision of the distance calculations.
+    d = numpy.median(knncolle.find_distance(idx, num_neighbors=8)) * 1.000001
+
     out = knncolle.find_neighbors(idx, threshold=d)
     ref_i, ref_d = ref_find_all(Y, d)
     helpers.compare_lists(ref_i, out.index)
     helpers.compare_lists_close(ref_d, out.distance)
 
     idx = knncolle.build_index(knncolle.VptreeParameters(distance="Manhattan"), Y)
-    d = numpy.median(knncolle.find_distance(idx, num_neighbors=8))
+    d = numpy.median(knncolle.find_distance(idx, num_neighbors=8)) * 1.000001
     out = knncolle.find_neighbors(idx, threshold=d)
     ref_i, ref_d = ref_find_all(Y, d, distance="manhattan")
     helpers.compare_lists(ref_i, out.index)
     helpers.compare_lists_close(ref_d, out.distance)
 
     idx = knncolle.build_index(knncolle.VptreeParameters(distance="Cosine"), Y)
-    d = numpy.median(knncolle.find_distance(idx, num_neighbors=8))
+    d = numpy.median(knncolle.find_distance(idx, num_neighbors=8)) * 1.000001
     out = knncolle.find_neighbors(idx, threshold=d)
     normed = (Y.T / numpy.sqrt((Y**2).sum(axis=1))).T
     ref_i, ref_d = ref_find_all(normed, d)
@@ -55,7 +59,7 @@ def test_find_neighbors_basic(helpers):
 def test_find_neighbors_parallel(helpers):
     Y = numpy.random.rand(500, 20)
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
-    d = numpy.median(knncolle.find_distance(idx, num_neighbors=8))
+    d = numpy.median(knncolle.find_distance(idx, num_neighbors=8)) * 1.000001
     out = knncolle.find_neighbors(idx, threshold=d)
     pout = knncolle.find_neighbors(idx, threshold=d, num_threads=2)
     helpers.compare_lists(out.index, pout.index)
@@ -65,7 +69,7 @@ def test_find_neighbors_parallel(helpers):
 def test_find_neighbors_subset(helpers):
     Y = numpy.random.rand(500, 20)
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
-    d = numpy.median(knncolle.find_distance(idx, num_neighbors=3))
+    d = numpy.median(knncolle.find_distance(idx, num_neighbors=3)) * 1.000001
 
     full = knncolle.find_neighbors(idx, threshold=d)
     sout = knncolle.find_neighbors(idx, threshold=d, subset=range(10, 30))
@@ -84,8 +88,8 @@ def test_find_neighbors_subset(helpers):
 def test_find_knn_variable_threshold(helpers):
     Y = numpy.random.rand(500, 20)
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
-    d4 = numpy.median(knncolle.find_distance(idx, num_neighbors=4))
-    d10 = numpy.median(knncolle.find_distance(idx, num_neighbors=10))
+    d4 = numpy.median(knncolle.find_distance(idx, num_neighbors=4)) * 1.000001
+    d10 = numpy.median(knncolle.find_distance(idx, num_neighbors=10)) * 1.000001
 
     with pytest.raises(Exception, match='should have length equal'):
         knncolle.find_neighbors(idx, threshold=[1, 1000])
@@ -107,7 +111,7 @@ def test_find_knn_variable_threshold(helpers):
 def test_find_neighbors_variable_output(helpers):
     Y = numpy.random.rand(500, 20)
     idx = knncolle.build_index(knncolle.VptreeParameters(), Y)
-    d = numpy.median(knncolle.find_distance(idx, num_neighbors=8))
+    d = numpy.median(knncolle.find_distance(idx, num_neighbors=8)) * 1.000001
 
     out = knncolle.find_neighbors(idx, threshold=d)
 
