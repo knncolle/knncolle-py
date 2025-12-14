@@ -4,6 +4,8 @@
 #include "pybind11/numpy.h"
 #include "pybind11/stl.h"
 
+#include "sanisizer/sanisizer.hpp"
+
 #include <algorithm>
 #include <cstdint>
 #include <optional>
@@ -11,36 +13,37 @@
 #include <stdexcept>
 #include <vector>
 
-typedef pybind11::array_t<double, pybind11::array::c_style | pybind11::array::forcecast> DataMatrix;
+typedef pybind11::array_t<knncolle_py::MatrixValue, pybind11::array::c_style | pybind11::array::forcecast> DataMatrix;
 
-void free_builder(uintptr_t builder_ptr) {
+void free_builder(std::uintptr_t builder_ptr) {
     delete knncolle_py::cast_builder(builder_ptr);
 }
 
-uintptr_t generic_build(uintptr_t builder_ptr, const DataMatrix& data) {
+std::uintptr_t generic_build(std::uintptr_t builder_ptr, const DataMatrix& data) {
     auto buffer = data.request();
 
     // All input NumPy matrices are row-major layouts with observations in rows,
     // which is trivially transposed to give us the expected column-major layout with observations in columns.
-    uint32_t nobs = buffer.shape[0], ndim = buffer.shape[1];
+    const auto nobs = sanisizer::cast<knncolle_py::Index>(buffer.shape[0]);
+    const auto ndim = sanisizer::cast<knncolle_py::Index>(buffer.shape[1]);
 
     auto builder = knncolle_py::cast_builder(builder_ptr);
     auto tmp = std::make_unique<knncolle_py::WrappedPrebuilt>();
-    tmp->ptr.reset(builder->ptr->build_raw(knncolle_py::SimpleMatrix(ndim, nobs, static_cast<const double*>(buffer.ptr))));
+    tmp->ptr.reset(builder->ptr->build_raw(knncolle::SimpleMatrix(ndim, nobs, static_cast<const knncolle_py::MatrixValue*>(buffer.ptr))));
 
-    return reinterpret_cast<uintptr_t>(static_cast<void*>(tmp.release()));
+    return reinterpret_cast<std::uintptr_t>(static_cast<void*>(tmp.release()));
 }
 
-void free_prebuilt(uintptr_t prebuilt_ptr) {
+void free_prebuilt(std::uintptr_t prebuilt_ptr) {
     delete knncolle_py::cast_prebuilt(prebuilt_ptr);
 }
 
-uint32_t generic_num_obs(uintptr_t prebuilt_ptr) {
+knncolle_py::Index generic_num_obs(std::uintptr_t prebuilt_ptr) {
     const auto& prebuilt = knncolle_py::cast_prebuilt(prebuilt_ptr)->ptr;
     return prebuilt->num_observations();
 }
 
-uint32_t generic_num_dims(uintptr_t prebuilt_ptr) {
+knncolle_py::Index generic_num_dims(std::uintptr_t prebuilt_ptr) {
     const auto& prebuilt = knncolle_py::cast_prebuilt(prebuilt_ptr)->ptr;
     return prebuilt->num_dimensions();
 }
@@ -52,8 +55,11 @@ uint32_t generic_num_dims(uintptr_t prebuilt_ptr) {
 template<typename Value_>
 using OutputMatrix = pybind11::array_t<Value_, pybind11::array::c_style>;
 
+template<typename Input_>
+using I = std::remove_reference_t<std::remove_cv_t<Input_> >;
+
 template<typename Value_>
-Value_* prepare_output(OutputMatrix<Value_>& mat, bool report, uint32_t k, uint32_t nobs) {
+Value_* prepare_output(OutputMatrix<Value_>& mat, const bool report, knncolle_py::Index k, knncolle_py::Index nobs) {
     if (report) {
         mat = OutputMatrix<Value_>({ nobs, k });
         return static_cast<Value_*>(mat.request().ptr);
@@ -64,47 +70,49 @@ Value_* prepare_output(OutputMatrix<Value_>& mat, bool report, uint32_t k, uint3
 
 template<typename Value_>
 pybind11::list format_range_output(const std::vector<std::vector<Value_> >& results) {
-    pybind11::list output(results.size());
-    for (size_t r = 0, end = results.size(); r < end; ++r) {
+    const auto num = results.size();
+    auto output = sanisizer::create<pybind11::list>(num);
+    for (I<decltype(num)> r = 0; r < num; ++r) {
         output[r] = pybind11::array_t<Value_>(results[r].size(), results[r].data());
     }
     return output;
 }
 
-typedef pybind11::array_t<uint32_t, pybind11::array::f_style | pybind11::array::forcecast> NeighborVector;
+typedef pybind11::array_t<knncolle_py::Index, pybind11::array::f_style | pybind11::array::forcecast> NeighborVector;
 
-typedef pybind11::array_t<uint32_t, pybind11::array::f_style | pybind11::array::forcecast> ChosenVector;
+typedef pybind11::array_t<knncolle_py::Index, pybind11::array::f_style | pybind11::array::forcecast> ChosenVector;
 
 pybind11::object generic_find_knn(
-    uintptr_t prebuilt_ptr,
+    std::uintptr_t prebuilt_ptr,
     const NeighborVector& num_neighbors,
-    bool force_variable_neighbors,
+    const bool force_variable_neighbors,
     std::optional<ChosenVector> chosen,
-    int num_threads,
-    bool last_distance_only,
+    const int num_threads,
+    const bool last_distance_only,
     bool report_index,
-    bool report_distance)
-{
+    bool report_distance
+) {
     const auto& prebuilt = knncolle_py::cast_prebuilt(prebuilt_ptr)->ptr;
-    uint32_t nobs = prebuilt->num_observations();
+    const auto nobs = prebuilt->num_observations();
 
     // Checking if we have to handle subsets.
-    uint32_t num_output = nobs;
-    const uint32_t* subset_ptr = NULL;
+    auto num_output = nobs;
+    const knncolle_py::Index* subset_ptr = NULL;
     if (chosen.has_value()) {
         const auto& subset = *chosen;
         num_output = subset.size();
-        for (uint32_t i = 0; i < num_output; ++i) {
-            auto s = subset.at(i);
+
+        for (I<decltype(num_output)> i = 0; i < num_output; ++i) {
+            const auto s = subset.at(i);
             if (s < 0 || s >= nobs) {
                 throw std::runtime_error("'subset' contains out-of-range indices");
             } 
         }
-        subset_ptr = static_cast<const uint32_t*>(subset.request().ptr);
+        subset_ptr = static_cast<const knncolle_py::Index*>(subset.request().ptr);
     }
 
     // Checking that the 'k' is valid.
-    auto sanitize_k = [&](int k) -> int {
+    auto sanitize_k = [&](knncolle_py::Index k) -> knncolle_py::Index {
         if (k < nobs) {
             return k;
         }
@@ -117,15 +125,17 @@ pybind11::object generic_find_knn(
     };
 
     bool is_k_variable = false;
-    uint32_t const_k = 0;
-    std::vector<uint32_t> variable_k;
+    knncolle_py::Index const_k = 0;
+    std::vector<knncolle_py::Index> variable_k;
+
     if (num_neighbors.size() != 1 || force_variable_neighbors) {
         is_k_variable = true;
-        if (static_cast<uint32_t>(num_neighbors.size()) != num_output) {
+        if (!sanisizer::is_equal(num_neighbors.size(), num_output)) {
             throw std::runtime_error("length of 'k' must be equal to the number of points in the index or 'subset'");
         }
-        variable_k.resize(num_output);
-        for (uint32_t o = 0; o < num_output; ++o) {
+
+        sanisizer::resize(variable_k, num_output);
+        for (I<decltype(num_output)> o = 0; o < num_output; ++o) {
             variable_k[o] = sanitize_k(num_neighbors.at(o));
         }
     } else {
@@ -133,26 +143,26 @@ pybind11::object generic_find_knn(
     }
 
     // Formatting all the possible output containers.
-    OutputMatrix<uint32_t> const_i;
-    OutputMatrix<double> const_d;
-    pybind11::array_t<double> last_d;
-    uint32_t* out_i_ptr = NULL; 
-    double* out_d_ptr = NULL; 
-    std::vector<std::vector<uint32_t> > var_i;
-    std::vector<std::vector<double> > var_d;
+    OutputMatrix<knncolle_py::Index> const_i;
+    OutputMatrix<knncolle_py::MatrixValue> const_d;
+    pybind11::array_t<knncolle_py::MatrixValue> last_d;
+    knncolle_py::Index* out_i_ptr = NULL; 
+    knncolle_py::MatrixValue* out_d_ptr = NULL; 
+    std::vector<std::vector<knncolle_py::Index> > var_i;
+    std::vector<std::vector<knncolle_py::MatrixValue> > var_d;
 
     if (last_distance_only) {
-        last_d = pybind11::array_t<double>(num_output);
-        out_d_ptr = static_cast<double*>(last_d.request().ptr);
+        last_d = pybind11::array_t<knncolle_py::MatrixValue>(num_output);
+        out_d_ptr = static_cast<knncolle_py::MatrixValue*>(last_d.request().ptr);
         report_index = false;
         report_distance = true;
 
     } else if (is_k_variable) {
         if (report_index) {
-            var_i.resize(num_output);
+            sanisizer::resize(var_i, num_output);
         }
         if (report_distance) {
-            var_d.resize(num_output);
+            sanisizer::resize(var_d, num_output);
         }
 
     } else {
@@ -160,12 +170,12 @@ pybind11::object generic_find_knn(
         out_d_ptr = prepare_output(const_d, report_distance, const_k, num_output);
     }
 
-    knncolle::parallelize(num_threads, num_output, [&](int tid, uint32_t start, uint32_t length) {
+    knncolle::parallelize(num_threads, num_output, [&](int tid, knncolle_py::Index start, knncolle_py::Index length) {
         auto searcher = prebuilt->initialize();
-        std::vector<uint32_t> tmp_i;
-        std::vector<double> tmp_d;
+        std::vector<knncolle_py::Index> tmp_i;
+        std::vector<knncolle_py::MatrixValue> tmp_d;
 
-        for (uint32_t o = start, end = start + length; o < end; ++o) {
+        for (knncolle_py::Index o = start, end = start + length; o < end; ++o) {
             searcher->search(
                 (subset_ptr != NULL ? subset_ptr[o] : o),
                 (is_k_variable ? variable_k[o] : const_k),
@@ -177,7 +187,7 @@ pybind11::object generic_find_knn(
                 if (is_k_variable) {
                     var_i[o].swap(tmp_i);
                 } else {
-                    size_t out_offset = static_cast<size_t>(o) * static_cast<size_t>(const_k); // using size_t to avoid overflow.
+                    auto out_offset = sanisizer::product_unsafe<std::size_t>(o, const_k);
                     std::copy_n(tmp_i.begin(), const_k, out_i_ptr + out_offset); 
                 }
             }
@@ -188,7 +198,7 @@ pybind11::object generic_find_knn(
                 } else if (is_k_variable) {
                     var_d[o].swap(tmp_d);
                 } else {
-                    size_t out_offset = static_cast<size_t>(o) * static_cast<size_t>(const_k); // using size_t to avoid overflow.
+                    auto out_offset = sanisizer::product_unsafe<std::size_t>(o, const_k);
                     std::copy_n(tmp_d.begin(), const_k, out_d_ptr + out_offset); 
                 }
             }
@@ -229,29 +239,29 @@ pybind11::object generic_find_knn(
 } 
 
 pybind11::object generic_query_knn(
-    uintptr_t prebuilt_ptr,
+    std::uintptr_t prebuilt_ptr,
     const DataMatrix& query,
     const NeighborVector& num_neighbors,
-    bool force_variable_neighbors,
-    int num_threads,
-    bool last_distance_only,
+    const bool force_variable_neighbors,
+    const int num_threads,
+    const bool last_distance_only,
     bool report_index,
-    bool report_distance)
-{
+    bool report_distance
+) {
     const auto& prebuilt = knncolle_py::cast_prebuilt(prebuilt_ptr)->ptr;
-    uint32_t nobs = prebuilt->num_observations();
-    uint32_t ndim = prebuilt->num_dimensions();
+    const auto nobs = prebuilt->num_observations();
+    const auto ndim = prebuilt->num_dimensions();
 
     // Remember, all input NumPy matrices are row-major layouts with observations in rows.
     auto buf_info = query.request();
-    uint32_t nquery = buf_info.shape[0];
-    const double* query_ptr = static_cast<const double*>(buf_info.ptr);
-    if (static_cast<uint32_t>(buf_info.shape[1]) != ndim) {
+    const auto nquery = buf_info.shape[0];
+    const auto query_ptr = static_cast<const knncolle_py::MatrixValue*>(buf_info.ptr);
+    if (!sanisizer::is_equal(buf_info.shape[1], ndim)) {
         throw std::runtime_error("mismatch in dimensionality between index and 'query'");
     }
 
     // Checking that 'k' is valid.
-    auto sanitize_k = [&](uint32_t k) -> int {
+    auto sanitize_k = [&](knncolle_py::Index k) -> knncolle_py::Index {
         if (k <= nobs) {
             return k;
         }
@@ -260,15 +270,16 @@ pybind11::object generic_query_knn(
     };
 
     bool is_k_variable = false;
-    uint32_t const_k = 0;
-    std::vector<uint32_t> variable_k;
+    knncolle_py::Index const_k = 0;
+    std::vector<knncolle_py::Index> variable_k;
     if (num_neighbors.size() != 1 || force_variable_neighbors) {
         is_k_variable = true;
-        if (static_cast<uint32_t>(num_neighbors.size()) != nquery) {
+        if (!sanisizer::is_equal(num_neighbors.size(), nquery)) {
             throw std::runtime_error("length of 'k' must be equal to the number of points in the index or 'subset'");
         }
-        variable_k.resize(nquery);
-        for (uint32_t o = 0; o < nquery; ++o) {
+
+        sanisizer::resize(variable_k, nquery);
+        for (I<decltype(nquery)> o = 0; o < nquery; ++o) {
             variable_k[o] = sanitize_k(num_neighbors.at(o));
         }
     } else {
@@ -276,26 +287,26 @@ pybind11::object generic_query_knn(
     }
 
     // Formatting all the possible output containers.
-    OutputMatrix<uint32_t> const_i;
-    OutputMatrix<double> const_d;
-    pybind11::array_t<double> last_d;
-    uint32_t* out_i_ptr = NULL; 
-    double* out_d_ptr = NULL; 
-    std::vector<std::vector<uint32_t> > var_i;
-    std::vector<std::vector<double> > var_d;
+    OutputMatrix<knncolle_py::Index> const_i;
+    OutputMatrix<knncolle_py::MatrixValue> const_d;
+    pybind11::array_t<knncolle_py::MatrixValue> last_d;
+    knncolle_py::Index* out_i_ptr = NULL; 
+    knncolle_py::MatrixValue* out_d_ptr = NULL; 
+    std::vector<std::vector<knncolle_py::Index> > var_i;
+    std::vector<std::vector<knncolle_py::MatrixValue> > var_d;
 
     if (last_distance_only) {
-        last_d = pybind11::array_t<double>(nquery);
-        out_d_ptr = static_cast<double*>(last_d.request().ptr);
+        last_d = pybind11::array_t<knncolle_py::MatrixValue>(nquery);
+        out_d_ptr = static_cast<knncolle_py::MatrixValue*>(last_d.request().ptr);
         report_index = false;
         report_distance = true;
 
     } else if (is_k_variable) {
         if (report_index) {
-            var_i.resize(nquery);
+            sanisizer::resize(var_i, nquery);
         }
         if (report_distance) {
-            var_d.resize(nquery);
+            sanisizer::resize(var_d, nquery);
         }
 
     } else {
@@ -303,13 +314,13 @@ pybind11::object generic_query_knn(
         out_d_ptr = prepare_output(const_d, report_distance, const_k, nquery);
     }
 
-    knncolle::parallelize(num_threads, nquery, [&](int tid, uint32_t start, uint32_t length) {
+    knncolle::parallelize(num_threads, nquery, [&](int tid, knncolle_py::Index start, knncolle_py::Index length) {
         auto searcher = prebuilt->initialize();
-        std::vector<uint32_t> tmp_i;
-        std::vector<double> tmp_d;
+        std::vector<knncolle_py::Index> tmp_i;
+        std::vector<knncolle_py::MatrixValue> tmp_d;
 
-        size_t query_offset = static_cast<size_t>(start) * ndim; // using size_t to avoid overflow.
-        for (uint32_t o = start, end = start + length; o < end; ++o, query_offset += ndim) {
+        for (knncolle_py::Index o = start, end = start + length; o < end; ++o) {
+            const auto query_offset = sanisizer::product_unsafe<std::size_t>(o, ndim);
             searcher->search(
                 query_ptr + query_offset,
                 (is_k_variable ? variable_k[o] : const_k),
@@ -321,7 +332,7 @@ pybind11::object generic_query_knn(
                 if (is_k_variable) {
                     var_i[o].swap(tmp_i);
                 } else {
-                    size_t out_offset = static_cast<size_t>(o) * static_cast<size_t>(const_k); // using size_t to avoid overflow.
+                    const auto out_offset = sanisizer::product_unsafe<std::size_t>(o, const_k);
                     std::copy_n(tmp_i.begin(), const_k, out_i_ptr + out_offset); 
                 }
             }
@@ -332,7 +343,7 @@ pybind11::object generic_query_knn(
                 } else if (is_k_variable) {
                     var_d[o].swap(tmp_d);
                 } else {
-                    size_t out_offset = static_cast<size_t>(o) * static_cast<size_t>(const_k); // using size_t to avoid overflow.
+                    const auto out_offset = sanisizer::product_unsafe<std::size_t>(o, const_k);
                     std::copy_n(tmp_d.begin(), const_k, out_d_ptr + out_offset); 
                 }
             }
@@ -376,49 +387,51 @@ pybind11::object generic_query_knn(
  ********* Range functions *********
  ***********************************/
 
-typedef pybind11::array_t<double, pybind11::array::f_style | pybind11::array::forcecast> ThresholdVector;
+typedef pybind11::array_t<knncolle_py::MatrixValue, pybind11::array::f_style | pybind11::array::forcecast> ThresholdVector;
 
 pybind11::object generic_find_all(
-    uintptr_t prebuilt_ptr, 
+    std::uintptr_t prebuilt_ptr, 
     std::optional<ChosenVector> chosen,
     const ThresholdVector& thresholds,
-    int num_threads,
-    bool report_index,
-    bool report_distance) 
-{
+    const int num_threads,
+    const bool report_index,
+    const bool report_distance
+) {
     const auto& prebuilt = knncolle_py::cast_prebuilt(prebuilt_ptr)->ptr;
-    uint32_t nobs = prebuilt->num_observations();
+    const auto nobs = prebuilt->num_observations();
 
-    uint32_t num_output = nobs;
-    const uint32_t* subset_ptr = NULL;
+    auto num_output = nobs;
+    const knncolle_py::Index* subset_ptr = NULL;
     if (chosen.has_value()) {
         const auto& subset = *chosen;
         num_output = subset.size();
-        for (uint32_t i = 0; i < num_output; ++i) {
+
+        for (I<decltype(num_output)> i = 0; i < num_output; ++i) {
             auto s = subset.at(i);
             if (s < 0 || s >= nobs) {
                 throw std::runtime_error("'subset' contains out-of-range indices");
             } 
         }
-        subset_ptr = static_cast<const uint32_t*>(subset.request().ptr);
+
+        subset_ptr = static_cast<const knncolle_py::Index*>(subset.request().ptr);
     }
 
-    std::vector<std::vector<double> > out_d(report_distance ? num_output : 0);
-    std::vector<std::vector<uint32_t> > out_i(report_index ? num_output : 0);
+    std::vector<std::vector<knncolle_py::MatrixValue> > out_d(report_distance ? num_output : 0);
+    std::vector<std::vector<knncolle_py::Index> > out_i(report_index ? num_output : 0);
 
-    bool store_count = !report_distance && !report_index;
-    pybind11::array_t<uint32_t> counts(store_count ? num_output : 0);
-    uint32_t * counts_ptr = static_cast<uint32_t*>(counts.request().ptr);
+    const bool store_count = !report_distance && !report_index;
+    pybind11::array_t<knncolle_py::Index> counts(store_count ? num_output : 0);
+    const auto counts_ptr = static_cast<knncolle_py::Index*>(counts.request().ptr);
 
-    uint32_t nthresholds = thresholds.size();
-    bool multiple_thresholds = (nthresholds != 1);
-    if (multiple_thresholds && nthresholds != num_output) {
+    const auto nthresholds = thresholds.size();
+    const bool multiple_thresholds = (nthresholds != 1);
+    if (multiple_thresholds && !sanisizer::is_equal(nthresholds, num_output)) {
         throw std::runtime_error("'threshold' should have length equal to the number of observations or 'subset'");
     }
-    const double* threshold_ptr = static_cast<const double*>(thresholds.request().ptr);
+    const auto threshold_ptr = static_cast<const knncolle_py::MatrixValue*>(thresholds.request().ptr);
 
     bool no_support = false;
-    knncolle::parallelize(num_threads, num_output, [&](int tid, uint32_t start, uint32_t length) {
+    knncolle::parallelize(num_threads, num_output, [&](int tid, knncolle_py::Index start, knncolle_py::Index length) {
         auto searcher = prebuilt->initialize();
 
         if (!searcher->can_search_all()) {
@@ -428,7 +441,7 @@ pybind11::object generic_find_all(
             return;
         }
 
-        for (int o = start, end = start + length; o < end; ++o) {
+        for (knncolle_py::Index o = start, end = start + length; o < end; ++o) {
             auto count = searcher->search_all(
                 (subset_ptr != NULL ? subset_ptr[o] : o),
                 threshold_ptr[multiple_thresholds ? o : 0],
@@ -464,40 +477,40 @@ pybind11::object generic_find_all(
 } 
 
 pybind11::object generic_query_all(
-    uintptr_t prebuilt_ptr, 
+    std::uintptr_t prebuilt_ptr, 
     const DataMatrix& query,
     const ThresholdVector& thresholds,
-    int num_threads,
-    bool report_index,
-    bool report_distance) 
-{
+    const int num_threads,
+    const bool report_index,
+    const bool report_distance
+) {
     const auto& prebuilt = knncolle_py::cast_prebuilt(prebuilt_ptr)->ptr;
-    size_t ndim = prebuilt->num_dimensions();
+    const auto ndim = prebuilt->num_dimensions();
 
     // Remember, all input NumPy matrices are row-major layouts with observations in rows.
     auto buf_info = query.request();
-    uint32_t nquery = buf_info.shape[0];
-    const double* query_ptr = static_cast<const double*>(buf_info.ptr);
-    if (static_cast<size_t>(buf_info.shape[1]) != ndim) {
+    const auto nquery = sanisizer::cast<knncolle_py::Index>(buf_info.shape[0]);
+    const auto query_ptr = static_cast<const knncolle_py::MatrixValue*>(buf_info.ptr);
+    if (!sanisizer::is_equal(buf_info.shape[1], ndim)) {
         throw std::runtime_error("mismatch in dimensionality between index and 'query'");
     }
 
-    std::vector<std::vector<double> > out_d(report_distance ? nquery : 0);
-    std::vector<std::vector<uint32_t> > out_i(report_index ? nquery : 0);
+    std::vector<std::vector<knncolle_py::MatrixValue> > out_d(report_distance ? nquery : 0);
+    std::vector<std::vector<knncolle_py::Index> > out_i(report_index ? nquery : 0);
 
-    bool store_count = !report_distance && !report_index;
-    pybind11::array_t<uint32_t> counts(store_count ? nquery : 0);
-    uint32_t* counts_ptr = static_cast<uint32_t*>(counts.request().ptr);
+    const bool store_count = !report_distance && !report_index;
+    pybind11::array_t<knncolle_py::Index> counts(store_count ? nquery : 0);
+    const auto counts_ptr = static_cast<knncolle_py::Index*>(counts.request().ptr);
 
-    uint32_t nthresholds = thresholds.size();
+    const auto nthresholds = thresholds.size();
     bool multiple_thresholds = (nthresholds != 1);
     if (multiple_thresholds && nthresholds != nquery) {
         throw std::runtime_error("'threshold' should have length equal to 'subset'");
     }
-    const double* threshold_ptr = static_cast<const double*>(thresholds.request().ptr);
+    const auto threshold_ptr = static_cast<const knncolle_py::MatrixValue*>(thresholds.request().ptr);
 
     bool no_support = false;
-    knncolle::parallelize(num_threads, nquery, [&](int tid, uint32_t start, uint32_t length) {
+    knncolle::parallelize(num_threads, nquery, [&](int tid, knncolle_py::Index start, knncolle_py::Index length) {
         auto searcher = prebuilt->initialize();
 
         if (!searcher->can_search_all()) {
@@ -507,16 +520,14 @@ pybind11::object generic_query_all(
             return;
         }
 
-        size_t query_offset = static_cast<size_t>(start) * ndim; // using size_t to avoid overflow.
-        for (int o = start, end = start + length; o < end; ++o, query_offset += ndim) {
-            auto current_ptr = query_ptr + query_offset;
+        for (knncolle_py::Index o = start, end = start + length; o < end; ++o) {
+            const auto current_ptr = query_ptr + sanisizer::product_unsafe<std::size_t>(o, ndim);
             auto count = searcher->search_all(
                 current_ptr,
                 threshold_ptr[multiple_thresholds ? o : 0],
                 (report_index ? &out_i[o] : NULL),
                 (report_distance ? &out_d[o] : NULL)
             ); 
-
             if (store_count) {
                 counts_ptr[o] = count;
             }

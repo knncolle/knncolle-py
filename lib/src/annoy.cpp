@@ -3,6 +3,8 @@
 
 #include <memory>
 #include <stdexcept>
+#include <cstdint>
+#include <string>
 
 // Turn off manual vectorization always, to avoid small inconsistencies in
 // distance calculations across otherwise-compliant machines. 
@@ -10,26 +12,22 @@
 
 #include "knncolle_annoy/knncolle_annoy.hpp"
 
-uintptr_t create_annoy_builder(int num_trees, double search_mult, std::string distance) {
+std::uintptr_t create_annoy_builder(int num_trees, double search_mult, std::string distance) {
     knncolle_annoy::AnnoyOptions opt;
     opt.num_trees = num_trees;
     opt.search_mult = search_mult;
     auto tmp = std::make_unique<knncolle_py::WrappedBuilder>();
 
     if (distance == "Manhattan") {
-        tmp->ptr.reset(new knncolle_annoy::AnnoyBuilder<Annoy::Manhattan, knncolle_py::SimpleMatrix, knncolle_py::Distance>(opt));
+        tmp->ptr.reset(new knncolle_annoy::AnnoyBuilder<knncolle_py::Index, knncolle_py::MatrixValue, knncolle_py::Distance, Annoy::Manhattan>(opt));
 
     } else if (distance == "Euclidean") {
-        tmp->ptr.reset(new knncolle_annoy::AnnoyBuilder<Annoy::Euclidean, knncolle_py::SimpleMatrix, knncolle_py::Distance>(opt));
+        tmp->ptr.reset(new knncolle_annoy::AnnoyBuilder<knncolle_py::Index, knncolle_py::MatrixValue, knncolle_py::Distance, Annoy::Euclidean>(opt));
 
     } else if (distance == "Cosine") {
         tmp->ptr.reset(
-            new knncolle::L2NormalizedBuilder<knncolle_py::SimpleMatrix, knncolle_py::Distance>(
-                new knncolle_annoy::AnnoyBuilder<
-                    Annoy::Euclidean,
-                    knncolle::L2NormalizedMatrix<knncolle_py::SimpleMatrix>,
-                    double
-                >(opt)
+            new knncolle::L2NormalizedBuilder<knncolle_py::Index, knncolle_py::MatrixValue, knncolle_py::Distance, knncolle_py::MatrixValue>(
+                std::make_shared<knncolle_annoy::AnnoyBuilder<knncolle_py::Index, knncolle_py::MatrixValue, knncolle_py::Distance, Annoy::Euclidean> >(opt)
             )
         );
 
@@ -37,7 +35,7 @@ uintptr_t create_annoy_builder(int num_trees, double search_mult, std::string di
         throw std::runtime_error("unknown distance type '" + distance + "'");
     }
 
-    return reinterpret_cast<uintptr_t>(static_cast<void*>(tmp.release()));
+    return reinterpret_cast<std::uintptr_t>(static_cast<void*>(tmp.release()));
 }
 
 void init_annoy(pybind11::module& m) {

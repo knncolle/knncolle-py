@@ -10,7 +10,7 @@ namespace knncolle_py {
 /**
  * Type of the indices.
  */
-typedef uint32_t Index;
+typedef std::uint32_t Index;
 
 /**
  * Type of the distances.
@@ -26,7 +26,7 @@ typedef double MatrixValue;
  * Type for the matrix inputs into the **knncolle** interface.
  * Indices are unsigned 32-bit points while values are double-precision.
  */
-typedef knncolle::SimpleMatrix<Index, Index, MatrixValue> SimpleMatrix;
+typedef knncolle::Matrix<Index, MatrixValue> Matrix;
 
 /**
  * @brief Wrapper for the builder factory.
@@ -35,7 +35,7 @@ struct WrappedBuilder {
     /**
      * Pointer to an algorithm-specific `knncolle::Builder`.
      */
-    std::shared_ptr<knncolle::Builder<SimpleMatrix, Distance> > ptr;
+    std::shared_ptr<knncolle::Builder<Index, MatrixValue, Distance> > ptr;
 };
 
 /**
@@ -53,7 +53,7 @@ struct WrappedPrebuilt {
     /**
      * Pointer to a `knncolle::Prebuilt` containing a prebuilt search index.
      */
-    std::shared_ptr<knncolle::Prebuilt<Index, Index, Distance> > ptr;
+    std::shared_ptr<knncolle::Prebuilt<Index, MatrixValue, Distance> > ptr;
 };
 
 /**
