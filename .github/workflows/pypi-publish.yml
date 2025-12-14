@@ -5,6 +5,9 @@ on:
     tags:
       - "*"
 
+permissions:
+  id-token: write # need this for OIDC
+
 jobs:
   build_wheels:
     name: Build wheels on ${{ matrix.os }}
@@ -13,7 +16,7 @@ jobs:
       matrix:
         # macos-13 is an intel runner, higher macos's are apple silicon
         # At some point, maybe get this to work on windows-latest
-        os: [ubuntu-latest, macos-13, macos-latest]
+        os: [ubuntu-latest, macos-15-intel, macos-latest]
 
     steps:
       - uses: actions/checkout@v4
@@ -21,10 +24,9 @@ jobs:
           submodules: true
 
       - name: Build wheels
-        uses: pypa/cibuildwheel@v2.22.0
+        uses: pypa/cibuildwheel@v3.3.0
         env:
-          CIBW_ARCHS_LINUX: x86_64
-          CIBW_PROJECT_REQUIRES_PYTHON: ">=3.9"
+          CIBW_PROJECT_REQUIRES_PYTHON: ">=3.10"
           CIBW_SKIP: pp*
 
       - uses: actions/upload-artifact@v4
@@ -58,7 +60,4 @@ jobs:
           path: dist
           merge-multiple: true
 
-      - uses: pypa/gh-action-pypi-publish@v1.12.2
-        with:
-          user: __token__
-          password: ${{ secrets.PYPI_PASSWORD }}
+      - uses: pypa/gh-action-pypi-publish@release/v1
