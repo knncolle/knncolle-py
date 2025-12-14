@@ -3,8 +3,8 @@ knncolle package
 
 .. automodule:: knncolle
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Submodules
 ----------
@@ -14,109 +14,109 @@ knncolle.annoy module
 
 .. automodule:: knncolle.annoy
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 knncolle.build\_index module
 ----------------------------
 
 .. automodule:: knncolle.build_index
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 knncolle.classes module
 -----------------------
 
 .. automodule:: knncolle.classes
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 knncolle.define\_builder module
 -------------------------------
 
 .. automodule:: knncolle.define_builder
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 knncolle.exhaustive module
 --------------------------
 
 .. automodule:: knncolle.exhaustive
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 knncolle.find\_distance module
 ------------------------------
 
 .. automodule:: knncolle.find_distance
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 knncolle.find\_knn module
 -------------------------
 
 .. automodule:: knncolle.find_knn
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 knncolle.find\_neighbors module
 -------------------------------
 
 .. automodule:: knncolle.find_neighbors
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 knncolle.hnsw module
 --------------------
 
 .. automodule:: knncolle.hnsw
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 knncolle.kmknn module
 ---------------------
 
 .. automodule:: knncolle.kmknn
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 knncolle.query\_distance module
 -------------------------------
 
 .. automodule:: knncolle.query_distance
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 knncolle.query\_knn module
 --------------------------
 
 .. automodule:: knncolle.query_knn
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 knncolle.query\_neighbors module
 --------------------------------
 
 .. automodule:: knncolle.query_neighbors
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 knncolle.vptree module
 ----------------------
 
 .. automodule:: knncolle.vptree
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
