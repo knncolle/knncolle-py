@@ -6,10 +6,6 @@
 #include <cstdint>
 #include <string>
 
-// Turn off manual vectorization always, to avoid small inconsistencies in
-// distance calculations across otherwise-compliant machines. 
-#define NO_MANUAL_VECTORIZATION 1
-
 #include "knncolle_annoy/knncolle_annoy.hpp"
 
 std::uintptr_t create_annoy_builder(int num_trees, double search_mult, std::string distance) {

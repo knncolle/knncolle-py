@@ -5,10 +5,6 @@
 #include <cstdint>
 #include <memory>
 
-// Turn off manual vectorization always, to avoid small inconsistencies in
-// distance calculations across otherwise-compliant machines. 
-#define NO_MANUAL_VECTORIZATION
-
 #include "knncolle_hnsw/knncolle_hnsw.hpp"
 
 std::uintptr_t create_hnsw_builder(int nlinks, int ef_construct, int ef_search, std::string distance) {
