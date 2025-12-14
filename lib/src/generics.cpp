@@ -104,7 +104,7 @@ pybind11::object generic_find_knn(
 
         for (I<decltype(num_output)> i = 0; i < num_output; ++i) {
             const auto s = subset.at(i);
-            if (s < 0 || s >= nobs) {
+            if (s >= nobs) { // no need to check for negatives, as the index is unsigned. 
                 throw std::runtime_error("'subset' contains out-of-range indices");
             } 
         }
@@ -170,7 +170,7 @@ pybind11::object generic_find_knn(
         out_d_ptr = prepare_output(const_d, report_distance, const_k, num_output);
     }
 
-    knncolle::parallelize(num_threads, num_output, [&](int tid, knncolle_py::Index start, knncolle_py::Index length) {
+    knncolle::parallelize(num_threads, num_output, [&](int, knncolle_py::Index start, knncolle_py::Index length) {
         auto searcher = prebuilt->initialize();
         std::vector<knncolle_py::Index> tmp_i;
         std::vector<knncolle_py::MatrixValue> tmp_d;
@@ -314,7 +314,7 @@ pybind11::object generic_query_knn(
         out_d_ptr = prepare_output(const_d, report_distance, const_k, nquery);
     }
 
-    knncolle::parallelize(num_threads, nquery, [&](int tid, knncolle_py::Index start, knncolle_py::Index length) {
+    knncolle::parallelize(num_threads, nquery, [&](int, knncolle_py::Index start, knncolle_py::Index length) {
         auto searcher = prebuilt->initialize();
         std::vector<knncolle_py::Index> tmp_i;
         std::vector<knncolle_py::MatrixValue> tmp_d;
@@ -408,7 +408,7 @@ pybind11::object generic_find_all(
 
         for (I<decltype(num_output)> i = 0; i < num_output; ++i) {
             auto s = subset.at(i);
-            if (s < 0 || s >= nobs) {
+            if (s >= nobs) { // no need to check for negatives, index is unsigned.
                 throw std::runtime_error("'subset' contains out-of-range indices");
             } 
         }
