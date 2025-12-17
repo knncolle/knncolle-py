@@ -6,6 +6,7 @@ project(knncolle_py
     LANGUAGES CXX)
 
 # Defining the targets.
+find_package(Python ${PYBIND11_PYTHON_VERSION} EXACT COMPONENTS Interpreter Development)
 find_package(pybind11 CONFIG)
 
 # pybind11 method:
@@ -25,6 +26,9 @@ target_include_directories(knncolle_py PRIVATE "../src/knncolle/include")
 set_property(TARGET knncolle_py PROPERTY CXX_STANDARD 17)
 
 target_link_libraries(knncolle_py PRIVATE pybind11::pybind11)
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+    target_compile_options(knncolle_py PRIVATE -Wall -Wpedantic -Wextra)
+endif()
 
 set_target_properties(knncolle_py PROPERTIES
     OUTPUT_NAME lib_knncolle
