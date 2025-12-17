@@ -10,7 +10,7 @@
 
 [![PyPI-Server](https://img.shields.io/pypi/v/knncolle.svg)](https://pypi.org/project/knncolle/)
 [![Monthly Downloads](https://static.pepy.tech/badge/knncolle/month)](https://pepy.tech/project/knncolle)
-![Unit tests](https://github.com/knncolle/knncolle-py/actions/workflows/pypi-test.yml/badge.svg)
+![Unit tests](https://github.com/knncolle/knncolle-py/actions/workflows/run-tests.yml/badge.svg)
 
 # Python bindings to knncolle
 
