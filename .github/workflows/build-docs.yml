@@ -26,6 +26,7 @@ jobs:
 
       - name: Build docs
         run: |
+          touch src/knncolle/lib_knncolle.py
           tox -e docs
 
       - name: GH Pages Deployment
