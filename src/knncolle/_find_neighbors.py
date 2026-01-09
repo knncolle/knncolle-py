@@ -10,10 +10,13 @@ from ._utils import process_threshold, process_subset
 
 @dataclass
 class FindNeighborsResults:
-    """Results of :py:func:`~knncolle.find_neighbors.find_neighbors`.
+    """
+    Results of :py:func:`~knncolle.find_neighbors`.
+    The contents of ``index`` and ``distance`` depend on the arguments passed to :py:func:`~knncolle.find_neighbors`.
 
     ``index`` and ``distance`` are lists where each element corresponds to an observation in ``X``.
-    Each element is a NumPy array containing the indices of (for ``index``) or distances to (for ``distance``) the neighbors of the corresponding observation within the specified threshold distance.
+    Each element is a NumPy array of length equal to the number of neighbors of the corresponding observation within the specified threshold distance.
+    ``index`` contains the indices of the nearest neighbors while ``distance`` contains the distance to those neighbors.
     For each observation, neighbors are guaranteed to be sorted in order of increasing distance.
     Each element of ``index`` is guaranteed to not contain the index of the corresponding observation.
 
@@ -38,7 +41,8 @@ def find_neighbors(
     get_distance: bool = True,
     **kwargs
 ) -> FindNeighborsResults:
-    """Find all neighbors within a certain distance for each observation.
+    """
+    Find all neighbors within a certain distance for each observation.
 
     Args:
         X:
@@ -71,6 +75,18 @@ def find_neighbors(
 
     Returns:
         Results of the neighbor search.
+
+    Raises:
+        NotImplementedError: if no method was implemented for this particular :py:class:`~knncolle.Index` subclass. 
+
+    Examples:
+        >>> import knncolle
+        >>> import numpy
+        >>> y = numpy.random.rand(100, 5)
+        >>> idx = knncolle.build_index(knncolle.KmknnParameters(), y)
+        >>> res = knncolle.find_neighbors(idx, 1)
+        >>> res.index[0]
+        >>> res.distance[0]
     """
     raise NotImplementedError("no available method for '" + str(type(X)) + "'")
 

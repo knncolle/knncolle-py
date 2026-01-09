@@ -6,7 +6,15 @@ from ._define_builder import define_builder
 
 
 class HnswParameters(Parameters):
-    """Parameters for the hierarchical navigable small worlds (HNSW) algorithm, see `here <https://github.com/nmslib/hnswlib>`_ for details.
+    """
+    Parameters for the hierarchical navigable small worlds (HNSW) algorithm, see `here <https://github.com/nmslib/hnswlib>`_ for details.
+    This can be used in :py:func:`~knncolle.build_index` or :py:func:`~knncolle.define_builder`.
+
+    Examples:
+        >>> import knncolle
+        >>> params = knncolle.HnswParameters()
+        >>> params.distance
+        >>> params.ef_search
     """
 
     def __init__(
@@ -104,8 +112,18 @@ class HnswParameters(Parameters):
 
 
 class HnswIndex(GenericIndex):
-    """A prebuilt index for the hierarchical navigable small worlds (HNSW) algorithm,
-    created by :py:func:`~knncolle.define_builder.define_builder` with a :py:class:`~knncolle.hnsw.HnswParameters` object.
+    """
+    Prebuilt index for the hierarchical navigable small worlds (HNSW) algorithm,
+    This is typically created by :py:func:`~knncolle.build_index` with an :py:class:`~HnswParameters` object,
+    and can be used in functions like :py:func:`~knncolle.find_knn`.
+
+    Examples:
+        >>> import knncolle
+        >>> params = knncolle.HnswParameters()
+        >>> import numpy
+        >>> y = numpy.random.rand(200, 10)
+        >>> idx = knncolle.build_index(params, y)
+        >>> type(idx)
     """
 
     def __init__(self, ptr):

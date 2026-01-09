@@ -10,7 +10,7 @@ from . import _lib_knncolle as lib
 def build_index(param: Parameters, x: numpy.ndarray, **kwargs) -> Index:
     """
     Build a search index for a given nearest neighbor search algorithm.
-    The default method calls :py:func:`~knncolle.define_builder.define_builder` to obtain an algorithm-specific factory that builds the index from ``x``. 
+    The default method calls :py:func:`~knncolle.define_builder` to obtain an algorithm-specific factory that builds the index from ``x``.
 
     Args:
         param:
@@ -24,7 +24,15 @@ def build_index(param: Parameters, x: numpy.ndarray, **kwargs) -> Index:
             Additional arguments to be passed to individual methods.
 
     Returns:
-        Instance of a :py:class:`~knncolle.classes.Index` subclass.
+        Instance of as :py:class:`~knncolle.Index` subclass, to be used in functions like :py:func:`~knncolle.find_knn`.
+
+    Examples:
+        >>> import knncolle
+        >>> params = knncolle.KmknnParameters()
+        >>> import numpy
+        >>> y = numpy.random.rand(200, 10)
+        >>> idx = knncolle.build_index(params, y)
+        >>> type(idx)
     """
     builder, cls = define_builder(param)
     prebuilt = lib.generic_build(builder.ptr, x)

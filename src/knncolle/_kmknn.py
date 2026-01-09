@@ -6,7 +6,15 @@ from ._define_builder import define_builder
 
 
 class KmknnParameters(Parameters):
-    """Parameters for the k-means k-nearest neighbors (KMKNN) algorithm."""
+    """
+    Parameters for the k-means k-nearest neighbors (KMKNN) algorithm.
+    This can be used in :py:func:`~knncolle.build_index` or :py:func:`~knncolle.define_builder`.
+
+    Examples:
+        >>> import knncolle
+        >>> params = knncolle.KmknnParameters()
+        >>> params.distance
+    """
 
     def __init__(
         self,
@@ -37,8 +45,18 @@ class KmknnParameters(Parameters):
 
 
 class KmknnIndex(GenericIndex):
-    """A prebuilt index for the k-means k-nearest neighbors algorithm,
-    created by :py:func:`~knncolle.define_builder.define_builder` with a :py:class:`~knncolle.kmknn.KmknnParameters` instance.
+    """
+    Prebuilt index for the k-means k-nearest neighbors algorithm.
+    This is typically created by :py:func:`~knncolle.build_index` with an :py:class:`~KmknnParameters` object,
+    and can be used in functions like :py:func:`~knncolle.find_knn`.
+
+    Examples:
+        >>> import knncolle
+        >>> params = knncolle.KmknnParameters()
+        >>> import numpy
+        >>> y = numpy.random.rand(200, 10)
+        >>> idx = knncolle.build_index(params, y)
+        >>> type(idx)
     """
 
     def __init__(self, ptr):

@@ -6,7 +6,15 @@ from ._define_builder import define_builder
 
 
 class ExhaustiveParameters(Parameters):
-    """Parameters for an exhaustive search. """
+    """
+    Parameters for an exhaustive search, where all observations are compared to find the nearest neighbors.
+    This can be used in :py:func:`~knncolle.build_index` or :py:func:`~knncolle.define_builder`.
+
+    Examples:
+        >>> import knncolle
+        >>> params = knncolle.ExhaustiveParameters()
+        >>> params.distance
+    """
 
     def __init__(
         self,
@@ -37,7 +45,19 @@ class ExhaustiveParameters(Parameters):
 
 
 class ExhaustiveIndex(GenericIndex):
-    """A prebuilt index for an exhaustive search, created by :py:func:`~knncolle.define_builder.define_builder` with a :py:class:`~knncolle.exhaustive.ExhaustiveParameters` instance."""
+    """
+    Prebuilt index for an exhaustive search.
+    This is typically created by :py:func:`~knncolle.define_builder` with an :py:class:`~knncolle.ExhaustiveParameters` object,
+    and can be used in functions like :py:func:`~knncolle.find_knn`.
+
+    Examples:
+        >>> import knncolle
+        >>> params = knncolle.ExhaustiveParameters()
+        >>> import numpy
+        >>> y = numpy.random.rand(200, 10)
+        >>> idx = knncolle.build_index(params, y)
+        >>> type(idx)
+    """
 
     def __init__(self, ptr):
         """

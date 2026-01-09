@@ -6,7 +6,15 @@ from ._define_builder import define_builder
 
 
 class VptreeParameters(Parameters):
-    """Parameters for the vantage point (VP) tree algorithm."""
+    """
+    Parameters for the vantage point (VP) tree algorithm.
+    This can be used in :py:func:`~knncolle.build_index` or :py:func:`~knncolle.define_builder`.
+
+    Examples:
+        >>> import knncolle
+        >>> params = knncolle.VptreeParameters()
+        >>> params.distance
+    """
 
     def __init__(
         self,
@@ -37,8 +45,18 @@ class VptreeParameters(Parameters):
 
 
 class VptreeIndex(GenericIndex):
-    """A prebuilt index for the vantage point tree algorithm,
-    created by :py:func:`~knncolle.define_builder.define_builder` with a :py:class:`~knncolle.vptree.VptreeParameters` instance.
+    """
+    Prebuilt index for the vantage point tree algorithm.
+    This is typically created by :py:func:`~knncolle.build_index` with an :py:class:`~VptreeParameters` object,
+    and can be used in functions like :py:func:`~knncolle.find_knn`.
+
+    Examples:
+        >>> import knncolle
+        >>> params = knncolle.VptreeParameters()
+        >>> import numpy
+        >>> y = numpy.random.rand(200, 10)
+        >>> idx = knncolle.build_index(params, y)
+        >>> type(idx)
     """
 
     def __init__(self, ptr):

@@ -15,7 +15,8 @@ def find_distance(
     subset: Optional[Sequence] = None, 
     **kwargs
 ) -> numpy.ndarray:
-    """Find the distance to the k-th closest point for each observation.
+    """
+    Find the distance to the k-th closest point for each observation.
 
     Args:
         X:
@@ -44,6 +45,16 @@ def find_distance(
     Returns:
         A NumPy array of length equal to the number of observations in ``X`` (or ``subset``, if provided).
         Each element contains the distance to the ``num_neighbors``-th point for each observation.
+
+    Raises:
+        NotImplementedError: if no method was implemented for this particular :py:class:`~knncolle.Index` subclass. 
+
+    Examples:
+        >>> import knncolle
+        >>> import numpy
+        >>> y = numpy.random.rand(100, 5)
+        >>> idx = knncolle.build_index(knncolle.KmknnParameters(), y)
+        >>> dist = knncolle.find_distance(idx, 10)
     """
     raise NotImplementedError("no available method for '" + str(type(X)) + "'")
 

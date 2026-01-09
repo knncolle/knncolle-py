@@ -10,7 +10,9 @@ from ._utils import process_num_neighbors, process_subset
 
 @dataclass
 class QueryKnnResults:
-    """Results of :py:func:`~knncolle.query_knn.query_knn`.
+    """
+    Results of :py:func:`~knncolle.query_knn`.
+    The contents of ``index`` and ``distance`` depend on the arguments passed to :py:func:`~knncolle.query_knn`.
 
     If ``num_neighbors`` is an integer, ``index`` and ``distance`` are both matrices.
     Each row corresponds to an observation in ``query`` and each column corresponds to one of its neighbors in ``X``.
@@ -18,15 +20,16 @@ class QueryKnnResults:
     In each row, neighbors are guaranteed to be sorted in order of increasing distance.
 
     If ``num_neighbors`` is a sequence, ``index`` and ``distance`` are lists instead.
-    Each list element corresponds to an observation in ``X`` and is a NumPy array containing the indices (for ``index``) or distances (for ``distance``) to the requested number of neighbors for that observation.
+    Each list element corresponds to an observation in ``query`` and is a NumPy array of length equal to the requested number of neighbors for that observation.
+    ``index`` contains the indices of the nearest neighbors while ``distance`` contains the distance to those neighbors.
     For each observation, the neighbors are guaranteed to be sorted in order of increasing distance. 
 
     If ``get_index = False``, ``index`` is set to None.
 
     If ``get_distance = False``, ``distance`` is set to None.
     """
-    index: Optional[numpy.ndarray]
-    distance: Optional[numpy.ndarray]
+    index: Optional[Union[list, numpy.ndarray]]
+    distance: Optional[Union[list, numpy.ndarray]]
 
 
 @singledispatch
@@ -39,7 +42,8 @@ def query_knn(
     get_distance: bool = True,
     **kwargs
 ) -> QueryKnnResults:
-    """Find the k-nearest neighbors in the search index for each observation in the query matrix.
+    """
+    Find the k-nearest neighbors in the search index for each observation in the query matrix.
 
     Args:
         X:
@@ -71,6 +75,25 @@ def query_knn(
 
     Returns:
         Results of the nearest-neighbor search.
+
+    Raises:
+        NotImplementedError: if no method was implemented for this particular :py:class:`~knncolle.Index` subclass. 
+
+    Examples:
+        >>> import knncolle
+        >>> import numpy
+        >>> y = numpy.random.rand(100, 5)
+        >>> idx = knncolle.build_index(knncolle.KmknnParameters(), y)
+        >>>
+        >>> query = numpy.random.rand(10, 5)
+        >>> res = knncolle.query_knn(idx, query, 10)
+        >>> res.index
+        >>> res.distance
+        >>>
+        >>> k = numpy.random.randint(1, 10, size=10)
+        >>> res = knncolle.query_knn(idx, query, k)
+        >>> res.index
+        >>> res.distance
     """
     raise NotImplementedError("no available method for '" + str(type(X)) + "'")
 

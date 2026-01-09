@@ -10,7 +10,9 @@ from ._utils import process_num_neighbors, process_subset
 
 @dataclass
 class FindKnnResults:
-    """Results of :py:func:`~knncolle.find_knn.find_knn`.
+    """
+    Results of :py:func:`~knncolle.find_knn`.
+    The contents of ``index`` and ``distance`` depend on the arguments passed to :py:func:`~knncolle.find_knn`.
 
     If ``num_neighbors`` is an integer, ``index`` and ``distance`` are both matrices.
     Each row corresponds to an observation in ``X`` and each column corresponds to one of its neighbors.
@@ -19,7 +21,8 @@ class FindKnnResults:
     Each row of ``index`` is guaranteed to not contain the index of the corresponding observation.
 
     If ``num_neighbors`` is a sequence, ``index`` and ``distance`` are instead lists.
-    Each list element corresponds to an observation in ``X`` and is a NumPy array containing the indices (for ``index``) or distances (for ``distance``) to the requested number of neighbors for that observation.
+    Each list element corresponds to an observation in ``X`` and is a NumPy array of length equal to the requested number of neighbors for that observation.
+    ``index`` contains the indices of the nearest neighbors while ``distance`` contains the distance to those neighbors.
     For each observation, the neighbors are guaranteed to be sorted in order of increasing distance.
     Each element of ``index`` is guaranteed to not contain the index of the corresponding observation.
 
@@ -30,8 +33,8 @@ class FindKnnResults:
     If ``subset`` is provided, the number of rows in ``index`` and ``distance`` (if ``num_neighbors`` is an integer) or their length (otherwise) is instead equal to the length of the subset.
     Each row or list entry corresponds to one of the observations in the subset.
     """
-    index: Optional[numpy.ndarray]
-    distance: Optional[numpy.ndarray]
+    index: Optional[Union[list, numpy.ndarray]]
+    distance: Optional[Union[list, numpy.ndarray]]
 
 
 @singledispatch
@@ -44,7 +47,8 @@ def find_knn(
     get_distance: bool = True,
     **kwargs
 ) -> FindKnnResults:
-    """Find the k-nearest neighbors for each observation.
+    """
+    Find the k-nearest neighbors for each observation.
 
     Args:
         X:
@@ -68,7 +72,7 @@ def find_knn(
             All indices should be non-negative and less than the total number of observations.
 
         get_index:
-            Whether to report the indices of each nearest neighbor.
+           Whether to report the indices of each nearest neighbor.
 
         get_distance:
             Whether to report the distances to each nearest neighbor.
@@ -78,6 +82,23 @@ def find_knn(
 
     Returns:
         Results of the nearest-neighbor search.
+
+    Raises:
+        NotImplementedError: if no method was implemented for this particular :py:class:`~knncolle.Index` subclass. 
+
+    Examples:
+        >>> import knncolle
+        >>> import numpy
+        >>> y = numpy.random.rand(100, 5)
+        >>> idx = knncolle.build_index(knncolle.KmknnParameters(), y)
+        >>> res = knncolle.find_knn(idx, 10)
+        >>> res.index[:10,:]
+        >>> res.distance[:10,:]
+        >>>
+        >>> k = numpy.random.randint(1, 10, size=100)
+        >>> res = knncolle.find_knn(idx, k)
+        >>> res.index[:10]
+        >>> res.distance[:10]
     """
     raise NotImplementedError("no available method for '" + str(type(X)) + "'")
 

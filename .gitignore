@@ -56,3 +56,4 @@ MANIFEST
 *.pickle
 
 src/knncolle/_lib_knncolle.py
+tests/test_docstrings.py

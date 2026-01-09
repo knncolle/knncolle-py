@@ -15,7 +15,7 @@ except PackageNotFoundError:  # pragma: no cover
 finally:
     del version, PackageNotFoundError
 
-from ._classes import Parameters, Index, GenericIndex
+from ._classes import Parameters, Index, Builder, GenericIndex
 from ._annoy import AnnoyParameters, AnnoyIndex
 from ._build_index import build_index
 from ._define_builder import define_builder

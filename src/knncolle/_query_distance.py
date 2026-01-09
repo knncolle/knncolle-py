@@ -15,7 +15,8 @@ def query_distance(
     num_threads: int = 1,
     **kwargs
 ) -> numpy.ndarray:
-    """Find the distance to the k-th nearest neighbor in the search index for each observation in the query dataset.
+    """
+    Find the distance to the k-th nearest neighbor in the search index for each observation in the query dataset.
 
     Args:
         X:
@@ -41,6 +42,17 @@ def query_distance(
 
     Returns:
         A NumPy array of length equal to the number of observations in ``query`` containing the distance to the ``num_neighbors``-th point in ``X`` for each observation.
+
+    Raises:
+        NotImplementedError: if no method was implemented for this particular :py:class:`~knncolle.Index` subclass. 
+
+    Examples:
+        >>> import knncolle
+        >>> import numpy
+        >>> y = numpy.random.rand(100, 5)
+        >>> idx = knncolle.build_index(knncolle.KmknnParameters(), y)
+        >>> query = numpy.random.rand(10, 5)
+        >>> dist = knncolle.query_distance(idx, query, 10)
     """
     raise NotImplementedError("no available method for '" + str(type(X)) + "'")
 

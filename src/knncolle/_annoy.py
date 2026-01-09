@@ -6,7 +6,16 @@ from ._classes import Index, Builder, GenericIndex, Parameters
 
 
 class AnnoyParameters(Parameters):
-    """Parameters for the Approximate Nearest Neighbors Oh Yeah (Annoy) algorithm, see `here <https://github.com/spotify/annoy>`_ for details."""
+    """
+    Parameters for the Approximate Nearest Neighbors Oh Yeah (Annoy) algorithm, see `here <https://github.com/spotify/annoy>`_ for details.
+    This can be used in :py:func:`~knncolle.build_index` or :py:func:`~knncolle.define_builder`.
+
+    Examples:
+        >>> import knncolle
+        >>> params = knncolle.AnnoyParameters()
+        >>> params.distance
+        >>> params.search_mult
+    """
 
     def __init__(
         self,
@@ -84,8 +93,18 @@ class AnnoyParameters(Parameters):
 
 
 class AnnoyIndex(GenericIndex):
-    """A prebuilt index for the Approximate Nearest Neighbors Oh Yeah (Annoy) algorithm,
-    created by :py:func:`~knncolle.define_builder.define_builder` with a :py:class:`~knncolle.annoy.AnnoyParameters` object.
+    """
+    Prebuilt index for the Approximate Nearest Neighbors Oh Yeah (Annoy) algorithm.
+    This is typically created by :py:func:`~knncolle.build_index` with an :py:class:`~AnnoyParameters` object,
+    and can be used in functions like :py:func:`~knncolle.find_knn`.
+
+    Examples:
+        >>> import knncolle
+        >>> params = knncolle.AnnoyParameters()
+        >>> import numpy
+        >>> y = numpy.random.rand(200, 10)
+        >>> idx = knncolle.build_index(params, y)
+        >>> type(idx)
     """
 
     def __init__(self, ptr: int):
