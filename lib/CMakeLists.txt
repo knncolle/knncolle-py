@@ -31,6 +31,6 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
 endif()
 
 set_target_properties(knncolle_py PROPERTIES
-    OUTPUT_NAME lib_knncolle
+    OUTPUT_NAME _lib_knncolle
     PREFIX ""
 )

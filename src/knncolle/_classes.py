@@ -1,5 +1,5 @@
 from abc import ABC
-from . import lib_knncolle as lib
+from . import _lib_knncolle as lib
 
 
 class Parameters(ABC):

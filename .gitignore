@@ -54,3 +54,5 @@ MANIFEST
 .python-version
 *.doctree
 *.pickle
+
+src/knncolle/_lib_knncolle.py

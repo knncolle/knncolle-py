@@ -9,7 +9,7 @@ void init_hnsw(pybind11::module&);
 void init_kmknn(pybind11::module&);
 void init_vptree(pybind11::module&);
 
-PYBIND11_MODULE(lib_knncolle, m) {
+PYBIND11_MODULE(_lib_knncolle, m) {
     init_annoy(m);
     init_exhaustive(m);
     init_generics(m);

@@ -1,9 +1,9 @@
 from functools import singledispatch
 import numpy
 
-from .classes import Parameters, Index
-from .define_builder import define_builder
-from . import lib_knncolle as lib
+from ._classes import Parameters, Index
+from ._define_builder import define_builder
+from . import _lib_knncolle as lib
 
 
 @singledispatch

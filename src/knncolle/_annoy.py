@@ -1,9 +1,8 @@
-from .classes import Parameters, GenericIndex
 from typing import Literal, Optional, Tuple
 
-from . import lib_knncolle as lib
-from .define_builder import define_builder
-from .classes import Index, Builder, GenericIndex, Parameters
+from . import _lib_knncolle as lib
+from ._define_builder import define_builder
+from ._classes import Index, Builder, GenericIndex, Parameters
 
 
 class AnnoyParameters(Parameters):

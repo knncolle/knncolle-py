@@ -3,8 +3,8 @@ from typing import Sequence, Optional, Union
 from dataclasses import dataclass
 import numpy
 
-from .classes import Index, GenericIndex
-from . import lib_knncolle as lib
+from ._classes import Index, GenericIndex
+from . import _lib_knncolle as lib
 from ._utils import process_num_neighbors, process_subset
 
 

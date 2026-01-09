@@ -1,7 +1,7 @@
 from functools import singledispatch
 from typing import Tuple
 
-from .classes import Parameters
+from ._classes import Parameters
 
 
 @singledispatch

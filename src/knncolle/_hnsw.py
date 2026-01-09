@@ -1,9 +1,8 @@
-from .classes import Parameters, GenericIndex
 from typing import Literal, Optional, Tuple
 
-from . import lib_knncolle as lib
-from .classes import Parameters, GenericIndex, Builder
-from .define_builder import define_builder
+from . import _lib_knncolle as lib
+from ._classes import Parameters, GenericIndex, Builder
+from ._define_builder import define_builder
 
 
 class HnswParameters(Parameters):
